@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="efb579afaf604f71ae7aea2cbdacdbc4" Name="Diagram1">
+        <EntityTypeShape EntityType="Domain.Clienti" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Comenzi" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.DetaliiProdus" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Furnizori" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Inventar" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Magazine" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Preturi" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Produse" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.RandComenziProduse" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Roluri" Width="1.5" PointX="1.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Utilizatori" Width="1.5" PointX="3.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.ViziteMedicale" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
+        <AssociationConnector Association="Domain.FK_Comenzi_IdClient" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Comenzi_IdUtilizator" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_RandComenziProdus_780915676" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_ViziteMedicale_I_1739780243" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_DetaliiProdus_IdProdus" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Produse_IdFurnizor" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Inventar_IdMagazin" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Inventar_IdProdus" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Utilizatori_IdMagazin" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Preturi_IdProdus" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_RandComenziProduse_IdProdus" ManuallyRouted="false" />
+        <AssociationConnector Association="Domain.FK_Utilizatori_IdRol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
