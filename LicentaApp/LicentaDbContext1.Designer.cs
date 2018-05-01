@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\CSIE\Licenta\Licenta2\LicentaApp\LicentaApp\LicentaDbContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\personal\Teodora\Licenta\Aplicatie\LicentaApp\LicentaDbContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

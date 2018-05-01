@@ -187,6 +187,9 @@
     <Compile Include="DetaliiProdus.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\AppConstants.cs" />
+    <Compile Include="Domain\Extensions.cs" />
+    <Compile Include="Domain\SqlExceptionService.cs" />
     <Compile Include="Domain\ValueObjects\TipProdus.cs" />
     <Compile Include="FunctionsDB.cs" />
     <Compile Include="Furnizori.cs">

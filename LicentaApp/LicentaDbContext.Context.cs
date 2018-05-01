@@ -52,5 +52,14 @@ namespace LicentaApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("P_LOGIN", xParameter, yParameter, z);
         }
+    
+        public virtual int FILTREAZAPRODUSE_DENUMIRE(string p_DENUMIRE)
+        {
+            var p_DENUMIREParameter = p_DENUMIRE != null ?
+                new ObjectParameter("P_DENUMIRE", p_DENUMIRE) :
+                new ObjectParameter("P_DENUMIRE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FILTREAZAPRODUSE_DENUMIRE", p_DENUMIREParameter);
+        }
     }
 }

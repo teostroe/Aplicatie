@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Domain;
 
 namespace LicentaApp.Controllers
 {
@@ -61,15 +64,28 @@ namespace LicentaApp.Controllers
                 this.InitIngreistreazaSelectList();
                 return View(utilizator);
             }
-            db.Utilizatori.Add(utilizator);
-            db.SaveChanges();
+            try
+            {
+                db.Utilizatori.Add(utilizator);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                this.InitIngreistreazaSelectList();
+                ModelState.AddModelError(string.Empty, SqlExceptionService.GetHandledSqlError(ex));
+                return View(utilizator);
+            }
+           
             return RedirectToAction("Index");
         }
 
         private void InitIngreistreazaSelectList()
         {
-            ViewBag.MagazineSelectList = new SelectList(db.Magazine, "Id", "Denumire");
-            ViewBag.RoluriSelectList = new SelectList(db.Roluri, "Id", "Denumire");
+            ViewBag.MagazineSelectList = db.Magazine.ToSelectList(x => x.Id, x => x.Denumire);
+            ViewBag.RoluriSelectList = db.Roluri.ToSelectList(x => x.Id, x => x.Denumire);
+
+            //ViewBag.MagazineSelectList = new SelectList(db.Magazine, "Id", "Denumire");
+            //ViewBag.RoluriSelectList = new SelectList(db.Roluri, "Id", "Denumire");
         }
 
         // GET: Utilizatori/Edit/5

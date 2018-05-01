@@ -301,10 +301,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FILTREAZAPRODUSE_DENUMIRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET">
+          <Parameter Name="P_DENUMIRE" Type="nvarchar2" Mode="In" />
+        </Function>
         <Function Name="P_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET">
           <Parameter Name="X" Type="varchar2" Mode="In" />
           <Parameter Name="Y" Type="varchar2" Mode="In" />
           <Parameter Name="Z" Type="number" Mode="Out" />
+        </Function>
+        <Function Name="VALIDAREINREGISTRARE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
+          <Parameter Name="X" Type="varchar2" Mode="In" />
+          <Parameter Name="Y" Type="varchar2" Mode="In" />
         </Function>
         <Function Name="VALIDARELOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
           <Parameter Name="X" Type="varchar2" Mode="In" />
@@ -762,6 +769,9 @@
             <Parameter Name="Y" Mode="In" Type="String" />
             <Parameter Name="Z" Mode="Out" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="FILTREAZAPRODUSE_DENUMIRE">
+            <Parameter Name="P_DENUMIRE" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
@@ -913,6 +923,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="P_LOGIN" FunctionName="Domain.Store.P_LOGIN" />
+          <FunctionImportMapping FunctionImportName="FILTREAZAPRODUSE_DENUMIRE" FunctionName="Domain.Store.FILTREAZAPRODUSE_DENUMIRE" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
