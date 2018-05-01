@@ -173,15 +173,22 @@
     <Compile Include="Comenzi.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ClientiController.cs" />
+    <Compile Include="Controllers\ComenziController.cs" />
+    <Compile Include="Controllers\DetaliiProdusController.cs" />
     <Compile Include="Controllers\FurnizoriController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarController.cs" />
     <Compile Include="Controllers\MagazineController.cs" />
+    <Compile Include="Controllers\PreturiController.cs" />
     <Compile Include="Controllers\ProduseController.cs" />
     <Compile Include="Controllers\RoluriController.cs" />
     <Compile Include="Controllers\UtilizatoriController.cs" />
     <Compile Include="DetaliiProdus.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\ValueObjects\TipProdus.cs" />
+    <Compile Include="FunctionsDB.cs" />
     <Compile Include="Furnizori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -202,6 +209,11 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LicentaDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LicentaDbContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="LicentaDbContext1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
@@ -255,7 +267,7 @@
     </Content>
     <EntityDeploy Include="LicentaDbContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LicentaDbContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>LicentaDbContext1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="LicentaDbContext.edmx.diagram">
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
@@ -314,6 +326,31 @@
     <Content Include="Views\Produse\Details.cshtml" />
     <Content Include="Views\Produse\Edit.cshtml" />
     <Content Include="Views\Produse\Index.cshtml" />
+    <Content Include="Views\Inventar\Create.cshtml" />
+    <Content Include="Views\Inventar\Delete.cshtml" />
+    <Content Include="Views\Inventar\Details.cshtml" />
+    <Content Include="Views\Inventar\Edit.cshtml" />
+    <Content Include="Views\Inventar\Index.cshtml" />
+    <Content Include="Views\DetaliiProdus\Create.cshtml" />
+    <Content Include="Views\DetaliiProdus\Delete.cshtml" />
+    <Content Include="Views\DetaliiProdus\Details.cshtml" />
+    <Content Include="Views\DetaliiProdus\Edit.cshtml" />
+    <Content Include="Views\DetaliiProdus\Index.cshtml" />
+    <Content Include="Views\Preturi\Create.cshtml" />
+    <Content Include="Views\Preturi\Delete.cshtml" />
+    <Content Include="Views\Preturi\Details.cshtml" />
+    <Content Include="Views\Preturi\Edit.cshtml" />
+    <Content Include="Views\Preturi\Index.cshtml" />
+    <Content Include="Views\Comenzi\Create.cshtml" />
+    <Content Include="Views\Comenzi\Delete.cshtml" />
+    <Content Include="Views\Comenzi\Details.cshtml" />
+    <Content Include="Views\Comenzi\Edit.cshtml" />
+    <Content Include="Views\Comenzi\Index.cshtml" />
+    <Content Include="Views\Clienti\Create.cshtml" />
+    <Content Include="Views\Clienti\Delete.cshtml" />
+    <Content Include="Views\Clienti\Details.cshtml" />
+    <Content Include="Views\Clienti\Edit.cshtml" />
+    <Content Include="Views\Clienti\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

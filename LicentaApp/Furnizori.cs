@@ -22,11 +22,11 @@ namespace LicentaApp
     
         public int Id { get; set; }
         public string Denumire { get; set; }
-        public string CUI { get; set; }
         public string CIF { get; set; }
         public string Email { get; set; }
         public string NumarTelefon { get; set; }
         public string Adresa { get; set; }
+        public string NRREGCOMERTULUI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produse> Produse { get; set; }

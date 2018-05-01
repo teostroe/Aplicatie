@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Domain.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Domain.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clienti">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,7 +43,7 @@
           </Key>
           <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="Denumire" Type="nvarchar2" MaxLength="50" Nullable="false" />
-          <Property Name="CUI" Type="nvarchar2" MaxLength="15" Nullable="false" />
+          <Property Name="NRREGCOMERTULUI" Type="nvarchar2" MaxLength="15" Nullable="false" />
           <Property Name="CIF" Type="nvarchar2" MaxLength="20" Nullable="false" />
           <Property Name="Email" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="NumarTelefon" Type="nvarchar2" MaxLength="10" Nullable="false" />
@@ -135,10 +135,6 @@
           <Property Name="AxDrept" Type="number" Precision="10" Scale="0" />
           <Property Name="PrismaDrept" Type="number" Precision="10" Scale="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'STROET.ORA_VW_ASPNET_APPLICATIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <Association Name="FK_Comenzi_IdClient">
           <End Role="Clienti" Type="Self.Clienti" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -305,28 +301,14 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="ORA_ASPNET_APPS_CREATEAPP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
-          <Parameter Name="APPLICATIONNAME_" Type="nvarchar2" Mode="In" />
-          <Parameter Name="APPLICATIONID_" Type="raw" Mode="Out" />
+        <Function Name="P_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET">
+          <Parameter Name="X" Type="varchar2" Mode="In" />
+          <Parameter Name="Y" Type="varchar2" Mode="In" />
+          <Parameter Name="Z" Type="number" Mode="Out" />
         </Function>
-        <Function Name="ORA_ASPNET_INDEXEXISTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
-          <Parameter Name="INDEXNAME_" Type="nvarchar2" Mode="In" />
-        </Function>
-        <Function Name="ORA_ASPNET_TABLEEXISTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
-          <Parameter Name="TABLENAME_" Type="nvarchar2" Mode="In" />
-        </Function>
-        <Function Name="ORA_ASPNET_USERS_CREATEUSER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
-          <Parameter Name="APPLICATIONID_" Type="raw" Mode="In" />
-          <Parameter Name="USERNAME_" Type="nvarchar2" Mode="In" />
-          <Parameter Name="ISUSERANONYMOUS" Type="number" Mode="In" />
-          <Parameter Name="LASTACTIVITYDATE_" Type="date" Mode="In" />
-          <Parameter Name="USERID_" Type="raw" Mode="InOut" />
-        </Function>
-        <Function Name="ORA_ASPNET_USERS_DELETEUSER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
-          <Parameter Name="APPLICATIONNAME_" Type="nvarchar2" Mode="In" />
-          <Parameter Name="USERNAME_" Type="nvarchar2" Mode="In" />
-          <Parameter Name="TABLESTODELETEFROM" Type="number" Mode="In" />
-          <Parameter Name="NUMTABLESDELETEDFROM" Type="number" Mode="InOut" />
+        <Function Name="VALIDARELOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET" ReturnType="number">
+          <Parameter Name="X" Type="varchar2" Mode="In" />
+          <Parameter Name="Y" Type="varchar2" Mode="In" />
         </Function>
         <EntityContainer Name="DomainStoreContainer">
           <EntitySet Name="Clienti" EntityType="Self.Clienti" Schema="STROET" store:Type="Tables" />
@@ -390,8 +372,7 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
             <End Role="ViziteMedicale" EntitySet="ViziteMedicale" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Domain" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -439,12 +420,12 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Denumire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CUI" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CIF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumarTelefon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Adresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Produse" Relationship="Self.FK_Produse_IdFurnizor" FromRole="Furnizori" ToRole="Produse" />
+          <Property Name="NRREGCOMERTULUI" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Inventar">
           <Key>
@@ -488,7 +469,7 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
           <Property Name="Cod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Denumire" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TipProdus" Type="Int32" Nullable="false" />
+          <Property Name="TipProdus" Type="Domain.TipProdus" Nullable="false" />
           <Property Name="IdFurnizor" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DetaliiProdus" Relationship="Self.FK_DetaliiProdus_IdProdus" FromRole="Produse" ToRole="DetaliiProdus" />
           <NavigationProperty Name="Furnizori" Relationship="Self.FK_Produse_IdFurnizor" FromRole="Produse" ToRole="Furnizori" />
@@ -776,7 +757,13 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
             <End Role="Roluri" EntitySet="Roluri" />
             <End Role="Utilizatori" EntitySet="Utilizatori" />
           </AssociationSet>
+          <FunctionImport Name="P_LOGIN">
+            <Parameter Name="X" Mode="In" Type="String" />
+            <Parameter Name="Y" Mode="In" Type="String" />
+            <Parameter Name="Z" Mode="Out" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
+        <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -821,9 +808,9 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
           <EntitySetMapping Name="Furnizori">
             <EntityTypeMapping TypeName="Domain.Furnizori">
               <MappingFragment StoreEntitySet="Furnizori">
+                <ScalarProperty Name="NRREGCOMERTULUI" ColumnName="NRREGCOMERTULUI" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Denumire" ColumnName="Denumire" />
-                <ScalarProperty Name="CUI" ColumnName="CUI" />
                 <ScalarProperty Name="CIF" ColumnName="CIF" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="NumarTelefon" ColumnName="NumarTelefon" />
@@ -925,6 +912,7 @@ warning 6002: The table/view 'STROET.ORA_VW_ASPNET_USERS' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="P_LOGIN" FunctionName="Domain.Store.P_LOGIN" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

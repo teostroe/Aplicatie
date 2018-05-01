@@ -12,6 +12,8 @@ namespace LicentaApp
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class LicentaDbContext : DbContext
     {
@@ -37,5 +39,18 @@ namespace LicentaApp
         public virtual DbSet<Roluri> Roluri { get; set; }
         public virtual DbSet<Utilizatori> Utilizatori { get; set; }
         public virtual DbSet<ViziteMedicale> ViziteMedicale { get; set; }
+    
+        public virtual int P_LOGIN(string x, string y, ObjectParameter z)
+        {
+            var xParameter = x != null ?
+                new ObjectParameter("X", x) :
+                new ObjectParameter("X", typeof(string));
+    
+            var yParameter = y != null ?
+                new ObjectParameter("Y", y) :
+                new ObjectParameter("Y", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("P_LOGIN", xParameter, yParameter, z);
+        }
     }
 }

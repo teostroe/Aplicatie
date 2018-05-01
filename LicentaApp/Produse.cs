@@ -27,7 +27,7 @@ namespace LicentaApp
         public string Cod { get; set; }
         public string Denumire { get; set; }
         public Nullable<decimal> Discount { get; set; }
-        public int TipProdus { get; set; }
+        public LicentaApp.Domain.ValueObjects.TipProdus TipProdus { get; set; }
         public int IdFurnizor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
