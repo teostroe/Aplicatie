@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="Prenume" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="NumarTelefon" Type="nvarchar2" MaxLength="10" Nullable="false" />
@@ -22,7 +22,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="Discount" Type="number" Precision="18" Scale="2" />
           <Property Name="IdUtilizator" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -32,7 +32,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="nvarchar2" MaxLength="255" Nullable="false" />
           <Property Name="Valoare" Type="nvarchar2" MaxLength="255" Nullable="false" />
           <Property Name="IdProdus" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -41,7 +41,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="NRREGCOMERTULUI" Type="nvarchar2" MaxLength="15" Nullable="false" />
           <Property Name="CIF" Type="nvarchar2" MaxLength="20" Nullable="false" />
@@ -53,7 +53,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CantitateDisponibila" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IdMagazin" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IdProdus" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -62,7 +62,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="Oras" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="Adresa" Type="nclob" Nullable="false" />
@@ -72,7 +72,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Valoare" Type="number" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DataActualizare" Type="date" Nullable="false" />
           <Property Name="EsteUtilizatAcum" Type="number" Precision="1" Scale="0" Nullable="false" />
@@ -82,7 +82,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Cod" Type="nvarchar2" MaxLength="100" Nullable="false" />
           <Property Name="Denumire" Type="nvarchar2" MaxLength="150" Nullable="false" />
           <Property Name="Discount" Type="number" Precision="18" Scale="2" />
@@ -93,7 +93,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Cantitate" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IdComanda" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IdProdus" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -102,14 +102,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="nvarchar2" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Utilizatori">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="Nume" Type="nvarchar2" MaxLength="50" Nullable="false" />
           <Property Name="Prenume" Type="nvarchar2" MaxLength="50" Nullable="false" />
@@ -387,7 +387,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumarTelefon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -401,7 +401,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Data" Type="DateTime" Nullable="false" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IdUtilizator" Type="Int32" Nullable="false" />
@@ -415,7 +415,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Valoare" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdProdus" Type="Int32" Nullable="false" />
@@ -425,7 +425,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CIF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -438,7 +438,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CantitateDisponibila" Type="Int32" Nullable="false" />
           <Property Name="IdMagazin" Type="Int32" Nullable="false" />
           <Property Name="IdProdus" Type="Int32" Nullable="false" />
@@ -449,7 +449,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Oras" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Adresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -461,7 +461,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Valoare" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DataActualizare" Type="DateTime" Nullable="false" />
           <Property Name="EsteUtilizatAcum" Type="Boolean" Nullable="false" />
@@ -472,7 +472,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Cod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Denumire" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
@@ -488,7 +488,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Cantitate" Type="Int32" Nullable="false" />
           <Property Name="IdComanda" Type="Int32" Nullable="false" />
           <Property Name="IdProdus" Type="Int32" Nullable="false" />
@@ -499,7 +499,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Utilizatori" Relationship="Self.FK_Utilizatori_IdRol" FromRole="Roluri" ToRole="Utilizatori" />
         </EntityType>
@@ -507,7 +507,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -770,7 +770,7 @@
             <Parameter Name="Z" Mode="Out" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="FILTREAZAPRODUSE_DENUMIRE">
-            <Parameter Name="P_DENUMIRE" Mode="In" Type="String" />
+          <Parameter Name="P_DENUMIRE" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />

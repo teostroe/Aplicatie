@@ -1,0 +1,49 @@
+﻿@using LicentaApp.Domain
+@{
+    bool isPaginationEnabled = ViewData.ContainsKey(AppConstants.Pagination.EnablePagination) && (bool) ViewData[AppConstants.Pagination.EnablePagination];
+    int currentPage = 0;
+    int totalPages = 0;
+    string actionName = string.Empty;
+    if (isPaginationEnabled)
+    {
+        currentPage = Convert.ToInt32(ViewData[AppConstants.Pagination.CurrentPage]);
+        totalPages = Convert.ToInt32(ViewData[AppConstants.Pagination.TotalPages]);
+        actionName = ViewData[AppConstants.Pagination.ActionName].ToString();
+
+    }
+
+}
+
+@*TO DO: - In case of to many pages, do not display some of he pages. !!!NICE TO HAVE*@ 
+@if (isPaginationEnabled)
+{
+    <ul class="pagination">
+        @if (currentPage == 1)
+        {
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="@Url.Action(actionName, new {page = currentPage - 1})"><i class="material-icons">chevron_left</i></a></li>
+        }
+        @for (int i = 1; i <= totalPages; ++i)
+        {
+            if (currentPage == i)
+            {
+                <li class="active">@Html.ActionLink(i.ToString(), actionName, new { page = i })</li>
+            }
+            else
+            {
+                <li class="waves-effect">@Html.ActionLink(i.ToString(), actionName, new { page = i })</li>
+            }
+        }
+        @if (currentPage == totalPages)
+        {
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        }
+        else
+        {
+            <li class="waves-effect"><a href="@Url.Action(actionName, new {page = currentPage + 1})"><i class="material-icons">chevron_right</i></a></li>
+        }
+    </ul>
+}

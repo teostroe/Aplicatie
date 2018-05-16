@@ -10,9 +10,14 @@ namespace LicentaApp.Controllers
     {
         public ActionResult Index()
         {
-            LicentaDbContext db = new LicentaDbContext();
-            db.FILTREAZAPRODUSE_DENUMIRE("Furla Brigitte");
+            //LicentaDbContext db = new LicentaDbContext();
+            //db.FILTREAZAPRODUSE_DENUMIRE("Furla Brigitte");
 
+            return View();
+        }
+
+        public ActionResult Admin()
+        {
             return View();
         }
 

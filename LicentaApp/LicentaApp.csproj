@@ -182,16 +182,23 @@
     <Compile Include="Controllers\MagazineController.cs" />
     <Compile Include="Controllers\PreturiController.cs" />
     <Compile Include="Controllers\ProduseController.cs" />
+    <Compile Include="Controllers\ProfilController.cs" />
     <Compile Include="Controllers\RoluriController.cs" />
     <Compile Include="Controllers\UtilizatoriController.cs" />
     <Compile Include="DetaliiProdus.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AppConstants.cs" />
+    <Compile Include="Domain\EnumHelper.cs" />
     <Compile Include="Domain\Extensions.cs" />
+    <Compile Include="Domain\Metadata\ProductCache.cs" />
+    <Compile Include="Domain\Metadata\ProductMetadata.cs" />
+    <Compile Include="Domain\Metadata\ProductProperties.cs" />
+    <Compile Include="Domain\Metadata\ProductProviders.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
+    <Compile Include="Domain\ValueObjects\TipLentila.cs" />
     <Compile Include="Domain\ValueObjects\TipProdus.cs" />
-    <Compile Include="FunctionsDB.cs" />
+    <Compile Include="Domain\ValueObjects\TipTratament.cs" />
     <Compile Include="Furnizori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -240,17 +247,36 @@
     <Compile Include="Utilizatori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ProduseViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Bundles\Content\Custom\materialize-overrides.css" />
+    <Content Include="Bundles\Content\fa-svg-with-js.css" />
+    <Content Include="Bundles\Content\materialize.css" />
+    <Content Include="Bundles\Content\materialize.min.css" />
+    <Content Include="Bundles\Scripts\Custom\DynamicProductProperties.js" />
+    <Content Include="Bundles\Scripts\Custom\materialize-configs.js" />
+    <Content Include="Bundles\Scripts\fontawesome-all.js" />
+    <Content Include="Bundles\Scripts\materialize.js" />
+    <Content Include="Bundles\Scripts\materialize.min.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Bundles\Content\Custom\site.css" />
+    <Content Include="Bundles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Bundles\img\overlays\01.png" />
+    <Content Include="Bundles\img\overlays\02.png" />
+    <Content Include="Bundles\img\overlays\03.png" />
+    <Content Include="Bundles\img\overlays\04.png" />
+    <Content Include="Bundles\img\overlays\05.png" />
+    <Content Include="Bundles\img\overlays\06.png" />
+    <Content Include="Bundles\img\overlays\07.png" />
+    <Content Include="Bundles\img\overlays\08.png" />
+    <Content Include="Bundles\img\overlays\09.png" />
+    <Content Include="Bundles\img\svg\arrow_left.svg" />
+    <Content Include="Bundles\img\svg\arrow_right.svg" />
     <Content Include="LicentaDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
@@ -261,10 +287,21 @@
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
       <LastGenOutput>LicentaDbContext.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\ai.0.22.9-build00167.js" />
-    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Bundles\Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Bundles\Scripts\ai.0.22.9-build00167.min.js" />
+    <None Include="Bundles\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Bundles\Scripts\jquery-1.10.2.js" />
+    <Content Include="Bundles\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Bundles\Scripts\jquery-3.2.1.min.js" />
+    <None Include="Bundles\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Bundles\Scripts\jquery.validate.js" />
+    <Content Include="Bundles\Scripts\jquery.validate.min.js" />
+    <Content Include="Bundles\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Bundles\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Bundles\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Bundles\Scripts\respond.js" />
+    <Content Include="Bundles\Scripts\respond.min.js" />
+    <None Include="Bundles\Scripts\_references.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -275,18 +312,30 @@
     <Content Include="LicentaDbContext.edmx.diagram">
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Bundles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Bundles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Bundles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Bold.ttf" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Light.eot" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Medium.eot" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Medium.ttf" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Regular.eot" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Regular.ttf" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Thin.eot" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="Bundles\fonts\roboto\Roboto-Thin.woff2" />
+    <Content Include="Bundles\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -354,18 +403,25 @@
     <Content Include="Views\Clienti\Details.cshtml" />
     <Content Include="Views\Clienti\Edit.cshtml" />
     <Content Include="Views\Clienti\Index.cshtml" />
+    <Content Include="Views\Shared\Navbar.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Utilizatori.cshtml" />
+    <Content Include="Views\Profil\Index.cshtml" />
+    <Content Include="Views\Shared\Utilizatori\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Produse.cshtml" />
+    <Content Include="Views\Shared\Produse\ProductProperties.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Furnizori.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProduseViewModel.cshtml" />
+    <Content Include="Views\Shared\Pagination.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Domain\Services\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

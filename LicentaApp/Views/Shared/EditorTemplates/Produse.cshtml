@@ -1,0 +1,42 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.Produse
+@{
+    var isEdit = ViewBag.Action == AppConstants.CRUD.Edit;
+}
+@if (isEdit)
+{
+    @Html.HiddenFor(x =>x.Id)
+}
+<div class="row">
+    <div class="col m4 input-field">
+        @Html.TextBoxFor(model => model.Denumire, isEdit ? new { @readonly = "readonly" } : null)
+        @Html.LabelFor(model => model.Denumire)
+        @Html.ValidationMessageFor(model => model.Denumire, "", new { @class = "text-danger" })
+    </div>
+    <div class="col m4 input-field">
+        @Html.EditorFor(model => model.Discount)
+        @Html.LabelFor(model => model.Discount)
+        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+    </div>
+    <div class="col m4 input-field">
+        @Html.EditorFor(model => model.Cod)
+        @Html.LabelFor(model => model.Cod)
+        @Html.ValidationMessageFor(model => model.Cod, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row">
+    <div class="col m6 input-field">
+        @Html.EnumDropDownListFor(model => model.TipProdus, "- Selecteaza -", new {id = "tip-produs"})
+        @Html.LabelFor(model => model.TipProdus)
+        @Html.ValidationMessageFor(model => model.TipProdus, "", new { @class = "text-danger" })
+    </div>
+    @if (ViewBag.FurnizoriSelectList != null)
+    {
+        <div class="col m6 input-field">
+            @Html.DropDownListFor(model => model.IdFurnizor, (SelectList)ViewBag.FurnizoriSelectList, "- Selecteaza -")
+            @Html.LabelFor(model => model.IdFurnizor)
+            @Html.ValidationMessageFor(model => model.IdFurnizor, "", new { @class = "text-danger" })
+        </div>
+    }
+    
+</div>

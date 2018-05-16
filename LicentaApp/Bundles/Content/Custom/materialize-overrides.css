@@ -1,0 +1,9 @@
+﻿.sidenav li > a {
+    padding: 0;
+    float: none;
+}
+
+.sidenav li > a > i, .sidenav li > a > [class^="mdi-"], .sidenav li > a li > a > [class*="mdi-"], .sidenav li > a > i.material-icons {
+    margin: 0;
+    float: none;
+}

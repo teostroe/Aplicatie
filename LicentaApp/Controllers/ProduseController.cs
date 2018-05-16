@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.XPath;
 using LicentaApp;
+using LicentaApp.Domain;
+using LicentaApp.Domain.Metadata;
+using LicentaApp.Domain.ValueObjects;
+using LicentaApp.ViewModels;
 
 namespace LicentaApp.Controllers
 {
@@ -15,10 +21,11 @@ namespace LicentaApp.Controllers
         private LicentaDbContext db = new LicentaDbContext();
 
         // GET: Produse
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var produse = db.Produse.Include(p => p.Furnizori);
-            return View(produse.ToList());
+            ViewData.InitializePagination(page, produse.Count(), this.ControllerContext);
+            return View(produse.ToPagedList(page));
         }
 
         // GET: Produse/Details/5
@@ -36,10 +43,19 @@ namespace LicentaApp.Controllers
             return View(produse);
         }
 
+        public ActionResult GetProductProperties(TipProdus tipProdus)
+        {
+            var model = new ProduseViewModel
+            {
+                ProductMetadata = ProductMetadata.GetAllForProductType(tipProdus)
+            };
+            return PartialView("Produse/ProductProperties", model);
+        }
+
         // GET: Produse/Create
         public ActionResult Create()
         {
-            ViewBag.IdFurnizor = new SelectList(db.Furnizori, "Id", "Denumire");
+            this.InitViewBag();
             return View();
         }
 
@@ -48,17 +64,35 @@ namespace LicentaApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cod,Denumire,Discount,TipProdus,IdFurnizor")] Produse produse)
+        public ActionResult Create(ProduseViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Produse.Add(produse);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.InitViewBag();
+                this.ReInitViewModel(ref model);
+                return View(model);
             }
 
-            ViewBag.IdFurnizor = new SelectList(db.Furnizori, "Id", "Denumire", produse.IdFurnizor);
-            return View(produse);
+            model.Produse.DetaliiProdus = new List<DetaliiProdus>();
+            model.Produse.Preturi = new List<Preturi>();
+
+            model.Produse.Preturi.Add(new Preturi
+            {
+                DataActualizare = DateTime.UtcNow,
+                EsteUtilizatAcum = true,
+                Valoare = model.Pret
+            });
+            foreach (var prop in model.ProductProperties)
+            {
+                model.Produse.DetaliiProdus.Add(new DetaliiProdus
+                {
+                    Denumire = prop.Key,
+                    Valoare = prop.Value
+                });
+            }
+            db.Produse.Add(model.Produse);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Produse/Edit/5
@@ -68,13 +102,23 @@ namespace LicentaApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produse produse = db.Produse.Find(id);
+
+            Produse produse = db.Produse.Include(x => x.Preturi).Include(x => x.DetaliiProdus).SingleOrDefault(x => x.Id == id);
             if (produse == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdFurnizor = new SelectList(db.Furnizori, "Id", "Denumire", produse.IdFurnizor);
-            return View(produse);
+
+            var model = new ProduseViewModel
+            {
+                Produse = produse,
+                ProductMetadata = ProductMetadata.GetAllForProductType(produse.TipProdus),
+                Pret = produse.Preturi.SingleOrDefault(x => x.EsteUtilizatAcum).Valoare,
+                ProductProperties = db.DetaliiProdus.Where(x => x.IdProdus == produse.Id).ToDictionary(x => x.Denumire, x => x.Valoare)
+            };
+
+            this.InitViewBag();
+            return View(model);
         }
 
         // POST: Produse/Edit/5
@@ -82,16 +126,44 @@ namespace LicentaApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cod,Denumire,Discount,TipProdus,IdFurnizor")] Produse produse)
+        public ActionResult Edit(ProduseViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(produse).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.InitViewBag();
+                this.ReInitViewModel(ref model);
+                return View(model);
+
             }
-            ViewBag.IdFurnizor = new SelectList(db.Furnizori, "Id", "Denumire", produse.IdFurnizor);
-            return View(produse);
+
+            var dbProduse = this.db.Produse.SingleOrDefault(x => x.Id == model.Produse.Id);
+            db.Produse.Attach(dbProduse);
+            dbProduse.TipProdus = model.Produse.TipProdus;
+            dbProduse.Cod = model.Produse.Cod;
+            dbProduse.Discount = model.Produse.Discount;
+            dbProduse.IdFurnizor = model.Produse.IdFurnizor;
+            var detaliiprodus = db.DetaliiProdus.Where(x => x.IdProdus == model.Produse.Id).ToArray();
+            foreach (var dp in detaliiprodus)
+            {
+                db.DetaliiProdus.Attach(dp);
+                dp.Valoare = model.ProductProperties[dp.Denumire];
+            }
+            var pretUtilizat = db.Preturi.SingleOrDefault(x => x.IdProdus == model.Produse.Id && x.EsteUtilizatAcum);
+            if (pretUtilizat != null)
+            {
+                db.Preturi.Attach(pretUtilizat);
+                pretUtilizat.EsteUtilizatAcum = false;
+            }
+            db.Preturi.Add(new Preturi
+            {
+                DataActualizare = DateTime.UtcNow,
+                EsteUtilizatAcum = true,
+                Valoare = model.Pret,
+                IdProdus = model.Produse.Id
+            });
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Produse/Delete/5
@@ -128,5 +200,16 @@ namespace LicentaApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void InitViewBag()
+        {
+            ViewBag.FurnizoriSelectList = db.Furnizori.ToSelectList(x => x.Id, x => x.Denumire);
+        }
+
+        private void ReInitViewModel(ref ProduseViewModel model)
+        {
+            model.ProductMetadata = ProductMetadata.GetAllForProductType(model.Produse.TipProdus);
+        }
+
     }
 }

@@ -1,0 +1,15 @@
+﻿@model LicentaApp.ViewModels.ProduseViewModel
+
+@Html.EditorFor(x => x.Produse)
+<div class="row">
+    <div class="col m12 input-field">
+        @Html.EditorFor(model => model.Pret)
+        @Html.LabelFor(model => model.Pret)
+        @Html.ValidationMessageFor(model => model.Pret, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div id="product-properties-container">
+    @Html.Partial("Produse/ProductProperties", this.Model)
+</div>
+
+

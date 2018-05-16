@@ -1,0 +1,46 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.Furnizori
+@{
+    var isEdit = ViewBag.Action == AppConstants.CRUD.Edit;
+}
+
+@if (isEdit)
+{
+    @Html.HiddenFor(model => model.Id)
+}
+
+<div class="row">
+    <div class="col m4 input-field">
+        @Html.TextBoxFor(model => model.Denumire, isEdit ? new { @readonly = "readonly" } : null)
+        @Html.LabelFor(model => model.Denumire)
+        @Html.ValidationMessageFor(model => model.Denumire, "", new { @class = "text-danger" })
+    </div>
+    <div class="col m4 input-field">
+        @Html.EditorFor(model => model.Email)
+        @Html.LabelFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="col m4 input-field">
+        @Html.EditorFor(model => model.NumarTelefon)
+        @Html.LabelFor(model => model.NumarTelefon)
+        @Html.ValidationMessageFor(model => model.NumarTelefon, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="row">
+    <div class="col m6 input-field">
+        @Html.EditorFor(model => model.Adresa)
+        @Html.LabelFor(model => model.Adresa)
+        @Html.ValidationMessageFor(model => model.Adresa, "", new { @class = "text-danger" })
+    </div>
+    <div class="col m3 input-field">
+        @Html.EditorFor(model => model.CIF)
+        @Html.LabelFor(model => model.CIF)
+        @Html.ValidationMessageFor(model => model.CIF, "", new { @class = "text-danger" })
+    </div>
+    <div class="col m3 input-field">
+        @Html.EditorFor(model => model.NRREGCOMERTULUI)
+        @Html.LabelFor(model => model.NRREGCOMERTULUI)
+        @Html.ValidationMessageFor(model => model.NRREGCOMERTULUI, "", new { @class = "text-danger" })
+    </div>
+</div>

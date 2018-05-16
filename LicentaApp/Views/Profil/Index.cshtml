@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tabs-main-container">
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s6"><a class="active" href="#profil">Profil</a></li>
+                <li class="tab col s6"><a href="#utilizatori">Utilizatori</a></li>
+            </ul>
+        </div>
+        <div id="profil" class="col s12">Profil</div>
+        <div id="utilizatori" class="col s12"></div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $("ul.tabs").on('click', 'a', function(e) {
+            if (e.target.href.indexOf('#profil') >= 0) {
+
+            }else if (e.target.href.indexOf('#utilizatori') >= 0) {
+                $('#utilizatori').load('@(Url.Action("Utilizatori", "Profil",null))');
+            }
+        })
+    </script>
+}

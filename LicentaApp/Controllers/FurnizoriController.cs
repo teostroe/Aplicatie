@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Domain;
 
 namespace LicentaApp.Controllers
 {
@@ -46,7 +47,7 @@ namespace LicentaApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Denumire,CUI,CIF,Email,NumarTelefon,Adresa")] Furnizori furnizori)
+        public ActionResult Create(Furnizori furnizori)
         {
             if (ModelState.IsValid)
             {
