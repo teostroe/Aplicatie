@@ -61,5 +61,14 @@ namespace LicentaApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FILTREAZAPRODUSE_DENUMIRE", p_DENUMIREParameter);
         }
+    
+        public virtual int P_AFISARECLIENT(string p_TELEFON, ObjectParameter p_NUME, ObjectParameter p_PRENUME, ObjectParameter p_EMAIL)
+        {
+            var p_TELEFONParameter = p_TELEFON != null ?
+                new ObjectParameter("P_TELEFON", p_TELEFON) :
+                new ObjectParameter("P_TELEFON", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("P_AFISARECLIENT", p_TELEFONParameter, p_NUME, p_PRENUME, p_EMAIL);
+        }
     }
 }

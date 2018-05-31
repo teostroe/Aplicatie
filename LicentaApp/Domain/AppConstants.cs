@@ -25,5 +25,13 @@ namespace LicentaApp.Domain
         }
 
         public const string SQL = "SQL";
+
+        public const string SferaDistantaOptions = "SferaDistantaOptions";
+        public const string SferaAproapeOptions = "SferaAproapeOptions";
+        public const string CilindruOptions = "CilindruOptions";
+        public const string AxOptions = "AxOptions";
+        public const string PrismaOptions = "PrismaOptions";
+        public const string CodRama = "CodRama";
+
     }
 }

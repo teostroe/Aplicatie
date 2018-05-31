@@ -7,8 +7,9 @@ namespace LicentaApp.Domain.ValueObjects
 {
     public enum TipLentila
     {
-        Monofocala = 1,
+        MonofocalaUniforma = 1,
         Bifocala = 2,
-        Progresiva = 3
+        Progresiva = 3,
+        Minerala = 4
     }
 }

@@ -42,6 +42,7 @@ namespace LicentaApp.Controllers
         // GET: Clienti/Create
         public ActionResult Create()
         {
+            TempData.Add("TestObj", "TEST");
             return View();
         }
 

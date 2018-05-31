@@ -195,6 +195,7 @@
     <Compile Include="Domain\Metadata\ProductMetadata.cs" />
     <Compile Include="Domain\Metadata\ProductProperties.cs" />
     <Compile Include="Domain\Metadata\ProductProviders.cs" />
+    <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
     <Compile Include="Domain\ValueObjects\TipLentila.cs" />
     <Compile Include="Domain\ValueObjects\TipProdus.cs" />
@@ -247,6 +248,8 @@
     <Compile Include="Utilizatori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ComandaViewModel.cs" />
+    <Compile Include="ViewModels\LentileViewModel.cs" />
     <Compile Include="ViewModels\ProduseViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
@@ -336,6 +339,8 @@
     <Content Include="Bundles\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="Bundles\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="Bundles\Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Bundles\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Bundles\Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -413,10 +418,15 @@
     <Content Include="Views\Shared\EditorTemplates\ProduseViewModel.cshtml" />
     <Content Include="Views\Shared\Pagination.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Clienti.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ViziteMedicale.cshtml" />
+    <Content Include="Views\Shared\Comenzi\TipLentila.cshtml" />
+    <Content Include="Views\Comenzi\Create_Step1.cshtml" />
+    <Content Include="Views\Comenzi\Create_Step2.cshtml" />
+    <Content Include="Views\Comenzi\Create_Step3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Domain\Services\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>

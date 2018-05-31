@@ -1,0 +1,18 @@
+﻿@model ViziteMedicale
+    
+<div id="multistepsform-content-part2">
+    @using (Ajax.BeginForm("Create_Step2", "Comenzi", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "multistepsform-content-part2",
+        HttpMethod = "Post"
+    }))
+    {
+        <script src="~/Bundles/Scripts/jquery-1.10.2.js"></script>
+        <script src="~/Bundles/Scripts/jquery.validate.unobtrusive.js"></script>
+        <script src="~/Bundles/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+        @Html.EditorFor(x => x)
+        <button type="submit">Next</button>
+    }
+</div>

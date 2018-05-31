@@ -1,60 +1,52 @@
-﻿@model LicentaApp.Comenzi
+﻿@model LicentaApp.ViewModels.ComandaViewModel
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Comenzi</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <h5>Detalii client</h5>
+        <hr />
+        @Html.EditorFor(x => x.Client)
+        
+        @*Adauga selectie pentru tip de comanda (cu prelucrare/Comanda simpla). 
+        In caz de comanda simpla, se pot comanda rame/ochelari de soare
+        In caz de comanda cu prelucrare de pot comanda rame/ochelari de soare + lentile;\*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdUtilizator, "IdUtilizator", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdUtilizator", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdUtilizator, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <h5>Detalii vizita medicala</h5>
+        @Html.EditorFor(x => x.VizitaMedicala)
+        
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdClient, "IdClient", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdClient", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdClient, "", new { @class = "text-danger" })
+        @*Add AUTOCOMPLETE*@
+        <h6>Rama</h6>
+        <hr />
+        <div class="row">
+            <div class="col m6 input-field">
+                @Html.EditorFor(model => model.CodRama)
+                @Html.LabelFor(model => model.CodRama)
+                @Html.ValidationMessageFor(model => model.CodRama, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col m6 input-field">
+                @Html.EditorFor(model => model.DiscountRama)
+                @Html.LabelFor(model => model.DiscountRama)
+                @Html.ValidationMessageFor(model => model.DiscountRama, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

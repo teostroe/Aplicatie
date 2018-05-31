@@ -20,8 +20,11 @@ namespace LicentaApp.Domain.Metadata
             Cache.Clear();
 
             Cache.Add(new ProductMetadata(ProductProperties.TipLentila, "Tip Lentila", typeof(TipLentila), new[] { TipProdus.Lentile }, Deserializers.EnumDeserializer<TipLentila>, Serializers.EnumSerializer<TipLentila>));
-            Cache.Add(new ProductMetadata(ProductProperties.TipTratament, "Tip Tratament", typeof(TipTratament), new[] { TipProdus.Lentile }, Deserializers.EnumDeserializer<TipTratament>, Serializers.EnumSerializer<TipTratament>));
+            Cache.Add(new ProductMetadata(ProductProperties.IndiceRefractie, "Indice Refractie", typeof(decimal), new[] { TipProdus.Lentile }, Deserializers.DecimalDeserializer, Serializers.DecimalSerializer));
             Cache.Add(new ProductMetadata(ProductProperties.Diopetrie, "Dioptrie", typeof(decimal), new[] { TipProdus.Lentile }, Deserializers.DecimalDeserializer, Serializers.DecimalSerializer));
+            //Converet tip tratament to multi select
+            Cache.Add(new ProductMetadata(ProductProperties.TipTratament, "Tip Tratament", typeof(TipTratament), new[] { TipProdus.Lentile }, Deserializers.EnumDeserializer<TipTratament>, Serializers.EnumSerializer<TipTratament>));
+            
         }
 
         public static List<ProductMetadata> GetAllForProductType(TipProdus tipProdus)

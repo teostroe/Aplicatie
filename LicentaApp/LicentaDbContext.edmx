@@ -304,6 +304,12 @@
         <Function Name="FILTREAZAPRODUSE_DENUMIRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET">
           <Parameter Name="P_DENUMIRE" Type="nvarchar2" Mode="In" />
         </Function>
+        <Function Name="P_AFISARECLIENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET">
+          <Parameter Name="P_TELEFON" Type="nvarchar2" Mode="In" />
+          <Parameter Name="P_NUME" Type="nvarchar2" Mode="Out" />
+          <Parameter Name="P_PRENUME" Type="nvarchar2" Mode="Out" />
+          <Parameter Name="P_EMAIL" Type="nvarchar2" Mode="Out" />
+        </Function>
         <Function Name="P_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="STROET">
           <Parameter Name="X" Type="varchar2" Mode="In" />
           <Parameter Name="Y" Type="varchar2" Mode="In" />
@@ -772,6 +778,12 @@
           <FunctionImport Name="FILTREAZAPRODUSE_DENUMIRE">
           <Parameter Name="P_DENUMIRE" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="P_AFISARECLIENT">
+            <Parameter Name="P_TELEFON" Mode="In" Type="String" />
+            <Parameter Name="P_NUME" Mode="Out" Type="String" />
+            <Parameter Name="P_PRENUME" Mode="Out" Type="String" />
+            <Parameter Name="P_EMAIL" Mode="Out" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
@@ -924,6 +936,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="P_LOGIN" FunctionName="Domain.Store.P_LOGIN" />
           <FunctionImportMapping FunctionImportName="FILTREAZAPRODUSE_DENUMIRE" FunctionName="Domain.Store.FILTREAZAPRODUSE_DENUMIRE" />
+          <FunctionImportMapping FunctionImportName="P_AFISARECLIENT" FunctionName="Domain.Store.P_AFISARECLIENT" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

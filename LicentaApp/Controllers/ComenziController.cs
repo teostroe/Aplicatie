@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Domain;
+using LicentaApp.Domain.Services;
+using LicentaApp.Domain.ValueObjects;
 
 namespace LicentaApp.Controllers
 {
@@ -39,11 +42,51 @@ namespace LicentaApp.Controllers
         // GET: Comenzi/Create
         public ActionResult Create()
         {
-            ViewBag.IdClient = new SelectList(db.Clienti, "Id", "Nume");
-            ViewBag.IdUtilizator = new SelectList(db.Utilizatori, "Id", "Username");
-            ViewBag.Id = new SelectList(db.ViziteMedicale, "IdComandaVizitaMedicala", "IdComandaVizitaMedicala");
+            ViewData.Add(AppConstants.SferaDistantaOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.SferaAproapeOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.CilindruOptions, OptionsGenerationService.GenerateSelectListForValues(0.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.AxOptions, OptionsGenerationService.GenerateSelectListForValues(0, 360, 1));
+            ViewData.Add(AppConstants.PrismaOptions, OptionsGenerationService.GenerateSelectListForValues(0.0, 10.0, 0.5));
+
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create_Step1()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public PartialViewResult Create_Step1(Clienti client)
+        {
+            TempData.Add("Client", client);
+            ViewData.Add(AppConstants.SferaDistantaOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.SferaAproapeOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.CilindruOptions, OptionsGenerationService.GenerateSelectListForValues(0.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.AxOptions, OptionsGenerationService.GenerateSelectListForValues(0, 360, 1));
+            ViewData.Add(AppConstants.PrismaOptions, OptionsGenerationService.GenerateSelectListForValues(0.0, 10.0, 0.5));
+
+            return PartialView("Create_Step2");
+        }
+
+        [HttpPost]
+        public PartialViewResult Create_Step2(ViziteMedicale vizitaMedicala)
+        {
+            TempData.Add("VizitaMedicala", vizitaMedicala);
+            return PartialView("Create_Step3");
+        }
+
+        //[HttpPost]
+        //public PartialViewResult Create_Step3(ViziteMedicale vizitaMedicala)
+        //{
+
+        //}
+
+        //public ActionResult GetTipLentila(ViziteMedicale vzitaMedicala)
+        //{
+
+        //}
 
         // POST: Comenzi/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
