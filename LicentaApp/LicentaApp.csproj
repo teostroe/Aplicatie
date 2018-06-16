@@ -195,8 +195,12 @@
     <Compile Include="Domain\Metadata\ProductMetadata.cs" />
     <Compile Include="Domain\Metadata\ProductProperties.cs" />
     <Compile Include="Domain\Metadata\ProductProviders.cs" />
+    <Compile Include="Domain\Services\SerializationService.cs" />
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
+    <Compile Include="Domain\Services\ProductsDataService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
+    <Compile Include="Domain\ValueObjects\TipComanda.cs" />
+    <Compile Include="Domain\ValueObjects\TipCuloare.cs" />
     <Compile Include="Domain\ValueObjects\TipLentila.cs" />
     <Compile Include="Domain\ValueObjects\TipProdus.cs" />
     <Compile Include="Domain\ValueObjects\TipTratament.cs" />
@@ -262,6 +266,7 @@
     <Content Include="Bundles\Content\materialize.min.css" />
     <Content Include="Bundles\Scripts\Custom\DynamicProductProperties.js" />
     <Content Include="Bundles\Scripts\Custom\materialize-configs.js" />
+    <Content Include="Bundles\Scripts\Custom\proj-methods.js" />
     <Content Include="Bundles\Scripts\fontawesome-all.js" />
     <Content Include="Bundles\Scripts\materialize.js" />
     <Content Include="Bundles\Scripts\materialize.min.js" />
@@ -420,14 +425,25 @@
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Clienti.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ViziteMedicale.cshtml" />
-    <Content Include="Views\Shared\Comenzi\TipLentila.cshtml" />
+    <Content Include="Views\Shared\Comenzi\TipLentilaOptions.cshtml" />
     <Content Include="Views\Comenzi\Create_Step1.cshtml" />
     <Content Include="Views\Comenzi\Create_Step2.cshtml" />
     <Content Include="Views\Comenzi\Create_Step3.cshtml" />
+    <Content Include="Views\Shared\Comenzi\IndiceRefractieOptions.cshtml" />
+    <Content Include="Views\Shared\Comenzi\ProducatorOptions.cshtml" />
+    <Content Include="Views\Shared\Comenzi\LentilaOptions.cshtml" />
+    <Content Include="Views\Shared\Comenzi\LentileExtraOptions.cshtml" />
+    <Content Include="Views\Shared\Comenzi\Modals\VizitaMedicala.cshtml" />
+    <Content Include="Views\Shared\Comenzi\Displays\VizitaMedicala.cshtml" />
+    <Content Include="Views\Shared\Comenzi\Client.cshtml" />
+    <Content Include="Views\Shared\Comenzi\ComandaCuPrelucrare.cshtml" />
+    <Content Include="Views\Shared\Comenzi\ComandaSimpla.cshtml" />
+    <Content Include="Views\Shared\Comenzi\EditClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
+    <Folder Include="Views\Shared\Modals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

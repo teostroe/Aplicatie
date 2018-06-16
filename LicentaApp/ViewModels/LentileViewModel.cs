@@ -8,8 +8,11 @@ namespace LicentaApp.ViewModels
 {
     public class LentileViewModel
     {
-        public TipLentila TipLentila { get; set; }
+        public TipLentila? TipLentila { get; set; }
+        public decimal IndiceRefractie { get; set; }
+        public int ProducatorId { get; set; }
         public string CodProdus { get; set; }
-        public string Tratement { get; set; }
+        public TipTratament? Tratement { get; set; }
+        public TipCuloare? Culoare { get; set; }
     }
 }

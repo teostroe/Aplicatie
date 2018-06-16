@@ -97,6 +97,8 @@
           <Property Name="Cantitate" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IdComanda" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="IdProdus" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="TipTratement" Type="number" Precision="10" Scale="0" />
+          <Property Name="TipCuloare" Type="number" Precision="10" Scale="0" />
         </EntityType>
         <EntityType Name="Roluri">
           <Key>
@@ -123,17 +125,17 @@
             <PropertyRef Name="IdComandaVizitaMedicala" />
           </Key>
           <Property Name="IdComandaVizitaMedicala" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="DistantaPupilara" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="SferaDistantaStang" Type="number" Precision="10" Scale="0" />
-          <Property Name="SferaAproapeStang" Type="number" Precision="10" Scale="0" />
-          <Property Name="CilindruStang" Type="number" Precision="10" Scale="0" />
-          <Property Name="AxStang" Type="number" Precision="10" Scale="0" />
-          <Property Name="PrismaStang" Type="number" Precision="10" Scale="0" />
-          <Property Name="SferaDistantaDrept" Type="number" Precision="10" Scale="0" />
-          <Property Name="SferaAproapeDrept" Type="number" Precision="10" Scale="0" />
-          <Property Name="CilindruDrept" Type="number" Precision="10" Scale="0" />
-          <Property Name="AxDrept" Type="number" Precision="10" Scale="0" />
-          <Property Name="PrismaDrept" Type="number" Precision="10" Scale="0" />
+          <Property Name="DistantaPupilara" Type="number" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="SferaDistantaStang" Type="number" Precision="10" Scale="2" />
+          <Property Name="SferaAproapeStang" Type="number" Precision="10" Scale="2" />
+          <Property Name="CilindruStang" Type="number" Precision="10" Scale="2" />
+          <Property Name="AxStang" Type="number" Precision="10" Scale="2" />
+          <Property Name="PrismaStang" Type="number" Precision="10" Scale="2" />
+          <Property Name="SferaDistantaDrept" Type="number" Precision="10" Scale="2" />
+          <Property Name="SferaAproapeDrept" Type="number" Precision="10" Scale="2" />
+          <Property Name="CilindruDrept" Type="number" Precision="10" Scale="2" />
+          <Property Name="AxDrept" Type="number" Precision="10" Scale="2" />
+          <Property Name="PrismaDrept" Type="number" Precision="10" Scale="2" />
         </EntityType>
         <Association Name="FK_Comenzi_IdClient">
           <End Role="Clienti" Type="Self.Clienti" Multiplicity="1">
@@ -500,6 +502,8 @@
           <Property Name="IdProdus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Comenzi" Relationship="Self.FK_RandComenziProdus_780915676" FromRole="RandComenziProduse" ToRole="Comenzi" />
           <NavigationProperty Name="Produse" Relationship="Self.FK_RandComenziProduse_IdProdus" FromRole="RandComenziProduse" ToRole="Produse" />
+          <Property Name="TipTratement" Type="Domain.TipTratament" />
+          <Property Name="TipCuloare" Type="Domain.TipCuloare" />
         </EntityType>
         <EntityType Name="Roluri">
           <Key>
@@ -530,17 +534,17 @@
             <PropertyRef Name="IdComandaVizitaMedicala" />
           </Key>
           <Property Name="IdComandaVizitaMedicala" Type="Int32" Nullable="false" />
-          <Property Name="DistantaPupilara" Type="Int32" Nullable="false" />
-          <Property Name="SferaDistantaStang" Type="Int32" />
-          <Property Name="SferaAproapeStang" Type="Int32" />
-          <Property Name="CilindruStang" Type="Int32" />
-          <Property Name="AxStang" Type="Int32" />
-          <Property Name="PrismaStang" Type="Int32" />
-          <Property Name="SferaDistantaDrept" Type="Int32" />
-          <Property Name="SferaAproapeDrept" Type="Int32" />
-          <Property Name="CilindruDrept" Type="Int32" />
-          <Property Name="AxDrept" Type="Int32" />
-          <Property Name="PrismaDrept" Type="Int32" />
+          <Property Name="DistantaPupilara" Type="Decimal" Nullable="false" />
+          <Property Name="SferaDistantaStang" Type="Decimal" />
+          <Property Name="SferaAproapeStang" Type="Decimal" />
+          <Property Name="CilindruStang" Type="Decimal" />
+          <Property Name="AxStang" Type="Decimal" />
+          <Property Name="PrismaStang" Type="Decimal" />
+          <Property Name="SferaDistantaDrept" Type="Decimal" />
+          <Property Name="SferaAproapeDrept" Type="Decimal" />
+          <Property Name="CilindruDrept" Type="Decimal" />
+          <Property Name="AxDrept" Type="Decimal" />
+          <Property Name="PrismaDrept" Type="Decimal" />
           <NavigationProperty Name="Comenzi" Relationship="Self.FK_ViziteMedicale_I_1739780243" FromRole="ViziteMedicale" ToRole="Comenzi" />
         </EntityType>
         <Association Name="FK_Comenzi_IdClient">
@@ -786,6 +790,8 @@
           </FunctionImport>
         </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="TipCuloare" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipCuloare" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -887,6 +893,8 @@
           <EntitySetMapping Name="RandComenziProduse">
             <EntityTypeMapping TypeName="Domain.RandComenziProduse">
               <MappingFragment StoreEntitySet="RandComenziProduse">
+                <ScalarProperty Name="TipCuloare" ColumnName="TipCuloare" />
+                <ScalarProperty Name="TipTratement" ColumnName="TipTratement" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Cantitate" ColumnName="Cantitate" />
                 <ScalarProperty Name="IdComanda" ColumnName="IdComanda" />

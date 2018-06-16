@@ -1,0 +1,67 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.ViewModels.ComandaViewModel
+
+<div class="card-panel">
+    <h5>Detalii vizita medicala</h5>
+    @Html.EditorFor(x => x.VizitaMedicala)
+</div>
+<div class="row">
+    <div class="col m5">
+        <div class="row">
+            <div class="col m12 card-panel">
+                <div class="row">
+                    <div class="col s11">
+                        <h6>Rama</h6>
+                    </div>
+                    <div class="col s1" id="adauga-rame">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <hr />
+                <div id="rame-container">
+                    <div class="row">
+                        <div class="col m12 input-field">
+                            @Html.TextBoxFor(model => model.CodProdusRO, new { @id = "cod-produs-simplu", @class = "autocomplete" })
+                            @Html.LabelFor(model => model.CodProdusRO, "Cod Rama")
+                            @Html.ValidationMessageFor(model => model.CodProdusRO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col m12 card-panel ">
+                <div class="row">
+                    <div class="col m12 input-field">
+                        @Html.EditorFor(model => model.Discount)
+                        @Html.LabelFor(model => model.Discount, "Discount Rama")
+                        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col s1"></div>
+    <div class="col s6 card-panel" style="display:none" id="lentile-card">
+        <div id="tip-lentila-options-container">
+            @Html.Partial("Comenzi/TipLentilaOptions", this.Model)
+        </div>
+
+        <div id="indice-refractie-options-container">
+            @Html.Partial("Comenzi/IndiceRefractieOptions", this.Model)
+        </div>
+
+        <div id="producator-options-container">
+            @Html.Partial("Comenzi/ProducatorOptions", this.Model)
+        </div>
+
+        <div id="lentila-options-container">
+            @Html.Partial("Comenzi/LentilaOptions", this.Model)
+
+        </div>
+        <div id="extra-options-container">
+            @Html.Partial("Comenzi/LentileExtraOptions", this.Model)
+        </div>
+    </div>
+
+</div>

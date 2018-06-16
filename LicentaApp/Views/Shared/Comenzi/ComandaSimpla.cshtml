@@ -1,0 +1,19 @@
+﻿@model LicentaApp.ViewModels.ComandaViewModel
+    
+<div class="card-panel">
+    <h6>Ochelari de soare sau Rama ochelari</h6>
+    <hr />
+    <div class="row">
+        <div class="col m12 input-field">
+            @Html.TextBoxFor(model => model.CodProdusRO, new {@id = "cod-produs-simplu", @class = "autocomplete" })
+            @Html.LabelFor(model => model.CodProdusRO, "Cod")
+            @Html.ValidationMessageFor(model => model.CodProdusRO, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col m16 input-field">
+            @Html.EditorFor(model => model.Discount)
+            @Html.LabelFor(model => model.Discount, "Discount")
+            @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

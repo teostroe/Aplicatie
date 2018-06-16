@@ -1,0 +1,33 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.ViewModels.ComandaViewModel
+
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger" href="#modal-vizita-medicala">Adauga Date</a>
+
+<div id="vizita-medicala-info">
+
+</div>
+
+<!-- Modal Structure -->
+<div id="modal-vizita-medicala" class="modal">
+    <div class="modal-content">
+        <h4>Vizita Medicala</h4>
+        @using (Ajax.BeginForm("DisplayVizitaMedicala", "Comenzi", new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "vizita-medicala-info",
+            HttpMethod = "Post"
+        }))
+        {
+
+            @Html.EditorFor(x => x.VizitaMedicala)
+            @Html.DisplayFor(x => x.VizitaMedicala.AxDrept)
+            <div class="modal-footer">
+                <button type="submit" class="modal-close waves-effect waves-green btn-flat">Actualizeaza</button>
+            </div>
+        }
+    </div>
+    @*<div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Actualizeaza</a>
+        </div>*@
+</div>

@@ -1,0 +1,38 @@
+﻿@model LicentaApp.ViewModels.ComandaViewModel
+
+<div id="detalii-client-header">
+    <div class="row">
+        <div class="col s11">
+            <h5>Detalii client</h5>
+        </div>
+        <div class="col s1">
+            <a class="btn-floating btn-small waves-effect waves-light red modal-trigger" href="#modal-cauta-client"><i class="fas fa-search"></i></a>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div id="client-container">
+    @Html.EditorFor(x => x.Client)
+</div>
+
+
+<div id="modal-cauta-client" class="modal">
+    <div class="modal-content">
+        <h4>Cauta client</h4>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-search material-icons prefix"></i>
+                        <input type="text" id="cauta-client-input" class="autocomplete">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="adauga-client-btn">Adauga client</a>
+    </div>
+</div>

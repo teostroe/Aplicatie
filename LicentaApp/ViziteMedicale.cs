@@ -15,17 +15,17 @@ namespace LicentaApp
     public partial class ViziteMedicale
     {
         public int IdComandaVizitaMedicala { get; set; }
-        public int DistantaPupilara { get; set; }
-        public Nullable<int> SferaDistantaStang { get; set; }
-        public Nullable<int> SferaAproapeStang { get; set; }
-        public Nullable<int> CilindruStang { get; set; }
-        public Nullable<int> AxStang { get; set; }
-        public Nullable<int> PrismaStang { get; set; }
-        public Nullable<int> SferaDistantaDrept { get; set; }
-        public Nullable<int> SferaAproapeDrept { get; set; }
-        public Nullable<int> CilindruDrept { get; set; }
-        public Nullable<int> AxDrept { get; set; }
-        public Nullable<int> PrismaDrept { get; set; }
+        public decimal DistantaPupilara { get; set; }
+        public Nullable<decimal> SferaDistantaStang { get; set; }
+        public Nullable<decimal> SferaAproapeStang { get; set; }
+        public Nullable<decimal> CilindruStang { get; set; }
+        public Nullable<decimal> AxStang { get; set; }
+        public Nullable<decimal> PrismaStang { get; set; }
+        public Nullable<decimal> SferaDistantaDrept { get; set; }
+        public Nullable<decimal> SferaAproapeDrept { get; set; }
+        public Nullable<decimal> CilindruDrept { get; set; }
+        public Nullable<decimal> AxDrept { get; set; }
+        public Nullable<decimal> PrismaDrept { get; set; }
     
         public virtual Comenzi Comenzi { get; set; }
     }

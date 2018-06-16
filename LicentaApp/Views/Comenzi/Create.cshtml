@@ -1,4 +1,6 @@
-﻿@model LicentaApp.ViewModels.ComandaViewModel
+﻿@using LicentaApp.Domain
+@using LicentaApp.Domain.ValueObjects
+@model LicentaApp.ViewModels.ComandaViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -10,50 +12,30 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Comenzi</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <h5>Detalii client</h5>
-        <hr />
-        @Html.EditorFor(x => x.Client)
-        
-        @*Adauga selectie pentru tip de comanda (cu prelucrare/Comanda simpla). 
-        In caz de comanda simpla, se pot comanda rame/ochelari de soare
-        In caz de comanda cu prelucrare de pot comanda rame/ochelari de soare + lentile;\*@
-
-
-        <h5>Detalii vizita medicala</h5>
-        @Html.EditorFor(x => x.VizitaMedicala)
-        
-
-        @*Add AUTOCOMPLETE*@
-        <h6>Rama</h6>
-        <hr />
-        <div class="row">
-            <div class="col m6 input-field">
-                @Html.EditorFor(model => model.CodRama)
-                @Html.LabelFor(model => model.CodRama)
-                @Html.ValidationMessageFor(model => model.CodRama, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="col m6 input-field">
-                @Html.EditorFor(model => model.DiscountRama)
-                @Html.LabelFor(model => model.DiscountRama)
-                @Html.ValidationMessageFor(model => model.DiscountRama, "", new { @class = "text-danger" })
-            </div>
+    <div class="row">
+        <div class="col s8">
+            <h4>Creaza comanda</h4>
         </div>
-        
-        
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="col s4">
+            <div style="margin-top: 20px">
+                @Html.DropDownListFor(model => model.TipComanda, typeof(TipComanda).ToSelectList(), "- Tip Comanda -", new { @id = "tip-comanda-options" })
+                @Html.LabelFor(model => model.TipComanda)
             </div>
         </div>
     </div>
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="card-panel">
+        @Html.Partial("Comenzi/Client", this.Model)
+    </div>
+    <div id="comanda-container">
+
+    </div>
+
+        <div id="btn-submit" style="display: none">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
 }
 
 <div>
@@ -61,5 +43,231 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    <script>
+        @if (ViewData.ContainsKey(AppConstants.TelefonClienti))
+        {
+            <text>
+        var telefonArray = @Html.Raw(Json.Encode(ViewData[AppConstants.TelefonClienti]));
+        </text>
+        }
+        @if (ViewData.ContainsKey(AppConstants.CodRame))
+        {
+            <text>
+        var codRameArray = @Html.Raw(Json.Encode(ViewData[AppConstants.CodRame]));
+        </text>
+        }
+        @if (ViewData.ContainsKey(AppConstants.CodRameSiOchelariSoare))
+        {
+            <text>
+        var codRameSiOchelariArray = @Html.Raw(Json.Encode(ViewData[AppConstants.CodRameSiOchelariSoare]));
+        </text>
+        }
+
+
+        var sfereIds = [];
+        var tipLentila;
+        var indiceRefractie;
+        var idProducator;
+        var idProdus;
+        var tipComanda;
+
+        $(document).ready(function () {
+            $('#tip-comanda-options').change(function() {
+                tipComanda = $(this).val();
+                var containerId = '#comanda-container';
+                var url = '@Url.Action("GetComandaDupaTip", "Comenzi", null)?tipComanda=' + tipComanda;
+
+                loadStepOnItemChange(containerId, url, [sferaChange, initCodProdusAutocomplete], $(this));
+            });
+            loadAutocomplete('input#cauta-client-input.autocomplete', telefonArray);
+        });
+
+        function initCodProdusAutocomplete() {
+            $("#btn-submit").show();
+            switch(tipComanda) {
+                case "1":
+                    loadAutocomplete('input#cod-produs-simplu.autocomplete', codRameSiOchelariArray);
+                    break;
+                case "2":
+                    loadAutocomplete('input#cod-produs-simplu.autocomplete', codRameArray);
+                    $('#rame-container').hide();
+                    toggleRame();
+                    break;
+                default:
+                    $("#btn-submit").hide();
+
+            }
+        }
+
+
+
+
+        function sferaChange() {
+            $('.sfera').change(function (e) {
+                addOrRemove(sfereIds, $(this).val(), e.target.id);
+                var containerId = '#tip-lentila-options-container';
+                var url = '@Url.Action("GetTipLentilaOptions", "Comenzi", null)?doarLentilaProgresiva=' +
+                    doarLentilaProgresiva();
+                loadStepOnItemChange(containerId, url, [tipLentilaChange, displayLentileCard], $(this));
+            });
+        }
+
+        function displayLentileCard() {
+            $("#lentile-card").show();
+        }
+
+        function tipLentilaChange() {
+            $('#tip-lentila-options').change(function () {
+                tipLentila = $(this).val();
+                var containerId = '#indice-refractie-options-container';
+                var url = '@Url.Action("GetIndiceRefractieOptions", "Comenzi", null)?tipLentila=' + tipLentila;
+                loadStepOnItemChange(containerId, url, [indiceRefractieChange], $(this));
+            });
+        }
+
+        function indiceRefractieChange() {
+            $('#indice-refractie-options').change(function () {
+                indiceRefractie = $(this).val();
+                var containerId = '#producator-options-container';
+                var url = '@Url.Action("GetProducatorOptions", "Comenzi", null)?tipLentila=' +
+                    tipLentila +
+                    '&indiceRefractie=' +
+                    indiceRefractie;
+                loadStepOnItemChange(containerId, url, [producatorChange], $(this));
+            });
+        }
+
+        function producatorChange() {
+            $('#producator-options').change(function () {
+                idProducator = $(this).val();
+                var containerId = '#lentila-options-container';
+                var url = '@Url.Action("GetLentilaOptions", "Comenzi", null)?tipLentila=' +
+                    tipLentila +
+                    '&indiceRefractie=' +
+                    indiceRefractie +
+                    '&idProducator=' +
+                    idProducator;
+                loadStepOnItemChange(containerId, url, [lentilaChange], $(this));
+            });
+        }
+
+        function lentilaChange() {
+            $('#lentila-options').change(function () {
+                idProdus = $(this).val();
+                var containerId = '#extra-options-container';
+                var url = '@Url.Action("GetTratamentOptions", "Comenzi", null)?idProdus=' + idProdus;
+                loadStepOnItemChange(containerId, url, null, $(this));
+            });
+        }
+
+
+        function toggleRame() {
+            $("#adauga-rame").click(function() {
+                if ($('#rame-container').is(':visible')) {
+                    $("#rame-container").hide();
+                } else {
+                    $("#rame-container").show();
+                }
+            });
+        }
+
+
+
+
+        @*function loadPartialTipLentila() {
+            $('#tip-lentila-options-container')
+                .load('@Url.Action("GetTipLentilaOptions", "Comenzi", null)' + '?doarLentilaProgresiva=' + doarLentilaProgresiva(),
+                    function () {
+                        $('select').formSelect();
+                        tipLentilaChange();
+                        showHide(sfereIds.length > 0, $("#tip-lentila-options-container"));
+                    });
+
+        }
+
+        function tipLentilaChange() {
+            $('#tip-lentila-options').change(function () {
+                tipLentila = $(this).val();
+                $("#indice-refractie-options-container").load('@Url.Action("GetIndiceRefractieOptions", "Comenzi", null)' +
+                    '?tipLentila=' + tipLentila,
+                    function () {
+                        $('select').formSelect();
+                        indiceRefractieChange();
+                    });
+                showHide($(this).val(), $("#indice-refractie-options-container"));
+            });
+        }
+
+        function indiceRefractieChange() {
+            $('#indice-refractie-options').change(function () {
+                indiceRefractie = $(this).val();
+                $("#producator-options-container").load('@Url.Action("GetProducatorOptions", "Comenzi", null)' +
+                    '?tipLentila=' + tipLentila + '&indiceRefractie=' + indiceRefractie,
+                    function () {
+                        $('select').formSelect();
+                        producatorChange();
+                    });
+                showHide($(this).val(), $("#producator-options-container"));
+            });
+        }
+
+        function producatorChange() {
+            $('#producator-options').change(function () {
+                idProducator = $(this).val();
+                $("#lentila-options-container").load('@Url.Action("GetLentilaOptions", "Comenzi", null)' +
+                    '?tipLentila=' +
+                    tipLentila +
+                    '&indiceRefractie=' +
+                    indiceRefractie +
+                    '&idProducator=' +
+                    idProducator,
+                    function () {
+                        $('select').formSelect();
+                        lentilaChange();
+                    });
+                showHide($(this).val(), $("#lentila-options-container"));
+            });
+        }
+
+        function lentilaChange() {
+            $('#lentila-options').change(function () {
+                idProdus = $(this).val();
+                tipLentila = $(this).val();
+                $("#tratament-options-container").load('@Url.Action("GetTratamentOptions", "Comenzi", null)' +
+                    '?idProdus=' + idProdus,
+                    function () {
+                        $('select').formSelect();
+                    });
+                showHide($(this).val(), $("#tratament-options-container"));
+            });
+        }*@
+
+        function doarLentilaProgresiva() {
+            var isAproape = anyContains(sfereIds, "Aproape");
+            var isDistanta = anyContains(sfereIds, "Distanta");
+
+            if (isAproape && isDistanta) {
+                return true;
+            }
+            return false;
+        }
+
+
+
+        $('#adauga-client-btn').click(function() {
+            var numarTelefon = $('#cauta-client-input').val();
+            if (numarTelefon && telefonArray.indexOf(numarTelefon) > 0) {
+                $('#client-container').load('@Url.Action("GetClient", "Comenzi", null)' + '?numarTelefon='+ numarTelefon, function() {
+                    initCalendar();
+                    $('#client-editor-section').find('label').each(function() {
+                        $(this).addClass('active');
+                    });
+                });
+            }
+        });
+
+
+
+    </script>
 }

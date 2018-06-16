@@ -14,9 +14,19 @@ namespace LicentaApp.Domain.Metadata
                 return (string)obj;
             }
 
+            public static string IntegerSerializer(object obj)
+            {
+                return obj != null ? ((int)obj).ToString().ToUpper() : null;
+            }
+
             public static string DecimalSerializer(object obj)
             {
                 return obj != null ? ((decimal)obj).ToString().ToUpper() : null;
+            }
+
+            public static string BooleanSerializer(object obj)
+            {
+                return obj != null ? ((bool) obj).ToString().ToUpper() : null;
             }
                 
             public static string EnumSerializer<T>(object obj) where T : struct
@@ -33,9 +43,19 @@ namespace LicentaApp.Domain.Metadata
                 return str;
             }
 
+            public static object IntegerDeserializer(string str)
+            {
+                return str != null ? Int32.Parse(str) : default(int?);
+            }
+
             public static object DecimalDeserializer(string str)
             {
                 return str != null ? decimal.Parse(str) : default(decimal?);
+            }
+
+            public static object BooleanDeserialzier(string str)
+            {
+                return str != null ? bool.Parse(str) : default(bool?);
             }
 
             public static object EnumDeserializer<T>(string str) where T : struct

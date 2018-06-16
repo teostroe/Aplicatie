@@ -31,7 +31,16 @@ namespace LicentaApp.Domain
         public const string CilindruOptions = "CilindruOptions";
         public const string AxOptions = "AxOptions";
         public const string PrismaOptions = "PrismaOptions";
-        public const string CodRama = "CodRama";
+        public const string TipLentilaOptions = "TipLentilaOptions";
+        public const string IndiceReractieOptions = "IndiceReractieOptions";
+        public const string ProducatorOptions = "ProducatorOptions";
+        public const string LentilaOptions = "LentilaOptions";
+        public const string TratamentOptions = "TratamentOptions";
+        public const string CuloareOptions = "CuloareOptions";
 
+
+        public const string TelefonClienti = "TelefonClienti";
+        public const string CodRame = "CodRame";
+        public const string CodRameSiOchelariSoare = "CodRameSiOchelariSoare";
     }
 }

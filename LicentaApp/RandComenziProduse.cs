@@ -18,6 +18,8 @@ namespace LicentaApp
         public int Cantitate { get; set; }
         public int IdComanda { get; set; }
         public int IdProdus { get; set; }
+        public Nullable<LicentaApp.Domain.ValueObjects.TipTratament> TipTratement { get; set; }
+        public Nullable<LicentaApp.Domain.ValueObjects.TipCuloare> TipCuloare { get; set; }
     
         public virtual Comenzi Comenzi { get; set; }
         public virtual Produse Produse { get; set; }

@@ -1,0 +1,27 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.ViewModels.ComandaViewModel
+
+
+@if (ViewData.ContainsKey(AppConstants.TratamentOptions))
+{
+    <div class="row">
+        <div class="col m12 input-field">
+            @Html.DropDownListFor(model => model.Lentila.Tratement, (SelectList)ViewData[AppConstants.TratamentOptions], "- Selecteaza -", new { @id = "tratament-options" })
+            @Html.LabelFor(model => model.Lentila.Tratement)
+            @Html.ValidationMessageFor(model => model.Lentila.Tratement, "", new { @class = "text-danger" })
+        </div>
+    </div>
+}
+
+
+@if (ViewData.ContainsKey(AppConstants.CuloareOptions))
+{
+    <div class="row">
+        <div class="col m12 input-field">
+            @Html.DropDownListFor(model => model.Lentila.Culoare, (SelectList)ViewData[AppConstants.CuloareOptions], "- Selecteaza -", new { @id = "culoare-options" })
+            @Html.LabelFor(model => model.Lentila.Culoare)
+            @Html.ValidationMessageFor(model => model.Lentila.Culoare, "", new { @class = "text-danger" })
+        </div>
+    </div>
+}
+

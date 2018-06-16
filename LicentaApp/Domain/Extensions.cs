@@ -48,7 +48,7 @@ namespace LicentaApp.Domain
                 "Text");
         }
 
-        public static SelectList ToSelectList(this Type enumType, object selectedValue, params object[] valuesToExclude)
+        public static SelectList ToSelectListWithValue(this Type enumType, object selectedValue, params object[] valuesToExclude)
         {
             if (!enumType.IsEnum)
             {
@@ -121,6 +121,18 @@ namespace LicentaApp.Domain
             viewData.Add(AppConstants.Pagination.CurrentPage, currentPage);
             viewData.Add(AppConstants.Pagination.TotalPages, totalData / AppConstants.Pagination.ElementsOnPage + 1);
             viewData.Add(AppConstants.Pagination.ActionName, controllerContext.RouteData.Values["action"].ToString());
+        }
+
+        public static void AddOrUpdate(this ViewDataDictionary viewData, string key, object value)
+        {
+            if (viewData.ContainsKey(key))
+            {
+                viewData[key] = value;
+            }
+            else
+            {
+                viewData.Add(key, value);
+            }
         }
     }
 }

@@ -11,7 +11,12 @@
         <script src="~/Bundles/Scripts/jquery-1.10.2.js"></script>
         <script src="~/Bundles/Scripts/jquery.validate.unobtrusive.js"></script>
         <script src="~/Bundles/Scripts/jquery.unobtrusive-ajax.js"></script>
-
+        <script type="text/javasccript">
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $('.tooltipped').tooltip();
+            $('.tabs').tabs();
+        </script>
         @Html.EditorFor(x => x)
         <button type="submit">Next</button>
     }

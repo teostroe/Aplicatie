@@ -20,9 +20,16 @@ namespace LicentaApp
                         "~/Bundles/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
-                      "~/Bundles/Scripts/materialize.js",
-                      "~/Bundles/Scripts/fontawesome-all.js",
-                      "~/Bundles/Scripts/Custom/materialize-configs.js"));
+                //"~/Bundles/Scripts/angular.min.js",
+                //"~/Bundles/Scripts/angular-animate.min.js",
+                //"~/Bundles/Scripts/angular-aria.min.js",
+                //"~/Bundles/Scripts/angular-messages.min.js",
+                //"~/Bundles/Scripts/angular-route.min.js",
+                //"~/Bundles/Scripts/angular-resource.min.js",
+                  "~/Bundles/Scripts/materialize.js",
+                  "~/Bundles/Scripts/fontawesome-all.js",
+                  "~/Bundles/Scripts/Custom/materialize-configs.js",
+                  "~/Bundles/Scripts/Custom/proj-methods.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Bundles/Content/materialize.css",

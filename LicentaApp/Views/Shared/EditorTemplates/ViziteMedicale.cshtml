@@ -8,7 +8,7 @@
     @if (ViewData.ContainsKey(AppConstants.SferaDistantaOptions))
     {
         <div class="col m2 input-field">
-            @Html.DropDownListFor(model => model.SferaDistantaDrept, (SelectList)ViewData[AppConstants.SferaDistantaOptions], "- Fara -")
+            @Html.DropDownListFor(model => model.SferaDistantaDrept, (SelectList)ViewData[AppConstants.SferaDistantaOptions], "- Fara -", new { @class = "sfera"})
             @Html.LabelFor(model => model.SferaDistantaDrept)
             @Html.ValidationMessageFor(model => model.SferaDistantaDrept, "", new { @class = "text-danger" })
         </div>
@@ -16,7 +16,7 @@
     @if (ViewData.ContainsKey(AppConstants.SferaAproapeOptions))
     {
         <div class="col m2 input-field">
-            @Html.DropDownListFor(model => model.SferaAproapeDrept, (SelectList)ViewData[AppConstants.SferaAproapeOptions], "- Fara -")
+            @Html.DropDownListFor(model => model.SferaAproapeDrept, (SelectList)ViewData[AppConstants.SferaAproapeOptions], "- Fara -", new { @class = "sfera" })
             @Html.LabelFor(model => model.SferaAproapeDrept)
             @Html.ValidationMessageFor(model => model.SferaAproapeDrept, "", new { @class = "text-danger" })
         </div>
@@ -55,7 +55,7 @@
     @if (ViewData.ContainsKey(AppConstants.SferaDistantaOptions))
     {
         <div class="col m2 input-field">
-            @Html.DropDownListFor(model => model.SferaDistantaStang, (SelectList)ViewData[AppConstants.SferaDistantaOptions], "- Fara -")
+            @Html.DropDownListFor(model => model.SferaDistantaStang, (SelectList)ViewData[AppConstants.SferaDistantaOptions], "- Fara -", new { @class = "sfera" })
             @Html.LabelFor(model => model.SferaDistantaStang)
             @Html.ValidationMessageFor(model => model.SferaDistantaStang, "", new { @class = "text-danger" })
         </div>
@@ -63,7 +63,7 @@
     @if (ViewData.ContainsKey(AppConstants.SferaAproapeOptions))
     {
         <div class="col m2 input-field">
-            @Html.DropDownListFor(model => model.SferaAproapeStang, (SelectList)ViewData[AppConstants.SferaAproapeOptions], "- Fara -")
+            @Html.DropDownListFor(model => model.SferaAproapeStang, (SelectList)ViewData[AppConstants.SferaAproapeOptions], "- Fara -", new { @class = "sfera" })
             @Html.LabelFor(model => model.SferaAproapeStang)
             @Html.ValidationMessageFor(model => model.SferaAproapeStang, "", new { @class = "text-danger" })
         </div>

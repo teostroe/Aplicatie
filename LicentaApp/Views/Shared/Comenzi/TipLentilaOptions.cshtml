@@ -1,0 +1,15 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.ViewModels.ComandaViewModel
+
+@if (ViewData.ContainsKey(AppConstants.TipLentilaOptions))
+{
+    <h6>Lentile</h6>
+    <hr />
+    <div class="row">
+        <div class="col m12 input-field">
+            @Html.DropDownListFor(model => model.Lentila.TipLentila, (SelectList)ViewData[AppConstants.TipLentilaOptions], "- Selecteaza -", new { @id = "tip-lentila-options" })
+            @Html.LabelFor(model => model.Lentila.TipLentila)
+            @Html.ValidationMessageFor(model => model.Lentila.TipLentila, "", new { @class = "text-danger" })
+        </div>
+    </div>
+}
