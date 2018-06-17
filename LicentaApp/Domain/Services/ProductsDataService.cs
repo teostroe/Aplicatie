@@ -10,6 +10,25 @@ namespace LicentaApp.Domain.Services
     public class ProductsDataService
     {
 
+        public static decimal GetTotal(int idComanda, LicentaDbContext dbContext)
+        {
+            var dataComanda = dbContext.Comenzi.Find(idComanda).Data;
+            var produse = dbContext.RandComenziProduse
+                .Include(x => x.Produse)
+                .Where(x => x.IdComanda == idComanda)
+                .ToList();
+            return produse.Sum(x => x.Cantitate * GetPret(x.IdProdus, dataComanda, dbContext));
+        }
+
+        public static decimal GetPret(int idProdus, DateTime data, LicentaDbContext dbContext)
+        {
+            return dbContext.Preturi.Where(x => x.Id == idProdus)
+                .OrderByDescending(x => x.DataActualizare)
+                .Where(x => data > x.DataActualizare)
+                .FirstOrDefault()
+                .Valoare;
+        }
+
         public static IEnumerable<Produse> GetProducts(Dictionary<string, string> details, LicentaDbContext dbContext)
         {
             var productIds = GetProductIds(details, dbContext);

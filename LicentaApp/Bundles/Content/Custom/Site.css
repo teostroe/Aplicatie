@@ -64,3 +64,22 @@
 #tabs-main-container {
     padding: 50px 0 50px 0;
 }
+
+.relative-floating-btn {
+    position: relative;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.custom-display-table thead th{
+    padding-left: 40px;
+    font-size: 18px;
+}
+
+.custom-display-table tbody td{
+    padding: 10px;
+}
+
+.custom-padding-table tbody td{
+    padding: 10px;
+}

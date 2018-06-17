@@ -27,14 +27,14 @@
 <div class="row">
     <div class="col m6 input-field">
         @Html.EnumDropDownListFor(model => model.TipProdus, "- Selecteaza -", new {id = "tip-produs"})
-        @Html.LabelFor(model => model.TipProdus)
+        @Html.LabelFor(model => model.TipProdus, "Tip Produs")
         @Html.ValidationMessageFor(model => model.TipProdus, "", new { @class = "text-danger" })
     </div>
     @if (ViewBag.FurnizoriSelectList != null)
     {
         <div class="col m6 input-field">
             @Html.DropDownListFor(model => model.IdFurnizor, (SelectList)ViewBag.FurnizoriSelectList, "- Selecteaza -")
-            @Html.LabelFor(model => model.IdFurnizor)
+            @Html.LabelFor(model => model.IdFurnizor, "Furnizor")
             @Html.ValidationMessageFor(model => model.IdFurnizor, "", new { @class = "text-danger" })
         </div>
     }

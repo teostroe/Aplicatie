@@ -23,7 +23,10 @@ namespace LicentaApp.Controllers
         // GET: Produse
         public ActionResult Index(int? page)
         {
-            var produse = db.Produse.Include(p => p.Furnizori);
+            var produse = db.Produse.Include(p => p.Furnizori)
+                .Include(x => x.Preturi)
+                .OrderBy(x => x.TipProdus)
+                .ThenBy(x => x.Denumire);
             ViewData.InitializePagination(page, produse.Count(), this.ControllerContext);
             return View(produse.ToPagedList(page));
         }

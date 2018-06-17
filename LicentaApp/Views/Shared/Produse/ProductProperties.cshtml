@@ -13,6 +13,10 @@
                     @Html.DropDownListFor(x => x.ProductProperties[item.PropertyName], item.DataType
                         .ToSelectListWithValue(this.Model.ProductProperties != null && this.Model.ProductProperties.ContainsKey(item.PropertyName) ? this.Model.ProductProperties[item.PropertyName] : null))
                 }
+                else if (item.DataType == typeof(bool))
+                {
+                    @Html.CheckBoxStringFor(x => x.ProductProperties[item.PropertyName])
+                }
                 else
                 {
                     @Html.TextBoxFor(x => x.ProductProperties[item.PropertyName])

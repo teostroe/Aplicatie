@@ -99,6 +99,7 @@
           <Property Name="IdProdus" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="TipTratement" Type="number" Precision="10" Scale="0" />
           <Property Name="TipCuloare" Type="number" Precision="10" Scale="0" />
+          <Property Name="Discount" Type="number" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Roluri">
           <Key>
@@ -504,6 +505,7 @@
           <NavigationProperty Name="Produse" Relationship="Self.FK_RandComenziProduse_IdProdus" FromRole="RandComenziProduse" ToRole="Produse" />
           <Property Name="TipTratement" Type="Domain.TipTratament" />
           <Property Name="TipCuloare" Type="Domain.TipCuloare" />
+          <Property Name="Discount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Roluri">
           <Key>
@@ -893,6 +895,7 @@
           <EntitySetMapping Name="RandComenziProduse">
             <EntityTypeMapping TypeName="Domain.RandComenziProduse">
               <MappingFragment StoreEntitySet="RandComenziProduse">
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="TipCuloare" ColumnName="TipCuloare" />
                 <ScalarProperty Name="TipTratement" ColumnName="TipTratement" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

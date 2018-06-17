@@ -195,6 +195,7 @@
     <Compile Include="Domain\Metadata\ProductMetadata.cs" />
     <Compile Include="Domain\Metadata\ProductProperties.cs" />
     <Compile Include="Domain\Metadata\ProductProviders.cs" />
+    <Compile Include="Domain\RazorExtensions.cs" />
     <Compile Include="Domain\Services\SerializationService.cs" />
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
@@ -253,6 +254,8 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ComandaViewModel.cs" />
+    <Compile Include="ViewModels\Comanda\ComandaReadAllViewModel.cs" />
+    <Compile Include="ViewModels\Comanda\ComandaReadOneViewModel.cs" />
     <Compile Include="ViewModels\LentileViewModel.cs" />
     <Compile Include="ViewModels\ProduseViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
@@ -439,10 +442,14 @@
     <Content Include="Views\Shared\Comenzi\ComandaCuPrelucrare.cshtml" />
     <Content Include="Views\Shared\Comenzi\ComandaSimpla.cshtml" />
     <Content Include="Views\Shared\Comenzi\EditClient.cshtml" />
+    <Content Include="Views\Shared\_PagedLayout.cshtml" />
+    <Content Include="Views\Shared\_FloatingButton.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Clienti.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ViziteMedicale.cshtml" />
+    <Content Include="Views\Shared\_RUDButtons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shared\Modals\" />
   </ItemGroup>
   <ItemGroup>

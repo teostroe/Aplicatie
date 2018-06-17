@@ -1,0 +1,45 @@
+﻿@model LicentaApp.Clienti
+
+<table class="striped custom-display-table">
+    <thead>
+        <tr>
+            <th colspan="2">Detalii Client</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Nume:</b></td>
+            <td>@this.Model.Nume</td>
+        </tr>
+
+        <tr>
+            <td><b>Prenume:</b></td>
+            <td>@this.Model.Prenume</td>
+        </tr>
+
+        <tr>
+            <td><b>Numar Telefon:</b></td>
+            <td>@this.Model.NumarTelefon</td>
+        </tr>
+
+        <tr>
+            <td><b>Email:</b></td>
+            <td>@this.Model.Email</td>
+        </tr>
+
+        <tr>
+            <td><b>Data Nastere:</b></td>
+            <td>@this.Model.DataNastere.ToString("dd/MM/yyyy")</td>
+        </tr>
+
+        <tr>
+            <td><b>Profesie</b></td>
+            <td>@this.Model.Profesie</td>
+        </tr>
+
+        <tr>
+            <td><b>Data Inregistrare:</b></td>
+            <td>@this.Model.DataInregistrare.ToString("dd/MM/yyyy")</td>
+        </tr>
+    </tbody>
+</table>

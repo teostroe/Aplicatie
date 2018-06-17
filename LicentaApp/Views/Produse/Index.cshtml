@@ -2,30 +2,37 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_PagedLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col s11">
+        <h4>Produse</h4>
+    </div>
+    <div class="col s1">
+        @Html.Partial("_FloatingButton", new Tuple<string, string>(Url.Action("Create", "Produse"), "Adauga"))
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cod)
+            Cod
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Denumire)
+            Denumire
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Discount)
+            Tip Produs
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipProdus)
+            Discount
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Furnizori.Denumire)
+            Pret
+        </th>
+        <th>
+            Furnizor
         </th>
         <th></th>
     </tr>
@@ -38,23 +45,23 @@
         <td>
             @Html.DisplayFor(modelItem => item.Denumire)
         </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TipProdus)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Discount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TipProdus)
+            @item.Preturi.Single(x => x.EsteUtilizatAcum).Valoare
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Furnizori.Denumire)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.Partial("_RUDButtons", new Tuple<int,string> (item.Id, "Produse"))
         </td>
     </tr>
 }
 
 </table>
-
-@Html.Partial("Pagination")

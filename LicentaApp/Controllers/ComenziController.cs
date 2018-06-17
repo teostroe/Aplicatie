@@ -12,6 +12,7 @@ using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.Services;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
+using LicentaApp.ViewModels.Comanda;
 using Microsoft.Ajax.Utilities;
 
 namespace LicentaApp.Controllers
@@ -27,10 +28,27 @@ namespace LicentaApp.Controllers
             {TipLentila.Progresiva, new  [] {1.5m, 1.6m, 1.67m, 1.74m}  }
         };
         // GET: Comenzi
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var comenzi = db.Comenzi.Include(c => c.Clienti).Include(c => c.Utilizatori).Include(c => c.ViziteMedicale);
-            return View(comenzi.ToList());
+            var comenzi = db.Comenzi
+                .Include(c => c.Clienti)
+                .Include(c => c.Utilizatori)
+                .Include(c => c.ViziteMedicale)
+                .ToList()
+                .Select(x => new ComandaReadAllViewModel
+                {
+                    NumarComanda = x.Id,
+                    Data = x.Data,
+                    NumeClient = $"{x.Clienti.Nume} {x.Clienti.Prenume}",
+                    NumeAngajat = $"{x.Utilizatori.Nume} {x.Utilizatori.Prenume}",
+                    //Discount = x.Discount,
+                    //Total = ProductsDataService.GetTotal(x.Id, db)
+                })
+                .OrderByDescending(x => x.Data)
+                .ToList();
+            ViewData.InitializePagination(page, comenzi.Count(), this.ControllerContext);
+
+            return View(comenzi);
         }
 
         // GET: Comenzi/Details/5
@@ -40,12 +58,37 @@ namespace LicentaApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comenzi comenzi = db.Comenzi.Find(id);
-            if (comenzi == null)
+
+            if (!db.Comenzi.Any(x => x.Id == id))
             {
                 return HttpNotFound();
             }
-            return View(comenzi);
+
+            var comanda = db.Comenzi
+                .Where(x => x.Id == id)
+                .Include(x => x.Clienti)
+                .Include(x => x.ViziteMedicale)
+                .Include(x => x.RandComenziProduse)
+                .Single();
+            var model = new ComandaReadOneViewModel
+            {
+                NumarComanda = comanda.Id,
+                Client = comanda.Clienti,
+                VizitaMedicala = comanda.ViziteMedicale,
+                Discount = comanda.Discount,
+                Data = comanda.Data,
+                Produse = comanda.RandComenziProduse.Select(x => new ComandaProdusViewModel
+                {
+                    Cod = x.Produse.Cod,
+                    TipProdus = x.Produse.TipProdus,
+                    Cantitate = x.Cantitate,
+                    Denumire = x.Produse.Denumire,
+                    //Pret = ProductsDataService.GetPret(x.Produse.Id, comanda.Data, db),
+                    Discount = x.Produse.Discount
+                })
+            };
+
+            return View(model);
         }
 
         // GET: Comenzi/Create
@@ -236,10 +279,12 @@ namespace LicentaApp.Controllers
             if (viewModel.Lentila != null)
             {
                 comanda.ViziteMedicale = viewModel.VizitaMedicala;
+                var dbProdus = db.Produse.Single(x => x.Cod == viewModel.Lentila.CodProdus);
                 comanda.RandComenziProduse.Add(new RandComenziProduse
                 {
                     Cantitate = 2,
-                    IdProdus = db.Produse.Single(x => x.Cod == viewModel.Lentila.CodProdus).Id,
+                    IdProdus = dbProdus.Id,
+                    Discount = dbProdus.Discount,
                     TipTratement = viewModel.Lentila.Tratement,
                     TipCuloare = viewModel.Lentila.Culoare
                 });
@@ -337,3 +382,4 @@ namespace LicentaApp.Controllers
         }
     }
 }
+

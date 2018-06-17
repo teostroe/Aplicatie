@@ -1,0 +1,5 @@
+﻿@model Tuple<int,string>
+
+<a href="@Url.Action("Edit", this.Model.Item2, new { id=this.Model.Item1 })" class="tooltipped" data-position="bottom" data-tooltip="Editeaza"><i class="fas fa-edit fa-2x"></i></a>
+<a href="@Url.Action("Details", this.Model.Item2, new { id=this.Model.Item1 })" class="tooltipped" data-position="bottom" data-tooltip="Detalii"><i class="fas fa-info fa-2x"></i></a>
+<a href="@Url.Action("Delete", this.Model.Item2, new { id=this.Model.Item1 })" class="tooltipped" data-position="bottom" data-tooltip="Sterge"><i class="fas fa-trash fa-2x"></i></a>

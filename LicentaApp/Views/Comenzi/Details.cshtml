@@ -1,59 +1,56 @@
-﻿@model LicentaApp.Comenzi
+﻿@model LicentaApp.ViewModels.Comanda.ComandaReadOneViewModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var counter = 0;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Comenzi</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Data)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Data)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Clienti.Nume)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Clienti.Nume)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utilizatori.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utilizatori.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ViziteMedicale.IdComandaVizitaMedicala)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ViziteMedicale.IdComandaVizitaMedicala)
-        </dd>
-
-    </dl>
+<h3>Nr. Comanda: @this.Model.NumarComanda</h3>
+<hr />
+<div class="row">
+    @Html.DisplayFor(x => x.Client)
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col m12">
+        <h5>Detalii Vizita Medicala</h5>
+    </div>
+    @Html.DisplayFor(x => x.VizitaMedicala)
+</div>
+
+<table class="striped custom-padding-table" >
+    <thead>
+    <tr>
+        <th>Nr. Crt.</th>
+        <th>Cod</th>
+        <th>Denumire</th>
+        <th>Discount</th>
+        <th>Cantitate</th>
+        <th>Pret Initial</th>
+        <th>Pret Final</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in this.Model.Produse)
+    {
+        ++counter;
+        <tr>
+            <td>@counter</td>
+            <td>@item.Cod</td>
+            <td>@item.Denumire</td>
+            <td>@item.Discount</td>
+            <td>@item.Cantitate</td>
+            <td>@item.Pret</td>
+            <td>@(item.Discount.HasValue ? item.Discount * item.Pret : item.Pret)</td>
+        </tr>
+    }
+    <tr>
+        <td colspan="6">Discount comanda</td>
+        <td>@this.Model.Discount</td>
+    </tr>
+    <tr>
+        <td colspan="6">Total</td>
+        <td>@this.Model.Total</td>
+    </tr>
+    </tbody>
+</table>

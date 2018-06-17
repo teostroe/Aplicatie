@@ -1,58 +1,57 @@
-﻿@model IEnumerable<LicentaApp.Comenzi>
+﻿@model IEnumerable<LicentaApp.ViewModels.Comanda.ComandaReadAllViewModel>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_PagedLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col s11">
+        <h3>Comenzi</h3>
+    </div>
+    <div class="col s1">
+        @Html.Partial("_FloatingButton", new Tuple<string, string>(Url.Action("Create", "Comenzi"), "Adauga"))
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Data)
+            Numar comanda
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Discount)
+            Data
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Clienti.Nume)
+            Nume client
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Utilizatori.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ViziteMedicale.IdComandaVizitaMedicala)
+            Nume angajat
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Clienti.Nume)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Utilizatori.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ViziteMedicale.IdComandaVizitaMedicala)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumarComanda)
+            </td>
+            <td>
+                @item.Data.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeAngajat)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Details", "Comenzi", new { id=item.NumarComanda })" class="tooltipped" data-position="bottom" data-tooltip="Detalii"><i class="fas fa-info fa-2x"></i></a>
+            </td>
+        </tr>
+    }
 
 </table>
+
