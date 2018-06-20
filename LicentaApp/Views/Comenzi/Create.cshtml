@@ -38,10 +38,6 @@
         </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @*@Scripts.Render("~/bundles/jqueryval")*@
     <script>
@@ -81,7 +77,13 @@
                 loadStepOnItemChange(containerId, url, [sferaChange, initCodProdusAutocomplete], $(this));
             });
             loadAutocomplete('input#cauta-client-input.autocomplete', telefonArray);
+            $('#btn-submit').click(function() {
+                $('#data-nastere').val($('datepicker').val())
+            });
+
         });
+
+
 
         function initCodProdusAutocomplete() {
             $("#btn-submit").show();
@@ -156,7 +158,7 @@
             $('#lentila-options').change(function () {
                 idProdus = $(this).val();
                 var containerId = '#extra-options-container';
-                var url = '@Url.Action("GetTratamentOptions", "Comenzi", null)?idProdus=' + idProdus;
+                var url = '@Url.Action("GetLentileExtraOptions", "Comenzi", null)';
                 loadStepOnItemChange(containerId, url, null, $(this));
             });
         }
@@ -171,77 +173,6 @@
                 }
             });
         }
-
-
-
-
-        @*function loadPartialTipLentila() {
-            $('#tip-lentila-options-container')
-                .load('@Url.Action("GetTipLentilaOptions", "Comenzi", null)' + '?doarLentilaProgresiva=' + doarLentilaProgresiva(),
-                    function () {
-                        $('select').formSelect();
-                        tipLentilaChange();
-                        showHide(sfereIds.length > 0, $("#tip-lentila-options-container"));
-                    });
-
-        }
-
-        function tipLentilaChange() {
-            $('#tip-lentila-options').change(function () {
-                tipLentila = $(this).val();
-                $("#indice-refractie-options-container").load('@Url.Action("GetIndiceRefractieOptions", "Comenzi", null)' +
-                    '?tipLentila=' + tipLentila,
-                    function () {
-                        $('select').formSelect();
-                        indiceRefractieChange();
-                    });
-                showHide($(this).val(), $("#indice-refractie-options-container"));
-            });
-        }
-
-        function indiceRefractieChange() {
-            $('#indice-refractie-options').change(function () {
-                indiceRefractie = $(this).val();
-                $("#producator-options-container").load('@Url.Action("GetProducatorOptions", "Comenzi", null)' +
-                    '?tipLentila=' + tipLentila + '&indiceRefractie=' + indiceRefractie,
-                    function () {
-                        $('select').formSelect();
-                        producatorChange();
-                    });
-                showHide($(this).val(), $("#producator-options-container"));
-            });
-        }
-
-        function producatorChange() {
-            $('#producator-options').change(function () {
-                idProducator = $(this).val();
-                $("#lentila-options-container").load('@Url.Action("GetLentilaOptions", "Comenzi", null)' +
-                    '?tipLentila=' +
-                    tipLentila +
-                    '&indiceRefractie=' +
-                    indiceRefractie +
-                    '&idProducator=' +
-                    idProducator,
-                    function () {
-                        $('select').formSelect();
-                        lentilaChange();
-                    });
-                showHide($(this).val(), $("#lentila-options-container"));
-            });
-        }
-
-        function lentilaChange() {
-            $('#lentila-options').change(function () {
-                idProdus = $(this).val();
-                tipLentila = $(this).val();
-                $("#tratament-options-container").load('@Url.Action("GetTratamentOptions", "Comenzi", null)' +
-                    '?idProdus=' + idProdus,
-                    function () {
-                        $('select').formSelect();
-                    });
-                showHide($(this).val(), $("#tratament-options-container"));
-            });
-        }*@
 
         function doarLentilaProgresiva() {
             var isAproape = anyContains(sfereIds, "Aproape");

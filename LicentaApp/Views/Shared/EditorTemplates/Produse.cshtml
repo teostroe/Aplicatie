@@ -19,7 +19,7 @@
         @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
     </div>
     <div class="col m4 input-field">
-        @Html.EditorFor(model => model.Cod)
+        @Html.TextBoxFor(model => model.Cod, isEdit ? new { @readonly = "readonly" } : null)
         @Html.LabelFor(model => model.Cod)
         @Html.ValidationMessageFor(model => model.Cod, "", new { @class = "text-danger" })
     </div>

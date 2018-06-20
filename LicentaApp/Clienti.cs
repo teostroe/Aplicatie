@@ -11,7 +11,8 @@ namespace LicentaApp
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Clienti
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,6 +26,8 @@ namespace LicentaApp
         public string Prenume { get; set; }
         public string NumarTelefon { get; set; }
         public string Email { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+
         public System.DateTime DataNastere { get; set; }
         public System.DateTime DataInregistrare { get; set; }
         public string Profesie { get; set; }

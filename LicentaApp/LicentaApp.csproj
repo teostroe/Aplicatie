@@ -200,6 +200,7 @@
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
+    <Compile Include="Domain\ValueObjects\DaNu.cs" />
     <Compile Include="Domain\ValueObjects\TipComanda.cs" />
     <Compile Include="Domain\ValueObjects\TipCuloare.cs" />
     <Compile Include="Domain\ValueObjects\TipLentila.cs" />
@@ -293,6 +294,7 @@
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
       <LastGenOutput>LicentaDbContext.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="LicentaDbContext.edmx.sql" />
     <Content Include="LicentaDbContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LicentaDbContext.edmx</DependentUpon>
@@ -447,6 +449,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Clienti.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ViziteMedicale.cshtml" />
     <Content Include="Views\Shared\_RUDButtons.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Produse.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DetaliiProduse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

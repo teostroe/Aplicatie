@@ -46,5 +46,23 @@ namespace LicentaApp.Domain
 
             return name;
         }
+
+        public static Type GetUnderlyingType(Type type)
+        {
+            var underlyingType = Nullable.GetUnderlyingType(type);
+
+            return underlyingType ?? type;
+        }
+
+        public static string ToHtmlMvcString(this object obj)
+        {
+            var type = obj.GetType();
+            if (type.IsEnum)
+            {
+                var enumType = GetUnderlyingType(type);
+                return GetDisplayName(enumType, obj);
+            }
+            return obj.ToString();
+        }
     }
 }

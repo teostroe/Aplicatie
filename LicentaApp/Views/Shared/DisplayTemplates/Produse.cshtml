@@ -1,0 +1,34 @@
+﻿@model Produse
+
+<table class="striped custom-display-table">
+    <thead>
+        <tr>
+            <th colspan="2">@this.Model.Denumire</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Tip Produs:</b></td>
+            <td>@this.Model.TipProdus</td>
+        </tr>
+        <tr>
+            <td><b>Cod:</b></td>
+            <td>@this.Model.Cod</td>
+        </tr>
+
+        <tr>
+            <td><b>Discount:</b></td>
+            <td>@this.Model.Discount</td>
+        </tr>
+
+        <tr>
+            <td><b>Pret:</b></td>
+            <td>@this.Model.Preturi.OrderByDescending(x => x.EsteUtilizatAcum).FirstOrDefault().Valoare</td>
+        </tr>
+
+        <tr>
+            <td><b>Furnizor:</b></td>
+            <td>@this.Model.Furnizori.Denumire</td>
+        </tr>
+    </tbody>
+</table>

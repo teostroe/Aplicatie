@@ -30,7 +30,7 @@ namespace LicentaApp.Domain.Metadata
                 Deserializers.IntegerDeserializer, Serializers.IntegerSerializer));
             Cache.Add(new ProductMetadata(ProductProperties.SablonMax, "Max. Sablon", typeof(int), new[] { TipProdus.Rame, TipProdus.OchelariSoare },
                 Deserializers.IntegerDeserializer, Serializers.IntegerSerializer));
-            Cache.Add(new ProductMetadata(ProductProperties.EstePolarizat, "Este Polarizat", typeof(bool), new [] {TipProdus.OchelariSoare },
+            Cache.Add(new ProductMetadata(ProductProperties.EstePolarizat, "Este Polarizat", typeof(DaNu), new [] {TipProdus.OchelariSoare },
                 Deserializers.BooleanDeserialzier, Serializers.BooleanSerializer));
         }
 

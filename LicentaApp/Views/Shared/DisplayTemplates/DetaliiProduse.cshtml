@@ -1,0 +1,22 @@
+﻿@using LicentaApp.Domain
+@using LicentaApp.Domain.Metadata
+@model ICollection<DetaliiProdus>
+
+
+<table class="striped custom-display-table">
+    <thead>
+        <tr>
+            <th colspan="2">Specificatii produs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in this.Model)
+        {
+            var cache = ProductMetadata.GetForProperty(item.Denumire);
+            <tr>
+                <td><b>@cache.PropertyDisplayName</b></td>
+                <td>@cache.Deserializer(item.Valoare).ToHtmlMvcString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

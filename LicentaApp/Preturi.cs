@@ -17,7 +17,7 @@ namespace LicentaApp
         public int Id { get; set; }
         public decimal Valoare { get; set; }
         public System.DateTime DataActualizare { get; set; }
-        public bool EsteUtilizatAcum { get; set; }
+        public int EsteUtilizatAcum { get; set; }
         public int IdProdus { get; set; }
     
         public virtual Produse Produse { get; set; }

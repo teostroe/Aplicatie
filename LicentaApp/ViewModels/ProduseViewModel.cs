@@ -13,5 +13,6 @@ namespace LicentaApp.ViewModels
         public decimal Pret { get; set; }
         public List<ProductMetadata> ProductMetadata { get; set; }
         public Dictionary<string, string> ProductProperties { get; set; }
+        public bool Test { get; set; }
     }
 }

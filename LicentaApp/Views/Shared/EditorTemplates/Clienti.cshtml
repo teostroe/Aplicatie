@@ -14,7 +14,7 @@
             @Html.ValidationMessageFor(model => model.Prenume, "", new { @class = "text-danger" })
         </div>
         <div class="col m4 input-field">
-            @Html.TextBoxFor(model => model.DataNastere, "{0:dd/MM/yyyy}", new { @class = "datepicker" })
+            @Html.TextBoxFor(model => model.DataNastere, "{0:dd/MM/yyyy}", new {  @class="datepicker" })
             @Html.LabelFor(model => model.DataNastere)
             @Html.ValidationMessageFor(model => model.DataNastere, "", new { @class = "text-danger" })
         </div>

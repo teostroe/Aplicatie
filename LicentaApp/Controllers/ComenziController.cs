@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
@@ -157,7 +158,7 @@ namespace LicentaApp.Controllers
             return PartialView("Comenzi/LentilaOptions", model);
         }
 
-        public PartialViewResult GetTratamentOptions(int idProdus)
+        public PartialViewResult GetLentileExtraOptions()
         {
             var model = new ComandaViewModel();
 
@@ -197,11 +198,6 @@ namespace LicentaApp.Controllers
                     throw new NotImplementedException();
             }
         }
-
-        //public PartialViewResult GetCuloareOptions(int idProdus)
-        //{
-
-        //}
 
         [HttpPost]
         public PartialViewResult DisplayVizitaMedicala(ComandaViewModel viewModel)

@@ -82,7 +82,7 @@ namespace LicentaApp.Controllers
             model.Produse.Preturi.Add(new Preturi
             {
                 DataActualizare = DateTime.UtcNow,
-                EsteUtilizatAcum = true,
+                EsteUtilizatAcum = 1,
                 Valoare = model.Pret
             });
             foreach (var prop in model.ProductProperties)
@@ -116,7 +116,7 @@ namespace LicentaApp.Controllers
             {
                 Produse = produse,
                 ProductMetadata = ProductMetadata.GetAllForProductType(produse.TipProdus),
-                Pret = produse.Preturi.SingleOrDefault(x => x.EsteUtilizatAcum).Valoare,
+                Pret = produse.Preturi.SingleOrDefault(x => x.EsteUtilizatAcum == 1).Valoare,
                 ProductProperties = db.DetaliiProdus.Where(x => x.IdProdus == produse.Id).ToDictionary(x => x.Denumire, x => x.Valoare)
             };
 
@@ -151,16 +151,16 @@ namespace LicentaApp.Controllers
                 db.DetaliiProdus.Attach(dp);
                 dp.Valoare = model.ProductProperties[dp.Denumire];
             }
-            var pretUtilizat = db.Preturi.SingleOrDefault(x => x.IdProdus == model.Produse.Id && x.EsteUtilizatAcum);
+            var pretUtilizat = db.Preturi.SingleOrDefault(x => x.IdProdus == model.Produse.Id && x.EsteUtilizatAcum == 1);
             if (pretUtilizat != null)
             {
                 db.Preturi.Attach(pretUtilizat);
-                pretUtilizat.EsteUtilizatAcum = false;
+                pretUtilizat.EsteUtilizatAcum = 0;
             }
             db.Preturi.Add(new Preturi
             {
                 DataActualizare = DateTime.UtcNow,
-                EsteUtilizatAcum = true,
+                EsteUtilizatAcum = 1,
                 Valoare = model.Pret,
                 IdProdus = model.Produse.Id
             });
@@ -172,28 +172,22 @@ namespace LicentaApp.Controllers
         // GET: Produse/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Produse produse = db.Produse.Find(id);
-            if (produse == null)
-            {
-                return HttpNotFound();
-            }
-            return View(produse);
-        }
-
-        // POST: Produse/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             Produse produse = db.Produse.Find(id);
             db.Produse.Remove(produse);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //// POST: Produse/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Produse produse = db.Produse.Find(id);
+        //    db.Produse.Remove(produse);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

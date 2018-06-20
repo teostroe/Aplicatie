@@ -4,56 +4,17 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    <div class="col m2">
+        <h4>Detalii</h4>
+    </div>
+    <div class="col m2" style="margin-top: 25px">
+        <a href="@Url.Action("Edit", "Produse", new { id=this.Model.Id })" class="tooltipped" data-position="bottom" data-tooltip="Editeaza"><i class="fas fa-edit fa-2x"></i></a>
+        <a href="@Url.Action("Delete", "Produse", new { id=this.Model.Id })" class="tooltipped" data-position="bottom" data-tooltip="Sterge"><i class="fas fa-trash fa-2x"></i></a>
 
-<h2>Details</h2>
-
-<div>
-    <h4>Produse</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cod)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cod)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Denumire)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Denumire)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipProdus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipProdus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Furnizori.Denumire)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Furnizori.Denumire)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@Html.DisplayFor(x => x)
+
+@Html.Partial("DisplayTemplates/DetaliiProduse", this.Model.DetaliiProdus)

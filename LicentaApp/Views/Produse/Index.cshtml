@@ -53,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.Discount)
         </td>
         <td>
-            @item.Preturi.Single(x => x.EsteUtilizatAcum).Valoare
+            @item.Preturi.Single(x => x.EsteUtilizatAcum == 1).Valoare
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Furnizori.Denumire)
