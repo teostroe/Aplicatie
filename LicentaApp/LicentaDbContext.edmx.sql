@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/17/2018 16:22:41
--- Generated from EDMX file: C:\personal\Teodora\Licenta\Aplicatie\LicentaApp\LicentaDbContext.edmx
+-- Date Created: 06/20/2018 23:03:44
+-- Generated from EDMX file: D:\CSIE\Licenta\Licenta2\LicentaApp\LicentaApp\LicentaDbContext.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [LicentaTeo];
+USE [LicentaTeoStroe];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
