@@ -27,7 +27,7 @@ namespace LicentaApp
         public Nullable<int> CatreMagazinId { get; set; }
         public System.DateTime DataCreare { get; set; }
         public Nullable<System.DateTime> DataPrimire { get; set; }
-        public int StatusComanda { get; set; }
+        public LicentaApp.Domain.ValueObjects.StatusComanda StatusComanda { get; set; }
         public int IdUtilizator { get; set; }
     
         public virtual Furnizori Furnizori { get; set; }

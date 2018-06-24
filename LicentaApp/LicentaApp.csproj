@@ -173,6 +173,9 @@
     <Compile Include="Comenzi.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComenziAprovizionari.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ClientiController.cs" />
     <Compile Include="Controllers\ComenziController.cs" />
     <Compile Include="Controllers\DetaliiProdusController.cs" />
@@ -250,6 +253,9 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandComenziAprovizionareProduse.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="RandComenziProduse.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
