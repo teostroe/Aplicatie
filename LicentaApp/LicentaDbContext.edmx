@@ -237,7 +237,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DeLaFurnizorId" Type="int" Nullable="true" />
     <Property Name="CatreDepozitCentralId" Type="int" Nullable="true" />
     <Property Name="DeLaDepozitCentralId" Type="int" Nullable="true" />
@@ -251,7 +251,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdProdus" Type="int" Nullable="false" />
     <Property Name="IdComanda" Type="int" Nullable="false" />
     <Property Name="CantitateCeruta" Type="int" Nullable="false" />
@@ -957,7 +957,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeLaFurnizorId" Type="Int32" />
           <Property Name="CatreDepozitCentralId" Type="Int32" />
           <Property Name="DeLaDepozitCentralId" Type="Int32" />
@@ -977,7 +977,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdProdus" Type="Int32" Nullable="false" />
           <Property Name="IdComanda" Type="Int32" Nullable="false" />
           <Property Name="CantitateCeruta" Type="Int32" Nullable="false" />

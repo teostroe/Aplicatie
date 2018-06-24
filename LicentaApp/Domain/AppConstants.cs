@@ -52,6 +52,8 @@ namespace LicentaApp.Domain
         public const string VerificareProduse = "VerificareProduse";
         public const string TempComandaViewModel = "TempComandaViewModel";
 
+        public const string FurnizorOptions = "FurnizorOptions";
+        public const string CodProduseFurnizor = "CodProduseFurnizor";
 
     }
 }

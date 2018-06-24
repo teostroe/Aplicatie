@@ -1,0 +1,71 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.ViewModels.ComandaAprovizionare.ComandaAprivizionareCreate
+@{
+    ViewBag.Title = "CreazaComandaAprovizionareFurnizor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fromFurnizor = ViewData.ContainsKey(AppConstants.FurnizorOptions);
+}
+
+
+@using (Html.BeginForm(fromFurnizor ? "CreazaComandaAprovizionareFurnizor" : "CreazaComandaAprovizionareMagazin", "ComenziAprovizionare", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col m8">
+            <h4>Creaza</h4>
+        </div>
+        @if (fromFurnizor)
+        {
+            <div class="col m4">
+                <div style="margin-top: 20px">
+                    @Html.DropDownListFor(model => model.IdExpeditor, (SelectList)ViewData[AppConstants.FurnizorOptions], "- Furnizor -", new { @id = "id-furnizor" })
+                    @Html.LabelFor(model => model.IdExpeditor)
+                </div>
+            </div>
+        }
+
+    </div>
+
+        <div id="produse">
+            @Html.Partial("ComenziAprovizionare/ProduseFurnizor", this.Model)
+        </div>
+
+        <input type="submit" class="btn" value="Creaza" />
+}
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            adaugaLinie();
+            stergeLinie();
+        });
+
+        function adaugaLinie() {
+            $('.adauga-linie').click(function () {
+                var html = '<div class="row">\
+                        <div class="col m5">\
+                        <input type="text" name="Coduri" />\
+                        </div>\
+                        <div class="col m5">\
+                        <input type="number" name="Cantitati" />\
+                        </div>\
+                        <div class="col m2">\
+                        <a class="icon-button edit-icon adauga-linie"><i class="fas fa-plus fa-2x"></i></a>\
+                        <a class="icon-button delete-icon sterge-linie"><i class="fas fa-trash fa-2x"></i></a>\
+                        </div>\
+                        </div>';
+                var produseDiv = $('#produse');
+                produseDiv.last().append(html);
+                adaugaLinie();
+                stergeLinie();
+            });
+        }
+
+        function stergeLinie() {
+            $('.sterge-linie').click(function () {
+                var dom = $(this).parent().parent();
+                dom.remove();
+            });
+        }
+    </script>
+}

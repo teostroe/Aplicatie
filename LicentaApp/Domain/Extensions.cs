@@ -135,5 +135,10 @@ namespace LicentaApp.Domain
                 viewData.Add(key, value);
             }
         }
+
+        public static string ToCommaSeparatedString(this ICollection<string> col)
+        {
+            return string.Join(",", col);
+        }
     }
 }

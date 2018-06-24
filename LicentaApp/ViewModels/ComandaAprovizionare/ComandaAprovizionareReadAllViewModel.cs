@@ -10,6 +10,6 @@ namespace LicentaApp.ViewModels.ComandaAprovizionare
         public int NumarComanda { get; set; }
         public string Expeditor { get; set; }
         public string Destinatar { get; set; }
-        public string DataCerere { get; set; }
+        public DateTime DataCreare { get; set; }
     }
 }

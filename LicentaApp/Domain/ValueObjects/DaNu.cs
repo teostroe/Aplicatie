@@ -8,9 +8,9 @@ namespace LicentaApp.Domain.ValueObjects
 {
     public enum DaNu
     {
-        [Display(Name = "Da")]
-        Nu = 0,
         [Display(Name = "Nu")]
+        Nu = 0,
+        [Display(Name = "Da")]
         Da = 1
     }
 }

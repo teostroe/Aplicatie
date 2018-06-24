@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/24/2018 14:55:12
+-- Date Created: 06/24/2018 17:37:19
 -- Generated from EDMX file: C:\personal\Teodora\Licenta\Aplicatie\LicentaApp\LicentaDbContext.edmx
 -- --------------------------------------------------
 
@@ -23,6 +23,36 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Comenzi_IdUtilizator]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comenzi] DROP CONSTRAINT [FK_Comenzi_IdUtilizator];
 GO
+IF OBJECT_ID(N'[dbo].[FK_RandComenziProdus_780915676]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProdus_780915676];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ViziteMedicale_I_1739780243]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ViziteMedicale] DROP CONSTRAINT [FK_ViziteMedicale_I_1739780243];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DetaliiProdus_IdProdus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DetaliiProdus] DROP CONSTRAINT [FK_DetaliiProdus_IdProdus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Produse_IdFurnizor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Produse] DROP CONSTRAINT [FK_Produse_IdFurnizor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Inventar_IdMagazin]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdMagazin];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Inventar_IdProdus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdProdus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdMagazin]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdMagazin];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Preturi_IdProdus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Preturi] DROP CONSTRAINT [FK_Preturi_IdProdus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RandComenziProduse_IdProdus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProduse_IdProdus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdRol]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdRol];
+GO
 IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Furnizori]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Furnizori];
 GO
@@ -38,41 +68,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Utilizatori]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Utilizatori];
 GO
-IF OBJECT_ID(N'[dbo].[FK_DetaliiProdus_IdProdus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DetaliiProdus] DROP CONSTRAINT [FK_DetaliiProdus_IdProdus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Inventar_IdMagazin]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdMagazin];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Inventar_IdProdus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdProdus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Preturi_IdProdus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Preturi] DROP CONSTRAINT [FK_Preturi_IdProdus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Produse_IdFurnizor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Produse] DROP CONSTRAINT [FK_Produse_IdFurnizor];
-GO
 IF OBJECT_ID(N'[dbo].[FK_RandComenziAprovizionareProduse_ComenziAprovizionari]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RandComenziAprovizionareProduse] DROP CONSTRAINT [FK_RandComenziAprovizionareProduse_ComenziAprovizionari];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RandComenziAprovizionareProduse_Produse]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RandComenziAprovizionareProduse] DROP CONSTRAINT [FK_RandComenziAprovizionareProduse_Produse];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RandComenziProdus_780915676]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProdus_780915676];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RandComenziProduse_IdProdus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProduse_IdProdus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdMagazin]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdMagazin];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdRol]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdRol];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ViziteMedicale_I_1739780243]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ViziteMedicale] DROP CONSTRAINT [FK_ViziteMedicale_I_1739780243];
 GO
 
 -- --------------------------------------------------
@@ -84,9 +84,6 @@ IF OBJECT_ID(N'[dbo].[Clienti]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Comenzi]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Comenzi];
-GO
-IF OBJECT_ID(N'[dbo].[ComenziAprovizionari]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ComenziAprovizionari];
 GO
 IF OBJECT_ID(N'[dbo].[DetaliiProdus]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DetaliiProdus];
@@ -106,9 +103,6 @@ GO
 IF OBJECT_ID(N'[dbo].[Produse]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Produse];
 GO
-IF OBJECT_ID(N'[dbo].[RandComenziAprovizionareProduse]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[RandComenziAprovizionareProduse];
-GO
 IF OBJECT_ID(N'[dbo].[RandComenziProduse]', 'U') IS NOT NULL
     DROP TABLE [dbo].[RandComenziProduse];
 GO
@@ -120,6 +114,12 @@ IF OBJECT_ID(N'[dbo].[Utilizatori]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ViziteMedicale]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ViziteMedicale];
+GO
+IF OBJECT_ID(N'[dbo].[ComenziAprovizionari]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ComenziAprovizionari];
+GO
+IF OBJECT_ID(N'[dbo].[RandComenziAprovizionareProduse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RandComenziAprovizionareProduse];
 GO
 
 -- --------------------------------------------------
@@ -264,7 +264,7 @@ GO
 
 -- Creating table 'ComenziAprovizionari'
 CREATE TABLE [dbo].[ComenziAprovizionari] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [DeLaFurnizorId] int  NULL,
     [CatreDepozitCentralId] int  NULL,
     [DeLaDepozitCentralId] int  NULL,
@@ -278,7 +278,7 @@ GO
 
 -- Creating table 'RandComenziAprovizionareProduse'
 CREATE TABLE [dbo].[RandComenziAprovizionareProduse] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [IdProdus] int  NOT NULL,
     [IdComanda] int  NOT NULL,
     [CantitateCeruta] int  NOT NULL,

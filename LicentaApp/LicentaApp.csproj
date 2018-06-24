@@ -177,6 +177,7 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ClientiController.cs" />
+    <Compile Include="Controllers\ComenziAprovizionareController.cs" />
     <Compile Include="Controllers\ComenziController.cs" />
     <Compile Include="Controllers\DetaliiProdusController.cs" />
     <Compile Include="Controllers\FurnizoriController.cs" />
@@ -204,12 +205,14 @@
     <Compile Include="Domain\Services\SerializationService.cs" />
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
+    <Compile Include="Domain\Services\ValidationServices\Implementations\AprovizionareFurnizorValidationService.cs" />
     <Compile Include="Domain\Services\ValidationServices\Implementations\ComandaValidationService.cs" />
     <Compile Include="Domain\Services\ValidationServices\IValidationService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
     <Compile Include="Domain\ValueObjects\DaNu.cs" />
     <Compile Include="Domain\ValueObjects\StatusComanda.cs" />
     <Compile Include="Domain\ValueObjects\TipComanda.cs" />
+    <Compile Include="Domain\ValueObjects\TipComandaAprovizionare.cs" />
     <Compile Include="Domain\ValueObjects\TipCuloare.cs" />
     <Compile Include="Domain\ValueObjects\TipLentila.cs" />
     <Compile Include="Domain\ValueObjects\TipProdus.cs" />
@@ -265,6 +268,8 @@
     <Compile Include="Utilizatori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareCreate.cs" />
+    <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprovizionareReadAllViewModel.cs" />
     <Compile Include="ViewModels\ComandaViewModel.cs" />
     <Compile Include="ViewModels\Comanda\ComandaReadAllViewModel.cs" />
     <Compile Include="ViewModels\Comanda\ComandaReadOneViewModel.cs" />
@@ -462,6 +467,10 @@
     <Content Include="Views\Shared\_TitleUDButtons.cshtml" />
     <Content Include="Views\Comenzi\VerificareComanda.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
+    <Content Include="Views\ComenziAprovizionare\ComenziAprovizionareFurnizori.cshtml" />
+    <Content Include="Views\ComenziAprovizionare\ComenziAprovizionareMagazine.cshtml" />
+    <Content Include="Views\Shared\ComenziAprovizionare\ProduseFurnizor.cshtml" />
+    <Content Include="Views\ComenziAprovizionare\Creaza.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
