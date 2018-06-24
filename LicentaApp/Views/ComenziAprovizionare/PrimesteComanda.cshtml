@@ -1,0 +1,47 @@
+﻿@model LicentaApp.ViewModels.ComandaAprovizionare.ComandaAprivizionareReadOneViewModel
+@{
+    ViewBag.Title = "PrimesteComanda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fromFurnizor = this.Model.DeLaFurnizorId.HasValue;
+}
+@using (Html.BeginForm(fromFurnizor ? "AcceptaComandaAprovizionareFurnizor" : "AcceptaComandaAprovizionareMagazin", "ComenziAprovizionare", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.NumarComanda)
+    @Html.HiddenFor(x => x.CatreDepozitCentralId)
+    @Html.HiddenFor(x => x.CatreMagazinId)
+    @Html.HiddenFor(x => x.DeLaDepozitCentralId)
+    @Html.HiddenFor(x => x.DeLaFurnizorId)
+    <h6>Numar comanda: @this.Model.NumarComanda</h6>
+
+    <div class="row">
+        <div class="col m3"><p><b>Cod</b></p></div>
+        <div class="col m3"><p><b>Denumrie</b></p></div>
+        <div class="col m3"><p><b>Cantitate Ceruta</b></p></div>
+        <div class="col m3"><p><b>Cantitate Primita</b></p></div>
+    </div>
+
+    for (int i = 0; i < this.Model.Produse.Length; ++i)
+    {
+        @Html.HiddenFor(x => x.Produse[i].IdProdus)
+        <div class="row">
+            <div class="col m3">
+                @this.Model.Produse[i].Cod
+            </div>
+            <div class="col m3">
+                @this.Model.Produse[i].Denumire
+            </div>
+            <div class="col m3">
+                @this.Model.Produse[i].CantitateCeruta
+            </div>
+            <div class="col m3">
+                @Html.TextBoxFor(x => x.Produse[i].CantitatePrimita)
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <input class="btn" type="submit" value="Salveaza" />
+    </div>
+
+
+}

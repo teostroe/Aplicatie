@@ -36,6 +36,7 @@ namespace LicentaApp
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Bundles/Content/materialize.css",
                       "~/Bundles/Content/fa-svg-with-js.css",
+                      "~/Bundles/Content/fontawesome-all.css",
                       "~/Bundles/Content/Custom/materialize-overrides.css",
                       "~/Bundles/Content/Custom/site.css"));
         }

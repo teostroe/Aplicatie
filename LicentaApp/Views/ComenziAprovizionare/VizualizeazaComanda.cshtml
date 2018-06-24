@@ -1,0 +1,45 @@
+﻿@using LicentaApp.Domain.ValueObjects
+@model ComenziAprovizionari
+@{
+    ViewBag.Title = "VizualizeazaComanda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fromFurnizor = this.Model.DeLaFurnizorId.HasValue;
+}
+
+<div class="row">
+    <div class="col m9">
+    </div>
+    <div class="col m3">
+        @if (this.Model.StatusComanda != StatusComanda.Finalizata)
+        {
+            <a href="@Url.Action("PrimesteComanda", "ComenziAprovizionare", new { idComanda = this.Model.Id })" class="btn">Primeste aprovizionare</a>
+        }
+    </div>
+</div>
+
+@Html.DisplayFor(x => x)
+
+<h5>Detalii produse</h5>
+<hr />
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Cod</th>
+            <th>Denumire</th>
+            <th>Cantitate Ceruta</th>
+            <th>Cantitate Primita</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in this.Model.RandComenziAprovizionareProduse)
+        {
+            <tr>
+                <td>@item.Produse.Cod</td>
+                <td>@item.Produse.Denumire</td>
+                <td>@item.CantitateCeruta</td>
+                <td>@item.CantitatePrimita</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

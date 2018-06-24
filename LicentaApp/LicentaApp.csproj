@@ -206,6 +206,7 @@
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
     <Compile Include="Domain\Services\ValidationServices\Implementations\AprovizionareFurnizorValidationService.cs" />
+    <Compile Include="Domain\Services\ValidationServices\Implementations\AprovizionareMagazinValidationService.cs" />
     <Compile Include="Domain\Services\ValidationServices\Implementations\ComandaValidationService.cs" />
     <Compile Include="Domain\Services\ValidationServices\IValidationService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
@@ -269,6 +270,7 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareCreate.cs" />
+    <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareReadOneViewModel.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprovizionareReadAllViewModel.cs" />
     <Compile Include="ViewModels\ComandaViewModel.cs" />
     <Compile Include="ViewModels\Comanda\ComandaReadAllViewModel.cs" />
@@ -283,6 +285,7 @@
   <ItemGroup>
     <Content Include="Bundles\Content\Custom\materialize-overrides.css" />
     <Content Include="Bundles\Content\fa-svg-with-js.css" />
+    <Content Include="Bundles\Content\fontawesome-all.css" />
     <Content Include="Bundles\Content\materialize.css" />
     <Content Include="Bundles\Content\materialize.min.css" />
     <Content Include="Bundles\Scripts\Custom\DynamicProductProperties.js" />
@@ -471,6 +474,9 @@
     <Content Include="Views\ComenziAprovizionare\ComenziAprovizionareMagazine.cshtml" />
     <Content Include="Views\Shared\ComenziAprovizionare\ProduseFurnizor.cshtml" />
     <Content Include="Views\ComenziAprovizionare\Creaza.cshtml" />
+    <Content Include="Views\ComenziAprovizionare\VizualizeazaComanda.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ComenziAprovizionari.cshtml" />
+    <Content Include="Views\ComenziAprovizionare\PrimesteComanda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

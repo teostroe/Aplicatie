@@ -1,0 +1,52 @@
+﻿@using LicentaApp.Domain
+@model ComenziAprovizionari
+
+<table class="striped custom-display-table">
+    <thead>
+        <tr>
+            <th>Numar Comanda: @this.Model.Id</th>
+            <th>Status: @this.Model.StatusComanda.ToHtmlMvcString()</th>
+        </tr>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+        @if (this.Model.DeLaFurnizorId.HasValue)
+        {
+            <tr>
+                <td><b>Expeditor:</b></td>
+                <td>@this.Model.Furnizori.Denumire</td>
+            </tr>
+            <tr>
+                <td><b>Destinatar:</b></td>
+                <td>@this.Model.CatreDepozitCentral.Denumire</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td><b>Expeditor:</b></td>
+                <td>@this.Model.DeLaDepozitCentral.Denumire</td>
+            </tr>
+            <tr>
+                <td><b>Destinatar:</b></td>
+                <td>@this.Model.Magazine.Denumire</td>
+            </tr>
+        }
+        <tr>
+            <td><b>Data creare:</b></td>
+            <td>@this.Model.DataCreare.ToString("dd/MM/yyyy")</td>
+        </tr>
+        @if (this.Model.DataPrimire.HasValue)
+        {
+            <tr>
+                <td><b>Data primire:</b></td>
+                <td>@this.Model.DataPrimire.Value.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    <tr>
+        <td><b>Utilizator:</b></td>
+        <td>@(this.Model.Utilizatori.Nume + " " + this.Model.Utilizatori.Prenume)</td>
+    </tr>
+    </tbody>
+</table>

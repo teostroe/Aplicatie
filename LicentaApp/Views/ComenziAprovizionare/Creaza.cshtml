@@ -17,10 +17,14 @@
         {
             <div class="col m4">
                 <div style="margin-top: 20px">
-                    @Html.DropDownListFor(model => model.IdExpeditor, (SelectList)ViewData[AppConstants.FurnizorOptions], "- Furnizor -", new { @id = "id-furnizor" })
+                    @Html.DropDownListFor(model => model.IdExpeditor, (SelectList) ViewData[AppConstants.FurnizorOptions], "- Furnizor -", new {@id = "id-furnizor"})
                     @Html.LabelFor(model => model.IdExpeditor)
                 </div>
             </div>
+        }
+        else
+        {
+            @Html.HiddenFor(x => x.IdExpeditor)
         }
 
     </div>
