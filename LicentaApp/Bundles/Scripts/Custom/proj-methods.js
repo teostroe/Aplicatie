@@ -47,8 +47,8 @@ function showHide(conditionToDisplay, element) {
 //url: url of controller with/without params
 //nextChangeFunction: method for the next change event
 //dom: $(this)
-function loadStepOnItemChange(containerId, url, nextChangeFunction, dom) {
-    var value = dom.val();
+function loadStepOnItemChange(containerId, url, nextChangeFunction, dom, conditionToDisplay) {
+    conditionToDisplay = conditionToDisplay || dom.val();
     $(containerId).load(url,
         function() {
             $('select').formSelect();
@@ -58,5 +58,5 @@ function loadStepOnItemChange(containerId, url, nextChangeFunction, dom) {
                 }
             };
         });
-    showHide(value, $(containerId));
+    showHide(conditionToDisplay, $(containerId));
 }

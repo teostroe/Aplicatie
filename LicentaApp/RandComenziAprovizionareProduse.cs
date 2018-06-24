@@ -12,14 +12,15 @@ namespace LicentaApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Preturi
+    public partial class RandComenziAprovizionareProduse
     {
         public int Id { get; set; }
-        public decimal Valoare { get; set; }
-        public System.DateTime DataActualizare { get; set; }
-        public bool EsteUtilizatAcum { get; set; }
         public int IdProdus { get; set; }
+        public int IdComanda { get; set; }
+        public int CantitateCeruta { get; set; }
+        public Nullable<int> CantitatePrimita { get; set; }
     
+        public virtual ComenziAprovizionari ComenziAprovizionari { get; set; }
         public virtual Produse Produse { get; set; }
     }
 }

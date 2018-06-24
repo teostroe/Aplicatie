@@ -4,11 +4,12 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout" +
+             ".cshtml";
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("VerificareComanda", "Comenzi", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
@@ -30,12 +31,23 @@
         @Html.Partial("Comenzi/Client", this.Model)
     </div>
     <div id="comanda-container">
+        @if (Model?.TipComanda != null)
+        {
+            if (this.Model.TipComanda == TipComanda.ComandaCuPrelucrare)
+            {
+                @Html.Partial("Comenzi/ComandaCuPrelucrare")
+            }
+            else if (this.Model.TipComanda == TipComanda.ComandaSimpla)
+            {
+                @Html.Partial("Comenzi/ComandaSimpla")
+            }
+        }
 
     </div>
 
-        <div id="btn-submit" style="display: none">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+    <div id="btn-submit">
+        <input type="submit" value="Verificare Comanda" class="btn" />
+    </div>
 }
 
 @section Scripts {
@@ -60,6 +72,13 @@
         </text>
         }
 
+        @if (Model?.TipComanda == null)
+        {
+            <text>
+        $("#btn-submit").hide();
+        $("#lentile-card").hide();
+        </text>
+        }
 
         var sfereIds = [];
         var tipLentila;
@@ -67,8 +86,11 @@
         var idProducator;
         var idProdus;
         var tipComanda;
+        var afiseazaRame;
 
-        $(document).ready(function () {
+        $(document).ready(function() {
+            reloadEvents();
+
             $('#tip-comanda-options').change(function() {
                 tipComanda = $(this).val();
                 var containerId = '#comanda-container';
@@ -77,23 +99,21 @@
                 loadStepOnItemChange(containerId, url, [sferaChange, initCodProdusAutocomplete], $(this));
             });
             loadAutocomplete('input#cauta-client-input.autocomplete', telefonArray);
-            $('#btn-submit').click(function() {
-                $('#data-nastere').val($('datepicker').val())
-            });
 
         });
 
 
-
         function initCodProdusAutocomplete() {
             $("#btn-submit").show();
-            switch(tipComanda) {
+            switch (tipComanda) {
                 case "1":
                     loadAutocomplete('input#cod-produs-simplu.autocomplete', codRameSiOchelariArray);
                     break;
                 case "2":
                     loadAutocomplete('input#cod-produs-simplu.autocomplete', codRameArray);
-                    $('#rame-container').hide();
+                    if (!afiseazaRame) {
+                        $('#rame-container').hide();
+                    }
                     toggleRame();
                     break;
                 default:
@@ -103,15 +123,18 @@
         }
 
 
-
-
         function sferaChange() {
-            $('.sfera').change(function (e) {
+            $('.sfera').change(function(e) {
                 addOrRemove(sfereIds, $(this).val(), e.target.id);
                 var containerId = '#tip-lentila-options-container';
-                var url = '@Url.Action("GetTipLentilaOptions", "Comenzi", null)?doarLentilaProgresiva=' +
-                    doarLentilaProgresiva();
-                loadStepOnItemChange(containerId, url, [tipLentilaChange, displayLentileCard], $(this));
+                var urlPramas = getTipLentilaOptionsUrlParams();
+                var url = '@Url.Action("GetTipLentilaOptions", "Comenzi", null)' + urlPramas;
+                var conditionToDisplay = sfereIds.length > 0 ? true : undefined;
+                loadStepOnItemChange(containerId,
+                    url,
+                    [tipLentilaChange, displayLentileCard],
+                    $(this),
+                    conditionToDisplay);
             });
         }
 
@@ -120,7 +143,7 @@
         }
 
         function tipLentilaChange() {
-            $('#tip-lentila-options').change(function () {
+            $('#tip-lentila-options').change(function() {
                 tipLentila = $(this).val();
                 var containerId = '#indice-refractie-options-container';
                 var url = '@Url.Action("GetIndiceRefractieOptions", "Comenzi", null)?tipLentila=' + tipLentila;
@@ -129,7 +152,7 @@
         }
 
         function indiceRefractieChange() {
-            $('#indice-refractie-options').change(function () {
+            $('#indice-refractie-options').change(function() {
                 indiceRefractie = $(this).val();
                 var containerId = '#producator-options-container';
                 var url = '@Url.Action("GetProducatorOptions", "Comenzi", null)?tipLentila=' +
@@ -141,7 +164,7 @@
         }
 
         function producatorChange() {
-            $('#producator-options').change(function () {
+            $('#producator-options').change(function() {
                 idProducator = $(this).val();
                 var containerId = '#lentila-options-container';
                 var url = '@Url.Action("GetLentilaOptions", "Comenzi", null)?tipLentila=' +
@@ -155,7 +178,7 @@
         }
 
         function lentilaChange() {
-            $('#lentila-options').change(function () {
+            $('#lentila-options').change(function() {
                 idProdus = $(this).val();
                 var containerId = '#extra-options-container';
                 var url = '@Url.Action("GetLentileExtraOptions", "Comenzi", null)';
@@ -184,21 +207,84 @@
             return false;
         }
 
+        function getTipLentilaOptionsUrlParams() {
+            if (sfereIds.length > 0) {
+                var result = "?ids=" + sfereIds[0];
+                for (var i = 1; i < sfereIds.length; ++i) {
+                    result += ("&ids=" + sfereIds[i]);
+                }
+                return result;
+            } else {
+                return "";
+            }
+        }
 
 
         $('#adauga-client-btn').click(function() {
             var numarTelefon = $('#cauta-client-input').val();
-            if (numarTelefon && telefonArray.indexOf(numarTelefon) > 0) {
-                $('#client-container').load('@Url.Action("GetClient", "Comenzi", null)' + '?numarTelefon='+ numarTelefon, function() {
-                    initCalendar();
-                    $('#client-editor-section').find('label').each(function() {
-                        $(this).addClass('active');
+            if (numarTelefon && telefonArray.indexOf(numarTelefon) >= 0) {
+                $('#client-container').load('@Url.Action("GetClient", "Comenzi", null)' +
+                    '?numarTelefon=' +
+                    numarTelefon,
+                    function() {
+                        initCalendar();
+                        $('#client-editor-section').find('label').each(function() {
+                            $(this).addClass('active');
+                        });
                     });
-                });
             }
         });
 
+        function reloadEvents() {
+            @{
+                if (this.Model?.CodProdusRO.IsNullOrEmpty() == false)
+                {
+                    <text>
+            afiseazaRame = true;
+            </text>
+                }
 
 
+                if (this.Model?.TipComanda != null)
+                {
+                    <text>
+            tipComanda = "@Html.Raw((int)this.Model.TipComanda)";
+            sferaChange();
+            initCodProdusAutocomplete();
+            </text>
+                }
+
+                if (ViewData.ContainsKey(AppConstants.TipLentilaOptions))
+                {
+                    {
+                        <text>
+            tipLentilaChange();
+            displayLentileCard();
+            </text>
+                    }
+                    if (ViewData.ContainsKey(AppConstants.IndiceReractieOptions))
+                    {
+                        <text>
+            indiceRefractieChange();
+            </text>
+                    }
+                    if (ViewData.ContainsKey(AppConstants.ProducatorOptions))
+                    {
+                        <text>
+            producatorChange();
+            </text>
+                    }
+                    if (ViewData.ContainsKey(AppConstants.LentilaOptions))
+                    {
+                        <text>
+            lentilaChange();
+            </text>
+                    }
+                }
+
+
+            }
+
+        }
     </script>
 }

@@ -24,6 +24,12 @@ namespace LicentaApp.Domain
             public const string Read = "READ";
         }
 
+        public class Alerts
+        {
+            public const string Success = "Success";
+            public const string Error = "Error";
+        }
+
         public const string SQL = "SQL";
 
         public const string SferaDistantaOptions = "SferaDistantaOptions";
@@ -42,5 +48,10 @@ namespace LicentaApp.Domain
         public const string TelefonClienti = "TelefonClienti";
         public const string CodRame = "CodRame";
         public const string CodRameSiOchelariSoare = "CodRameSiOchelariSoare";
+
+        public const string VerificareProduse = "VerificareProduse";
+        public const string TempComandaViewModel = "TempComandaViewModel";
+
+
     }
 }

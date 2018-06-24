@@ -10,9 +10,10 @@ namespace LicentaApp.ViewModels
     {
         public Clienti Client { get; set; }
         public ViziteMedicale VizitaMedicala { get; set; }
-        public TipComanda TipComanda { get; set; }
+        public TipComanda? TipComanda { get; set; }
         public decimal? Discount { get; set; }
         public string CodProdusRO { get; set; }
+        public decimal? Manopera { get; set; }
 
         public LentileViewModel Lentila { get; set; }
     }

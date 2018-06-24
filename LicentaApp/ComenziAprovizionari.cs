@@ -12,26 +12,29 @@ namespace LicentaApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Comenzi
+    public partial class ComenziAprovizionari
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Comenzi()
+        public ComenziAprovizionari()
         {
-            this.RandComenziProduse = new HashSet<RandComenziProduse>();
+            this.RandComenziAprovizionareProduse = new HashSet<RandComenziAprovizionareProduse>();
         }
     
         public int Id { get; set; }
-        public System.DateTime Data { get; set; }
-        public Nullable<decimal> Discount { get; set; }
+        public Nullable<int> DeLaFurnizorId { get; set; }
+        public Nullable<int> CatreMagazinCentralId { get; set; }
+        public Nullable<int> DeLaMagazinCentralId { get; set; }
+        public Nullable<int> CatreMagazinId { get; set; }
+        public System.DateTime DataCreare { get; set; }
+        public Nullable<System.DateTime> DataPrimire { get; set; }
         public int IdUtilizator { get; set; }
-        public int IdClient { get; set; }
-        public Nullable<decimal> Manopera { get; set; }
-        public LicentaApp.Domain.ValueObjects.StatusComanda StatusComanda { get; set; }
     
-        public virtual Clienti Clienti { get; set; }
+        public virtual Magazine CatreMagazinCentral { get; set; }
+        public virtual Furnizori DeLaFurnizor { get; set; }
+        public virtual Magazine DeLaMagazinCentral { get; set; }
+        public virtual Magazine CatreMagazin { get; set; }
         public virtual Utilizatori Utilizatori { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RandComenziProduse> RandComenziProduse { get; set; }
-        public virtual ViziteMedicale ViziteMedicale { get; set; }
+        public virtual ICollection<RandComenziAprovizionareProduse> RandComenziAprovizionareProduse { get; set; }
     }
 }

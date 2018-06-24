@@ -196,11 +196,16 @@
     <Compile Include="Domain\Metadata\ProductProperties.cs" />
     <Compile Include="Domain\Metadata\ProductProviders.cs" />
     <Compile Include="Domain\RazorExtensions.cs" />
+    <Compile Include="Domain\Services\Binders\DateTimeModelBinder.cs" />
+    <Compile Include="Domain\Services\Binders\DecimalModelBinder.cs" />
     <Compile Include="Domain\Services\SerializationService.cs" />
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
+    <Compile Include="Domain\Services\ValidationServices\Implementations\ComandaValidationService.cs" />
+    <Compile Include="Domain\Services\ValidationServices\IValidationService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
     <Compile Include="Domain\ValueObjects\DaNu.cs" />
+    <Compile Include="Domain\ValueObjects\StatusComanda.cs" />
     <Compile Include="Domain\ValueObjects\TipComanda.cs" />
     <Compile Include="Domain\ValueObjects\TipCuloare.cs" />
     <Compile Include="Domain\ValueObjects\TipLentila.cs" />
@@ -257,6 +262,7 @@
     <Compile Include="ViewModels\ComandaViewModel.cs" />
     <Compile Include="ViewModels\Comanda\ComandaReadAllViewModel.cs" />
     <Compile Include="ViewModels\Comanda\ComandaReadOneViewModel.cs" />
+    <Compile Include="ViewModels\Comanda\ProdusVerificareViewModel.cs" />
     <Compile Include="ViewModels\LentileViewModel.cs" />
     <Compile Include="ViewModels\ProduseViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
@@ -271,6 +277,7 @@
     <Content Include="Bundles\Scripts\Custom\DynamicProductProperties.js" />
     <Content Include="Bundles\Scripts\Custom\materialize-configs.js" />
     <Content Include="Bundles\Scripts\Custom\proj-methods.js" />
+    <Content Include="Bundles\Scripts\Custom\validation-overrides.js" />
     <Content Include="Bundles\Scripts\fontawesome-all.js" />
     <Content Include="Bundles\Scripts\materialize.js" />
     <Content Include="Bundles\Scripts\materialize.min.js" />
@@ -409,9 +416,7 @@
     <Content Include="Views\Preturi\Edit.cshtml" />
     <Content Include="Views\Preturi\Index.cshtml" />
     <Content Include="Views\Comenzi\Create.cshtml" />
-    <Content Include="Views\Comenzi\Delete.cshtml" />
     <Content Include="Views\Comenzi\Details.cshtml" />
-    <Content Include="Views\Comenzi\Edit.cshtml" />
     <Content Include="Views\Comenzi\Index.cshtml" />
     <Content Include="Views\Clienti\Create.cshtml" />
     <Content Include="Views\Clienti\Delete.cshtml" />
@@ -431,9 +436,6 @@
     <Content Include="Views\Shared\EditorTemplates\Clienti.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ViziteMedicale.cshtml" />
     <Content Include="Views\Shared\Comenzi\TipLentilaOptions.cshtml" />
-    <Content Include="Views\Comenzi\Create_Step1.cshtml" />
-    <Content Include="Views\Comenzi\Create_Step2.cshtml" />
-    <Content Include="Views\Comenzi\Create_Step3.cshtml" />
     <Content Include="Views\Shared\Comenzi\IndiceRefractieOptions.cshtml" />
     <Content Include="Views\Shared\Comenzi\ProducatorOptions.cshtml" />
     <Content Include="Views\Shared\Comenzi\LentilaOptions.cshtml" />
@@ -451,6 +453,9 @@
     <Content Include="Views\Shared\_RUDButtons.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Produse.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DetaliiProduse.cshtml" />
+    <Content Include="Views\Shared\_TitleUDButtons.cshtml" />
+    <Content Include="Views\Comenzi\VerificareComanda.cshtml" />
+    <Content Include="Views\Shared\_Alerts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

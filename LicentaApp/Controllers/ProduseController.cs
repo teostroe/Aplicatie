@@ -82,7 +82,7 @@ namespace LicentaApp.Controllers
             model.Produse.Preturi.Add(new Preturi
             {
                 DataActualizare = DateTime.UtcNow,
-                EsteUtilizatAcum = 1,
+                EsteUtilizatAcum = true,
                 Valoare = model.Pret
             });
             foreach (var prop in model.ProductProperties)
@@ -116,7 +116,7 @@ namespace LicentaApp.Controllers
             {
                 Produse = produse,
                 ProductMetadata = ProductMetadata.GetAllForProductType(produse.TipProdus),
-                Pret = produse.Preturi.SingleOrDefault(x => x.EsteUtilizatAcum == 1).Valoare,
+                Pret = produse.Preturi.SingleOrDefault(x => x.EsteUtilizatAcum).Valoare,
                 ProductProperties = db.DetaliiProdus.Where(x => x.IdProdus == produse.Id).ToDictionary(x => x.Denumire, x => x.Valoare)
             };
 
@@ -151,16 +151,16 @@ namespace LicentaApp.Controllers
                 db.DetaliiProdus.Attach(dp);
                 dp.Valoare = model.ProductProperties[dp.Denumire];
             }
-            var pretUtilizat = db.Preturi.SingleOrDefault(x => x.IdProdus == model.Produse.Id && x.EsteUtilizatAcum == 1);
+            var pretUtilizat = db.Preturi.SingleOrDefault(x => x.IdProdus == model.Produse.Id && x.EsteUtilizatAcum);
             if (pretUtilizat != null)
             {
                 db.Preturi.Attach(pretUtilizat);
-                pretUtilizat.EsteUtilizatAcum = 0;
+                pretUtilizat.EsteUtilizatAcum = false;
             }
             db.Preturi.Add(new Preturi
             {
                 DataActualizare = DateTime.UtcNow,
-                EsteUtilizatAcum = 1,
+                EsteUtilizatAcum = true,
                 Valoare = model.Pret,
                 IdProdus = model.Produse.Id
             });

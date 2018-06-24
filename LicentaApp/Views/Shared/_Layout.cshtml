@@ -20,10 +20,10 @@
     </script>
 </head>
 <body>
-
     @Html.Partial("Navbar")
-    
+
     <div class="container body-content">
+        @Html.Partial("_Alerts")
         @RenderBody()
         <hr />
         <footer>

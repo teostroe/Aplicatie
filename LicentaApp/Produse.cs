@@ -21,6 +21,7 @@ namespace LicentaApp
             this.Inventar = new HashSet<Inventar>();
             this.Preturi = new HashSet<Preturi>();
             this.RandComenziProduse = new HashSet<RandComenziProduse>();
+            this.RandComenziAprovizionareProduse = new HashSet<RandComenziAprovizionareProduse>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace LicentaApp
         public virtual ICollection<Preturi> Preturi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RandComenziProduse> RandComenziProduse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RandComenziAprovizionareProduse> RandComenziAprovizionareProduse { get; set; }
     }
 }

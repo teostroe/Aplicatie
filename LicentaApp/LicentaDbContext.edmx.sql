@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/17/2018 16:22:41
+-- Date Created: 06/24/2018 13:18:28
 -- Generated from EDMX file: C:\personal\Teodora\Licenta\Aplicatie\LicentaApp\LicentaDbContext.edmx
 -- --------------------------------------------------
 
@@ -23,17 +23,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Comenzi_IdUtilizator]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comenzi] DROP CONSTRAINT [FK_Comenzi_IdUtilizator];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RandComenziProdus_780915676]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProdus_780915676];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ViziteMedicale_I_1739780243]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ViziteMedicale] DROP CONSTRAINT [FK_ViziteMedicale_I_1739780243];
-GO
 IF OBJECT_ID(N'[dbo].[FK_DetaliiProdus_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DetaliiProdus] DROP CONSTRAINT [FK_DetaliiProdus_IdProdus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Produse_IdFurnizor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Produse] DROP CONSTRAINT [FK_Produse_IdFurnizor];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Inventar_IdMagazin]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdMagazin];
@@ -41,17 +32,26 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Inventar_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdProdus];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdMagazin]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdMagazin];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Preturi_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Preturi] DROP CONSTRAINT [FK_Preturi_IdProdus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Produse_IdFurnizor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Produse] DROP CONSTRAINT [FK_Produse_IdFurnizor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RandComenziProdus_780915676]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProdus_780915676];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RandComenziProduse_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProduse_IdProdus];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdMagazin]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdMagazin];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdRol]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdRol];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ViziteMedicale_I_1739780243]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ViziteMedicale] DROP CONSTRAINT [FK_ViziteMedicale_I_1739780243];
 GO
 
 -- --------------------------------------------------
@@ -118,7 +118,9 @@ CREATE TABLE [dbo].[Comenzi] (
     [Data] datetime  NOT NULL,
     [Discount] decimal(18,2)  NULL,
     [IdUtilizator] int  NOT NULL,
-    [IdClient] int  NOT NULL
+    [IdClient] int  NOT NULL,
+    [Manopera] decimal(18,0)  NULL,
+    [StatusComanda] int  NOT NULL
 );
 GO
 
@@ -167,7 +169,7 @@ CREATE TABLE [dbo].[Preturi] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Valoare] decimal(18,2)  NOT NULL,
     [DataActualizare] datetime  NOT NULL,
-    [EsteUtilizatAcum] int  NOT NULL,
+    [EsteUtilizatAcum] bit  NOT NULL,
     [IdProdus] int  NOT NULL
 );
 GO

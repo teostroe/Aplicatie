@@ -11,9 +11,11 @@
 function initCalendar() {
     $('.datepicker').datepicker({
         format: 'dd/mm/yyyy',
-        defaultDate: "01/01/1990",
-        setDefaultDate: true,
+        //defaultDate: "1990/01/01",
+        //setDefaultDate: true,
+        yearRange: [1900, (new Date()).getFullYear()],
         i18n: {
+            cancel: "Anuleaza",
             months: [
                 "Ianuarie",
                 "Februarie",

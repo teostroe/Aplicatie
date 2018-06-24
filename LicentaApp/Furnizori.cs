@@ -18,6 +18,7 @@ namespace LicentaApp
         public Furnizori()
         {
             this.Produse = new HashSet<Produse>();
+            this.ComenziAprovizionari = new HashSet<ComenziAprovizionari>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace LicentaApp
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produse> Produse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari { get; set; }
     }
 }

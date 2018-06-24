@@ -7,10 +7,12 @@ using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using LicentaApp;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.Services;
+using LicentaApp.Domain.Services.ValidationServices.Implementations;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
 using LicentaApp.ViewModels.Comanda;
@@ -92,69 +94,49 @@ namespace LicentaApp.Controllers
             return View(model);
         }
 
-        // GET: Comenzi/Create
         public ActionResult Create()
         {
-            ViewData.Add(AppConstants.SferaDistantaOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.SferaAproapeOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.CilindruOptions, OptionsGenerationService.GenerateSelectListForValues(0.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.AxOptions, OptionsGenerationService.GenerateSelectListForValues(0, 360, 1));
-            ViewData.Add(AppConstants.PrismaOptions, OptionsGenerationService.GenerateSelectListForValues(0.0, 10.0, 0.5));
-            ViewData.Add(AppConstants.TelefonClienti, db.Clienti.Select(x => x.NumarTelefon).ToArray());
-            ViewData.Add(AppConstants.CodRame, db.Produse.Where(x => x.TipProdus == TipProdus.Rame).Select(x => x.Cod).ToArray());
-            ViewData.Add(AppConstants.CodRameSiOchelariSoare, db.Produse.Where(x => new[] { TipProdus.Rame, TipProdus.OchelariSoare, }.Contains(x.TipProdus)).Select(x => x.Cod).ToArray());
+            if (TempData.ContainsKey(AppConstants.TempComandaViewModel))
+            {
+                var viewModel = (ComandaViewModel)TempData[AppConstants.TempComandaViewModel];
+                this.OnCreate_ViewDataInit(viewModel);
+                return View(viewModel);
+            }
+
+            this.OnCreate_ViewDataInit();
             return View();
         }
 
-        public PartialViewResult GetTipLentilaOptions(bool doarLentilaProgresiva)
+        public PartialViewResult GetTipLentilaOptions(string[] ids)
         {
             var model = new ComandaViewModel();
-            if (doarLentilaProgresiva)
+            if (ids != null)
             {
-                ViewData.AddOrUpdate(AppConstants.TipLentilaOptions,
-                    typeof(TipLentila).ToSelectList(TipLentila.Bifocala, TipLentila.MonofocalaUniforma, TipLentila.Minerala));
+                var doarLentilaProgresiva = ids.Any(x => x.Contains("Aproape")) && ids.Any(x => x.Contains("Distanta"));
+                this.AddTipLentilaOptionsToViewData(doarLentilaProgresiva);
             }
-            else
-            {
-                ViewData.AddOrUpdate(AppConstants.TipLentilaOptions,
-                    typeof(TipLentila).ToSelectList());
-            }
+
             return PartialView("Comenzi/TipLentilaOptions", model);
         }
 
         public PartialViewResult GetIndiceRefractieOptions(TipLentila tipLentila)
         {
             var model = new ComandaViewModel();
-            ViewData.AddOrUpdate(AppConstants.IndiceReractieOptions, new SelectList(this._indiciRefractie[tipLentila]));
+            this.AddIndiceRefractieOptionsToViewData(tipLentila);
             return PartialView("Comenzi/IndiceRefractieOptions", model);
         }
 
         public PartialViewResult GetProducatorOptions(TipLentila tipLentila, decimal indiceRefractie)
         {
             var model = new ComandaViewModel();
-            var data = new Dictionary<string, object>()
-            {
-                {ProductProperties.TipLentila, tipLentila},
-                {ProductProperties.IndiceRefractie, indiceRefractie}
-            };
-            var serializedValues = SerializationService.SerializeProductData(data);
-
-            var produseSelectlist = ProductsDataService.GetFurnizori(serializedValues, this.db).ToSelectList(x => x.Id, x => x.Denumire);
-            ViewData.AddOrUpdate(AppConstants.ProducatorOptions, produseSelectlist);
+            this.AddProducatorOptionsToViewData(tipLentila, indiceRefractie);
             return PartialView("Comenzi/ProducatorOptions", model);
         }
 
         public PartialViewResult GetLentilaOptions(TipLentila tipLentila, decimal indiceRefractie, int idProducator)
         {
             var model = new ComandaViewModel();
-            var data = new Dictionary<string, object>()
-            {
-                {ProductProperties.TipLentila, tipLentila},
-                {ProductProperties.IndiceRefractie, indiceRefractie}
-            };
-            var serializedValues = SerializationService.SerializeProductData(data);
-            var selectList = ProductsDataService.GetProducts(serializedValues, this.db).Where(x => x.IdFurnizor == idProducator).ToSelectList(x => x.Cod, x => x.Denumire);
-            ViewData.AddOrUpdate(AppConstants.LentilaOptions, selectList);
+            this.AddLentilaOptionsToViewData(tipLentila, indiceRefractie, idProducator);
             return PartialView("Comenzi/LentilaOptions", model);
         }
 
@@ -162,10 +144,7 @@ namespace LicentaApp.Controllers
         {
             var model = new ComandaViewModel();
 
-            var tratamentSelectList = typeof(TipTratament).ToSelectList();
-            var culoareSelectList = typeof(TipCuloare).ToSelectList();
-            ViewData.AddOrUpdate(AppConstants.TratamentOptions, tratamentSelectList);
-            ViewData.AddOrUpdate(AppConstants.CuloareOptions, culoareSelectList);
+            this.AddLentileExtraOptionsToViewData();
             return PartialView("Comenzi/LentileExtraOptions", model);
         }
 
@@ -182,14 +161,10 @@ namespace LicentaApp.Controllers
         public PartialViewResult GetComandaDupaTip(TipComanda tipComanda)
         {
             var model = new ComandaViewModel();
-            ViewData.Add(AppConstants.SferaDistantaOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.SferaAproapeOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.CilindruOptions, OptionsGenerationService.GenerateSelectListForValues(0.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.AxOptions, OptionsGenerationService.GenerateSelectListForValues(0, 360, 1));
-            ViewData.Add(AppConstants.PrismaOptions, OptionsGenerationService.GenerateSelectListForValues(0.0, 10.0, 0.5));
             switch (tipComanda)
             {
                 case TipComanda.ComandaCuPrelucrare:
+                    this.AddVizitaMedicalaOptionsToViewData();
                     return PartialView("Comenzi/ComandaCuPrelucrare", model);
 
                 case TipComanda.ComandaSimpla:
@@ -199,61 +174,84 @@ namespace LicentaApp.Controllers
             }
         }
 
-        [HttpPost]
-        public PartialViewResult DisplayVizitaMedicala(ComandaViewModel viewModel)
-        {
-            return PartialView("Comenzi/Displays/VizitaMedicala", viewModel.VizitaMedicala);
-        }
-
         [HttpGet]
-        public ActionResult Create_Step1()
+        public ActionResult VerificareComanda(ComandaViewModel viewModel)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public PartialViewResult Create_Step1(Clienti client)
-        {
-            if (TempData.ContainsKey("Client"))
+            var validationResult = new ComandaValidationService().ValidateData(viewModel);
+            if (validationResult.Any())
             {
-                TempData["Client"] = client;
+                this.OnCreate_ViewDataInit(viewModel);
+                ViewData.Add(AppConstants.Alerts.Error, validationResult);
+                return View("Create", viewModel);
             }
-            else
+            if (viewModel.Client.DataInregistrare == default(DateTime))
             {
-                TempData.Add("Client", client);
+                viewModel.Client.DataInregistrare = DateTime.Now;
             }
-            ViewData.Add(AppConstants.SferaDistantaOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.SferaAproapeOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.CilindruOptions, OptionsGenerationService.GenerateSelectListForValues(0.00, 16.00, 0.25));
-            ViewData.Add(AppConstants.AxOptions, OptionsGenerationService.GenerateSelectListForValues(0, 360, 1));
-            ViewData.Add(AppConstants.PrismaOptions, OptionsGenerationService.GenerateSelectListForValues(0.0, 10.0, 0.5));
 
-            return PartialView("Create_Step2");
+            if (viewModel.TipComanda == TipComanda.ComandaCuPrelucrare)
+            {
+                viewModel.Manopera = 50m;
+
+            }
+            TempData[AppConstants.TempComandaViewModel] = viewModel;
+            var dictionary = new Dictionary<string, ProdusVerificareViewModel>();
+            if (viewModel.Lentila != null)
+            {
+                var lentila = this.GetProdusVerificare(viewModel.Lentila.CodProdus);
+                if ((viewModel.VizitaMedicala.SferaAproapeStang.HasValue ||
+                     viewModel.VizitaMedicala.SferaDistantaStang.HasValue) &&
+                    (viewModel.VizitaMedicala.SferaAproapeDrept.HasValue ||
+                     viewModel.VizitaMedicala.SferaDistantaDrept.HasValue))
+                {
+                    lentila.Cantitate = 2;
+                }
+                else
+                {
+                    lentila.Cantitate = 1;
+                }
+                dictionary.Add(viewModel.Lentila.CodProdus, lentila);
+            }
+            if (!viewModel.CodProdusRO.IsNullOrEmpty())
+            {
+                var produs = this.GetProdusVerificare(viewModel.CodProdusRO);
+                produs.Cantitate = 1;
+                dictionary.Add(viewModel.CodProdusRO, produs);
+            }
+
+            ViewData.Add(AppConstants.VerificareProduse, dictionary);
+            return View("VerificareComanda", viewModel);
         }
 
-        [HttpPost]
-        public PartialViewResult Create_Step2(ViziteMedicale vizitaMedicala)
+        private ProdusVerificareViewModel GetProdusVerificare(string codProdus)
         {
-            TempData.Add("VizitaMedicala", vizitaMedicala);
-            return PartialView("Create_Step3");
+            return this.db.Produse.Where(x => x.Cod == codProdus)
+                .Select(x => new ProdusVerificareViewModel
+                {
+                    DenumireProduse = x.Denumire,
+                    Discount = x.Discount,
+                    Pret = x.Preturi.FirstOrDefault(y => y.EsteUtilizatAcum).Valoare,
+                    TipProdus = x.TipProdus
+                }).FirstOrDefault();
+
         }
 
-
-
-        // POST: Comenzi/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ComandaViewModel viewModel)
         {
+            if (TempData.ContainsKey(AppConstants.TempComandaViewModel))
+            {
+                viewModel = (ComandaViewModel)TempData[AppConstants.TempComandaViewModel];
+            }
+
             //comanda lentile
             var comanda = new Comenzi();
             comanda.RandComenziProduse = new List<RandComenziProduse>();
             comanda.Data = DateTime.Now;
             comanda.Discount = viewModel.Discount;
             //to be updated
-            comanda.IdUtilizator = 2;
+            comanda.IdUtilizator = 1;
             #region Client
             if (db.Clienti.Any(x => x.Id == viewModel.Client.Id))
             {
@@ -302,69 +300,10 @@ namespace LicentaApp.Controllers
 
             db.Comenzi.Add(comanda);
             db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        // GET: Comenzi/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            if (TempData.ContainsKey(AppConstants.TempComandaViewModel))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData.Remove(AppConstants.TempComandaViewModel);
             }
-            Comenzi comenzi = db.Comenzi.Find(id);
-            if (comenzi == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.IdClient = new SelectList(db.Clienti, "Id", "Nume", comenzi.IdClient);
-            ViewBag.IdUtilizator = new SelectList(db.Utilizatori, "Id", "Username", comenzi.IdUtilizator);
-            ViewBag.Id = new SelectList(db.ViziteMedicale, "IdComandaVizitaMedicala", "IdComandaVizitaMedicala", comenzi.Id);
-            return View(comenzi);
-        }
-
-        // POST: Comenzi/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Data,Discount,IdUtilizator,IdClient")] Comenzi comenzi)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(comenzi).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdClient = new SelectList(db.Clienti, "Id", "Nume", comenzi.IdClient);
-            ViewBag.IdUtilizator = new SelectList(db.Utilizatori, "Id", "Username", comenzi.IdUtilizator);
-            ViewBag.Id = new SelectList(db.ViziteMedicale, "IdComandaVizitaMedicala", "IdComandaVizitaMedicala", comenzi.Id);
-            return View(comenzi);
-        }
-
-        // GET: Comenzi/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comenzi comenzi = db.Comenzi.Find(id);
-            if (comenzi == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comenzi);
-        }
-
-        // POST: Comenzi/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Comenzi comenzi = db.Comenzi.Find(id);
-            db.Comenzi.Remove(comenzi);
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -376,6 +315,121 @@ namespace LicentaApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void OnCreate_ViewDataInit(ComandaViewModel viewModel = null)
+        {
+            ViewData.Add(AppConstants.TelefonClienti, db.Clienti.Select(x => x.NumarTelefon).ToArray());
+            ViewData.Add(AppConstants.CodRame, db.Produse.Where(x => x.TipProdus == TipProdus.Rame).Select(x => x.Cod).ToArray());
+            ViewData.Add(AppConstants.CodRameSiOchelariSoare, db.Produse.Where(x => new[] { TipProdus.Rame, TipProdus.OchelariSoare, }.Contains(x.TipProdus)).Select(x => x.Cod).ToArray());
+
+            if (viewModel == null) return;
+
+            if (viewModel.TipComanda == TipComanda.ComandaCuPrelucrare)
+            {
+                this.AddVizitaMedicalaOptionsToViewData();
+            }
+
+            if (viewModel.VizitaMedicala == null) return;
+
+            bool doarLentilaProgresiva =
+                (viewModel.VizitaMedicala.SferaAproapeDrept.HasValue ||
+                 viewModel.VizitaMedicala.SferaDistantaDrept.HasValue ||
+                 viewModel.VizitaMedicala.PrismaDrept.HasValue) &&
+                (viewModel.VizitaMedicala.SferaAproapeStang.HasValue ||
+                 viewModel.VizitaMedicala.SferaDistantaStang.HasValue ||
+                 viewModel.VizitaMedicala.PrismaStang.HasValue);
+            AddTipLentilaOptionsToViewData(doarLentilaProgresiva);
+
+            if (viewModel.Lentila == null) return;
+
+            if (viewModel.Lentila.TipLentila.HasValue)
+            {
+                this.AddIndiceRefractieOptionsToViewData(viewModel.Lentila.TipLentila.Value);
+            }
+
+            if (viewModel.Lentila.IndiceRefractie.HasValue)
+            {
+                this.AddProducatorOptionsToViewData(viewModel.Lentila.TipLentila.Value, viewModel.Lentila.IndiceRefractie.Value);
+            }
+
+            if (viewModel.Lentila.ProducatorId.HasValue)
+            {
+                this.AddLentilaOptionsToViewData(viewModel.Lentila.TipLentila.Value,
+                    viewModel.Lentila.IndiceRefractie.Value, viewModel.Lentila.ProducatorId.Value);
+            }
+            if (!viewModel.Lentila.CodProdus.IsNullOrEmpty())
+            {
+                this.AddLentileExtraOptionsToViewData();
+            }
+        }
+
+        private void AddTipLentilaOptionsToViewData(bool doarLentilaProgresiva)
+        {
+            if (doarLentilaProgresiva)
+            {
+                ViewData.AddOrUpdate(AppConstants.TipLentilaOptions,
+                    typeof(TipLentila).ToSelectList(TipLentila.Bifocala, TipLentila.MonofocalaUniforma, TipLentila.Minerala));
+            }
+            else
+            {
+                ViewData.AddOrUpdate(AppConstants.TipLentilaOptions,
+                    typeof(TipLentila).ToSelectList());
+            }
+        }
+
+        private void AddIndiceRefractieOptionsToViewData(TipLentila tipLentila)
+        {
+            ViewData.AddOrUpdate(AppConstants.IndiceReractieOptions, new SelectList(this._indiciRefractie[tipLentila]));
+
+        }
+
+        private void AddProducatorOptionsToViewData(TipLentila tipLentila, decimal indiceRefractie)
+        {
+            var data = new Dictionary<string, object>()
+            {
+                {ProductProperties.TipLentila, tipLentila},
+                {ProductProperties.IndiceRefractie, indiceRefractie}
+            };
+            var serializedValues = SerializationService.SerializeProductData(data);
+
+            var produseSelectlist = ProductsDataService.GetFurnizori(serializedValues, this.db).ToSelectList(x => x.Id, x => x.Denumire);
+            ViewData.AddOrUpdate(AppConstants.ProducatorOptions, produseSelectlist);
+        }
+
+        private void AddLentilaOptionsToViewData(TipLentila tipLentila, decimal indiceRefractie, int idProducator)
+        {
+            var data = new Dictionary<string, object>()
+            {
+                {ProductProperties.TipLentila, tipLentila},
+                {ProductProperties.IndiceRefractie, indiceRefractie}
+            };
+            var serializedValues = SerializationService.SerializeProductData(data);
+            var selectList = ProductsDataService.GetProducts(serializedValues, this.db).Where(x => x.IdFurnizor == idProducator).ToSelectList(x => x.Cod, x => x.Denumire);
+            ViewData.AddOrUpdate(AppConstants.LentilaOptions, selectList);
+        }
+
+        private void AddLentileExtraOptionsToViewData()
+        {
+            var tratamentSelectList = typeof(TipTratament).ToSelectList();
+            var culoareSelectList = typeof(TipCuloare).ToSelectList();
+            ViewData.AddOrUpdate(AppConstants.TratamentOptions, tratamentSelectList);
+            ViewData.AddOrUpdate(AppConstants.CuloareOptions, culoareSelectList);
+        }
+
+        private void AddVizitaMedicalaOptionsToViewData()
+        {
+            ViewData.Add(AppConstants.SferaDistantaOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.SferaAproapeOptions, OptionsGenerationService.GenerateSelectListForValues(-19.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.CilindruOptions, OptionsGenerationService.GenerateSelectListForValues(0.00, 16.00, 0.25));
+            ViewData.Add(AppConstants.AxOptions, OptionsGenerationService.GenerateSelectListForValues(0, 360, 1));
+            ViewData.Add(AppConstants.PrismaOptions, OptionsGenerationService.GenerateSelectListForValues(0.0, 10.0, 0.5));
+        }
     }
 }
+
+
+
+
+
+
 

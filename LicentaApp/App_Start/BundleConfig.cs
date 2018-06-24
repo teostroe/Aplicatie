@@ -12,7 +12,9 @@ namespace LicentaApp
                         "~/Bundles/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Bundles/Scripts/jquery.validate*"));
+                        "~/Bundles/Scripts/jquery.validate*"
+                //"~/Bundles/Scripts/Custom/validation-overrides.js"
+                ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -20,12 +22,12 @@ namespace LicentaApp
                         "~/Bundles/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
-                //"~/Bundles/Scripts/angular.min.js",
-                //"~/Bundles/Scripts/angular-animate.min.js",
-                //"~/Bundles/Scripts/angular-aria.min.js",
-                //"~/Bundles/Scripts/angular-messages.min.js",
-                //"~/Bundles/Scripts/angular-route.min.js",
-                //"~/Bundles/Scripts/angular-resource.min.js",
+                  //"~/Bundles/Scripts/angular.min.js",
+                  //"~/Bundles/Scripts/angular-animate.min.js",
+                  //"~/Bundles/Scripts/angular-aria.min.js",
+                  //"~/Bundles/Scripts/angular-messages.min.js",
+                  //"~/Bundles/Scripts/angular-route.min.js",
+                  //"~/Bundles/Scripts/angular-resource.min.js",
                   "~/Bundles/Scripts/materialize.js",
                   "~/Bundles/Scripts/fontawesome-all.js",
                   "~/Bundles/Scripts/Custom/materialize-configs.js",

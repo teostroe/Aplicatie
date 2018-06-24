@@ -19,6 +19,9 @@ namespace LicentaApp
         {
             this.Inventar = new HashSet<Inventar>();
             this.Utilizatori = new HashSet<Utilizatori>();
+            this.ComenziAprovizionari = new HashSet<ComenziAprovizionari>();
+            this.ComenziAprovizionari1 = new HashSet<ComenziAprovizionari>();
+            this.ComenziAprovizionari2 = new HashSet<ComenziAprovizionari>();
         }
     
         public int Id { get; set; }
@@ -31,5 +34,11 @@ namespace LicentaApp
         public virtual ICollection<Inventar> Inventar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Utilizatori> Utilizatori { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari2 { get; set; }
     }
 }

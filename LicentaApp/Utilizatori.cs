@@ -18,6 +18,7 @@ namespace LicentaApp
         public Utilizatori()
         {
             this.Comenzi = new HashSet<Comenzi>();
+            this.ComenziAprovizionari = new HashSet<ComenziAprovizionari>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace LicentaApp
         public virtual ICollection<Comenzi> Comenzi { get; set; }
         public virtual Magazine Magazine { get; set; }
         public virtual Roluri Roluri { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari { get; set; }
     }
 }

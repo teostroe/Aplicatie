@@ -39,6 +39,8 @@ namespace LicentaApp
         public virtual DbSet<Roluri> Roluri { get; set; }
         public virtual DbSet<Utilizatori> Utilizatori { get; set; }
         public virtual DbSet<ViziteMedicale> ViziteMedicale { get; set; }
+        public virtual DbSet<ComenziAprovizionari> ComenziAprovizionari { get; set; }
+        public virtual DbSet<RandComenziAprovizionareProduse> RandComenziAprovizionareProduse { get; set; }
     
         public virtual int P_LOGIN(string x, string y, ObjectParameter z)
         {

@@ -4,16 +4,8 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
-    <div class="col m2">
-        <h4>Detalii</h4>
-    </div>
-    <div class="col m2" style="margin-top: 25px">
-        <a href="@Url.Action("Edit", "Produse", new { id=this.Model.Id })" class="tooltipped" data-position="bottom" data-tooltip="Editeaza"><i class="fas fa-edit fa-2x"></i></a>
-        <a href="@Url.Action("Delete", "Produse", new { id=this.Model.Id })" class="tooltipped" data-position="bottom" data-tooltip="Sterge"><i class="fas fa-trash fa-2x"></i></a>
 
-    </div>
-</div>
+@Html.Partial("_TitleUDButtons", new Tuple<string, string, int>("Detalii", "Produse", this.Model.Id))
 
 @Html.DisplayFor(x => x)
 

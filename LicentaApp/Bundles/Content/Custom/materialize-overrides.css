@@ -7,3 +7,99 @@
     margin: 0;
     float: none;
 }
+
+nav{
+    background-color: #b7504e;
+}
+
+footer.page-footer{
+    background-color: #b7504e;
+}
+
+.tabs .tab a{
+    color: #5c6bc0;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active{
+    color: #b7504e;
+}
+
+.tabs .indicator{
+    background-color: #b7504e;
+}
+
+.btn-floating.btn-large{
+    width: 45px;
+    height: 45px;
+}
+
+.btn-floating.btn-large i{
+    line-height: 45px;
+}
+
+.btn, .btn-large{
+    background-color:#4eb5b7;
+}
+
+.btn:hover, .btn-large:hover{
+    background-color:#81cacd;
+}
+
+.btn:active, .btn-large:active{
+    background-color:#28a5a6;
+}
+
+.btn:focus, .btn-large:focus{
+    background-color:#28a5a6;
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #504eb7  ;
+    box-shadow: 0 1px 0 0 #504eb7  ;
+}
+
+.red{
+    background-color: #504eb7 !important;
+}
+
+.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat:focus{
+    background-color:#504eb7;
+}
+
+.dropdown-content li > a, .dropdown-content li > span{
+    color: #b7504e;
+}
+
+.pagination li.active{
+    background-color: #504eb7;
+}
+
+[type="checkbox"]:indeterminate + label:before{
+    border-right: 2px solid #504eb7;
+}
+[type="checkbox"]:checked + label:before{
+    border-right:2px solid #504eb7;
+    border-bottom:2px solid #504eb7;
+
+}
+
+[type="checkbox"].filled-in:checked + label:after{
+    background-color: #504eb7;
+    border: 2px solid #504eb7;
+}
+
+.input-field .prefix.active {
+    color: #504eb7;
+}

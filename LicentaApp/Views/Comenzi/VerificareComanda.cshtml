@@ -1,0 +1,134 @@
+﻿@using LicentaApp.Domain
+@using LicentaApp.Domain.ValueObjects
+@using LicentaApp.ViewModels
+@using LicentaApp.ViewModels.Comanda
+@model LicentaApp.ViewModels.ComandaViewModel
+@{
+    var dictionary = (Dictionary<string, ProdusVerificareViewModel>)ViewData[AppConstants.VerificareProduse];
+    var total = dictionary.Sum(x => x.Value.Discount.HasValue
+        ? x.Value.Pret * x.Value.Cantitate - (x.Value.Discount * x.Value.Pret * x.Value.Cantitate)
+        : x.Value.Pret * x.Value.Cantitate);
+}
+
+
+
+@Html.DisplayFor(x => x.Client)
+
+
+@if (this.Model.TipComanda == TipComanda.ComandaCuPrelucrare)
+{
+    <br />
+        <h6><b>Detalii Vizita Medicala</b></h6>
+        <hr />
+        @Html.DisplayFor(x => x.VizitaMedicala)
+}
+
+<br />
+<h6><b>Detalii Comanda</b></h6>
+<hr />
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Cod</th>
+            <th>Denumire</th>
+            <th>Cantitate</th>
+            <th>Discount</th>
+            <th>Pret/buc</th>
+            <th>Pret total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var values in dictionary)
+        {
+
+            <tr>
+                <td>@values.Key</td>
+                <td>@values.Value.DenumireProduse</td>
+                <td>@values.Value.Cantitate</td>
+                <td>@values.Value.Discount</td>
+                <td>@values.Value.Pret</td>
+                @if (values.Value.Discount.HasValue)
+                {
+
+                    <td>
+                        @(values.Value.Cantitate * values.Value.Pret -
+                            (values.Value.Discount.Value * values.Value.Cantitate * values.Value.Pret))
+                </td>
+                }
+                else
+                {
+                    <td>@(values.Value.Cantitate * values.Value.Pret)</td>
+                }
+            </tr>
+            if (values.Value.TipProdus == TipProdus.Lentile)
+            {
+                if (this.Model.Lentila.Tratement.HasValue)
+                {
+                    <tr>
+                        <td><b>Tratament</b></td>
+                        <td colspan="4">@this.Model.Lentila.Tratement.Value.ToHtmlMvcString()</td>
+                    </tr>
+                }
+                if (this.Model.Lentila.Culoare.HasValue)
+                {
+                    <tr>
+                        <td></td>
+                        <td colspan="2"><b>Culoare</b></td>
+                        <td colspan="2">@this.Model.Lentila.Culoare.Value.ToHtmlMvcString()</td>
+                    </tr>
+                }
+            }
+
+
+        }
+        @if (this.Model.Manopera.HasValue)
+            {
+            <tr>
+                <td colspan="2">Manopera</td>
+                <td>1</td>
+                <td></td>
+                <td>@this.Model.Manopera.Value</td>
+                <td>@this.Model.Manopera.Value</td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="5"><b>Discount</b></td>
+            <td>@this.Model.Discount</td>
+        </tr>
+        <tr>
+            <td colspan="5"><b>Total</b></td>
+            @if (this.Model.Discount.HasValue)
+            {
+                <td>@(total - this.Model.Discount * total)</td>
+            }
+            else
+            {
+                <td>@total</td>
+            }
+        </tr>
+    </tbody>
+</table>
+<br/>
+<div class="row">
+    <div class="col m6">
+        @using (Html.BeginForm("Create", "Comenzi", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+            <input class="btn" type="submit" value="Editeaza" />
+        }
+    </div>
+    <div class="col m4"></div>
+    <div class="col m2">
+        @using (Html.BeginForm("Create", "Comenzi", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input class="btn" type="submit" value="Creaza" />
+        }
+    </div>
+</div>
+
+
+
+
+

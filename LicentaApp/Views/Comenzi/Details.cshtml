@@ -11,12 +11,16 @@
 <div class="row">
     @Html.DisplayFor(x => x.Client)
 </div>
-<div class="row">
-    <div class="col m12">
-        <h5>Detalii Vizita Medicala</h5>
-    </div>
-    @Html.DisplayFor(x => x.VizitaMedicala)
-</div>
+@if (this.Model.VizitaMedicala != null)
+{
+    <div class="row">
+        <div class="col m12">
+            <h5>Detalii Vizita Medicala</h5>
+        </div>
+        @Html.DisplayFor(x => x.VizitaMedicala)
+    </div>    
+}
+
 
 <table class="striped custom-padding-table" >
     <thead>

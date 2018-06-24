@@ -1,0 +1,16 @@
+﻿@model Tuple<string, string, int>
+@*
+    Item1 - Title
+    Item2 - Controller
+    Item3 - Id
+*@
+<div class="row">
+    <div class="col m2">
+        <h4>@this.Model.Item1</h4>
+    </div>
+    <div class="col m2" style="margin-top: 25px">
+        <a href="@Url.Action("Edit", this.Model.Item2, new { id=this.Model.Item3 })" class="tooltipped icon-button edit-icon" data-position="bottom" data-tooltip="Editeaza"><i class="fas fa-edit fa-2x"></i></a>
+        <a href="@Url.Action("Delete", this.Model.Item2, new { id=this.Model.Item3 })" class="tooltipped icon-button delete-icon" data-position="bottom" data-tooltip="Sterge"><i class="fas fa-trash fa-2x"></i></a>
+
+    </div>
+</div>
