@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/20/2018 23:03:44
--- Generated from EDMX file: D:\CSIE\Licenta\Licenta2\LicentaApp\LicentaApp\LicentaDbContext.edmx
+-- Date Created: 06/24/2018 14:55:12
+-- Generated from EDMX file: C:\personal\Teodora\Licenta\Aplicatie\LicentaApp\LicentaDbContext.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [LicentaTeoStroe];
+USE [LicentaTeo];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -23,17 +23,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Comenzi_IdUtilizator]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comenzi] DROP CONSTRAINT [FK_Comenzi_IdUtilizator];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RandComenziProdus_780915676]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProdus_780915676];
+IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Furnizori]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Furnizori];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ViziteMedicale_I_1739780243]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ViziteMedicale] DROP CONSTRAINT [FK_ViziteMedicale_I_1739780243];
+IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Magazine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Magazine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Magazine_DepozitCentral]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Magazine_DepozitCentral];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ComenziAprovizionare_Utilizatori]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComenziAprovizionari] DROP CONSTRAINT [FK_ComenziAprovizionare_Utilizatori];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DetaliiProdus_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DetaliiProdus] DROP CONSTRAINT [FK_DetaliiProdus_IdProdus];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Produse_IdFurnizor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Produse] DROP CONSTRAINT [FK_Produse_IdFurnizor];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Inventar_IdMagazin]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdMagazin];
@@ -41,17 +47,32 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Inventar_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Inventar] DROP CONSTRAINT [FK_Inventar_IdProdus];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdMagazin]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdMagazin];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Preturi_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Preturi] DROP CONSTRAINT [FK_Preturi_IdProdus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Produse_IdFurnizor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Produse] DROP CONSTRAINT [FK_Produse_IdFurnizor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RandComenziAprovizionareProduse_ComenziAprovizionari]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RandComenziAprovizionareProduse] DROP CONSTRAINT [FK_RandComenziAprovizionareProduse_ComenziAprovizionari];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RandComenziAprovizionareProduse_Produse]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RandComenziAprovizionareProduse] DROP CONSTRAINT [FK_RandComenziAprovizionareProduse_Produse];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RandComenziProdus_780915676]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProdus_780915676];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RandComenziProduse_IdProdus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RandComenziProduse] DROP CONSTRAINT [FK_RandComenziProduse_IdProdus];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdMagazin]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdMagazin];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Utilizatori_IdRol]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Utilizatori] DROP CONSTRAINT [FK_Utilizatori_IdRol];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ViziteMedicale_I_1739780243]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ViziteMedicale] DROP CONSTRAINT [FK_ViziteMedicale_I_1739780243];
 GO
 
 -- --------------------------------------------------
@@ -63,6 +84,9 @@ IF OBJECT_ID(N'[dbo].[Clienti]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Comenzi]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Comenzi];
+GO
+IF OBJECT_ID(N'[dbo].[ComenziAprovizionari]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ComenziAprovizionari];
 GO
 IF OBJECT_ID(N'[dbo].[DetaliiProdus]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DetaliiProdus];
@@ -81,6 +105,9 @@ IF OBJECT_ID(N'[dbo].[Preturi]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Produse]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Produse];
+GO
+IF OBJECT_ID(N'[dbo].[RandComenziAprovizionareProduse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RandComenziAprovizionareProduse];
 GO
 IF OBJECT_ID(N'[dbo].[RandComenziProduse]', 'U') IS NOT NULL
     DROP TABLE [dbo].[RandComenziProduse];
@@ -118,7 +145,9 @@ CREATE TABLE [dbo].[Comenzi] (
     [Data] datetime  NOT NULL,
     [Discount] decimal(18,2)  NULL,
     [IdUtilizator] int  NOT NULL,
-    [IdClient] int  NOT NULL
+    [IdClient] int  NOT NULL,
+    [Manopera] decimal(18,0)  NULL,
+    [StatusComanda] int  NOT NULL
 );
 GO
 
@@ -158,7 +187,8 @@ CREATE TABLE [dbo].[Magazine] (
     [Denumire] nvarchar(50)  NOT NULL,
     [Oras] nvarchar(50)  NOT NULL,
     [Adresa] nvarchar(max)  NOT NULL,
-    [Email] nvarchar(50)  NOT NULL
+    [Email] nvarchar(50)  NOT NULL,
+    [EsteDepozitCentral] bit  NOT NULL
 );
 GO
 
@@ -167,7 +197,7 @@ CREATE TABLE [dbo].[Preturi] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Valoare] decimal(18,2)  NOT NULL,
     [DataActualizare] datetime  NOT NULL,
-    [EsteUtilizatAcum] int  NOT NULL,
+    [EsteUtilizatAcum] bit  NOT NULL,
     [IdProdus] int  NOT NULL
 );
 GO
@@ -229,6 +259,30 @@ CREATE TABLE [dbo].[ViziteMedicale] (
     [CilindruDrept] decimal(18,0)  NULL,
     [AxDrept] decimal(18,0)  NULL,
     [PrismaDrept] decimal(18,0)  NULL
+);
+GO
+
+-- Creating table 'ComenziAprovizionari'
+CREATE TABLE [dbo].[ComenziAprovizionari] (
+    [Id] int  NOT NULL,
+    [DeLaFurnizorId] int  NULL,
+    [CatreDepozitCentralId] int  NULL,
+    [DeLaDepozitCentralId] int  NULL,
+    [CatreMagazinId] int  NULL,
+    [DataCreare] datetime  NOT NULL,
+    [DataPrimire] datetime  NULL,
+    [StatusComanda] int  NOT NULL,
+    [IdUtilizator] int  NOT NULL
+);
+GO
+
+-- Creating table 'RandComenziAprovizionareProduse'
+CREATE TABLE [dbo].[RandComenziAprovizionareProduse] (
+    [Id] int  NOT NULL,
+    [IdProdus] int  NOT NULL,
+    [IdComanda] int  NOT NULL,
+    [CantitateCeruta] int  NOT NULL,
+    [CantitatePrimita] int  NULL
 );
 GO
 
@@ -306,6 +360,18 @@ GO
 ALTER TABLE [dbo].[ViziteMedicale]
 ADD CONSTRAINT [PK_ViziteMedicale]
     PRIMARY KEY CLUSTERED ([IdComandaVizitaMedicala] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ComenziAprovizionari'
+ALTER TABLE [dbo].[ComenziAprovizionari]
+ADD CONSTRAINT [PK_ComenziAprovizionari]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'RandComenziAprovizionareProduse'
+ALTER TABLE [dbo].[RandComenziAprovizionareProduse]
+ADD CONSTRAINT [PK_RandComenziAprovizionareProduse]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -484,6 +550,111 @@ GO
 CREATE INDEX [IX_FK_Utilizatori_IdRol]
 ON [dbo].[Utilizatori]
     ([IdRol]);
+GO
+
+-- Creating foreign key on [DeLaFurnizorId] in table 'ComenziAprovizionari'
+ALTER TABLE [dbo].[ComenziAprovizionari]
+ADD CONSTRAINT [FK_ComenziAprovizionare_Furnizori]
+    FOREIGN KEY ([DeLaFurnizorId])
+    REFERENCES [dbo].[Furnizori]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComenziAprovizionare_Furnizori'
+CREATE INDEX [IX_FK_ComenziAprovizionare_Furnizori]
+ON [dbo].[ComenziAprovizionari]
+    ([DeLaFurnizorId]);
+GO
+
+-- Creating foreign key on [CatreMagazinId] in table 'ComenziAprovizionari'
+ALTER TABLE [dbo].[ComenziAprovizionari]
+ADD CONSTRAINT [FK_ComenziAprovizionare_Magazine]
+    FOREIGN KEY ([CatreMagazinId])
+    REFERENCES [dbo].[Magazine]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComenziAprovizionare_Magazine'
+CREATE INDEX [IX_FK_ComenziAprovizionare_Magazine]
+ON [dbo].[ComenziAprovizionari]
+    ([CatreMagazinId]);
+GO
+
+-- Creating foreign key on [DeLaDepozitCentralId] in table 'ComenziAprovizionari'
+ALTER TABLE [dbo].[ComenziAprovizionari]
+ADD CONSTRAINT [FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral]
+    FOREIGN KEY ([DeLaDepozitCentralId])
+    REFERENCES [dbo].[Magazine]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral'
+CREATE INDEX [IX_FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral]
+ON [dbo].[ComenziAprovizionari]
+    ([DeLaDepozitCentralId]);
+GO
+
+-- Creating foreign key on [CatreDepozitCentralId] in table 'ComenziAprovizionari'
+ALTER TABLE [dbo].[ComenziAprovizionari]
+ADD CONSTRAINT [FK_ComenziAprovizionare_Magazine_DepozitCentral]
+    FOREIGN KEY ([CatreDepozitCentralId])
+    REFERENCES [dbo].[Magazine]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComenziAprovizionare_Magazine_DepozitCentral'
+CREATE INDEX [IX_FK_ComenziAprovizionare_Magazine_DepozitCentral]
+ON [dbo].[ComenziAprovizionari]
+    ([CatreDepozitCentralId]);
+GO
+
+-- Creating foreign key on [IdUtilizator] in table 'ComenziAprovizionari'
+ALTER TABLE [dbo].[ComenziAprovizionari]
+ADD CONSTRAINT [FK_ComenziAprovizionare_Utilizatori]
+    FOREIGN KEY ([IdUtilizator])
+    REFERENCES [dbo].[Utilizatori]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComenziAprovizionare_Utilizatori'
+CREATE INDEX [IX_FK_ComenziAprovizionare_Utilizatori]
+ON [dbo].[ComenziAprovizionari]
+    ([IdUtilizator]);
+GO
+
+-- Creating foreign key on [IdComanda] in table 'RandComenziAprovizionareProduse'
+ALTER TABLE [dbo].[RandComenziAprovizionareProduse]
+ADD CONSTRAINT [FK_RandComenziAprovizionareProduse_ComenziAprovizionari]
+    FOREIGN KEY ([IdComanda])
+    REFERENCES [dbo].[ComenziAprovizionari]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RandComenziAprovizionareProduse_ComenziAprovizionari'
+CREATE INDEX [IX_FK_RandComenziAprovizionareProduse_ComenziAprovizionari]
+ON [dbo].[RandComenziAprovizionareProduse]
+    ([IdComanda]);
+GO
+
+-- Creating foreign key on [IdProdus] in table 'RandComenziAprovizionareProduse'
+ALTER TABLE [dbo].[RandComenziAprovizionareProduse]
+ADD CONSTRAINT [FK_RandComenziAprovizionareProduse_Produse]
+    FOREIGN KEY ([IdProdus])
+    REFERENCES [dbo].[Produse]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RandComenziAprovizionareProduse_Produse'
+CREATE INDEX [IX_FK_RandComenziAprovizionareProduse_Produse]
+ON [dbo].[RandComenziAprovizionareProduse]
+    ([IdProdus]);
 GO
 
 -- --------------------------------------------------

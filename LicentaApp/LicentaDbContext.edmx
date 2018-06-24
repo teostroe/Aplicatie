@@ -34,13 +34,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DeLaFurnizorId" Type="int" />
-          <Property Name="CatreMagazinCentralId" Type="int" />
-          <Property Name="DeLaMagazinCentralId" Type="int" />
+          <Property Name="CatreDepozitCentralId" Type="int" />
+          <Property Name="DeLaDepozitCentralId" Type="int" />
           <Property Name="CatreMagazinId" Type="int" />
           <Property Name="DataCreare" Type="datetime" Nullable="false" />
           <Property Name="DataPrimire" Type="datetime" />
+          <Property Name="StatusComanda" Type="int" Nullable="false" />
           <Property Name="IdUtilizator" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DetaliiProdus">
@@ -191,19 +192,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComenziAprovizionari_CatreMagazineCentral">
-          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
-          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Magazine">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ComenziAprovizionari">
-              <PropertyRef Name="CatreMagazinCentralId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComenziAprovizionari_Furnizori">
+        <Association Name="FK_ComenziAprovizionare_Furnizori">
           <End Role="Furnizori" Type="Self.Furnizori" Multiplicity="0..1" />
           <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -215,19 +204,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComenziAprovizionari_MagazinCentral">
-          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
-          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Magazine">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ComenziAprovizionari">
-              <PropertyRef Name="DeLaMagazinCentralId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComenziAprovizionari_Magazine">
+        <Association Name="FK_ComenziAprovizionare_Magazine">
           <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
           <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -239,7 +216,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComenziAprovizionari_Utilizatori">
+        <Association Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="DeLaDepozitCentralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Magazine_DepozitCentral">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="CatreDepozitCentralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Utilizatori">
           <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
           <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -436,23 +437,23 @@
             <End Role="Utilizatori" EntitySet="Utilizatori" />
             <End Role="Comenzi" EntitySet="Comenzi" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_CatreMagazineCentral" Association="Self.FK_ComenziAprovizionari_CatreMagazineCentral">
-            <End Role="Magazine" EntitySet="Magazine" />
-            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_Furnizori" Association="Self.FK_ComenziAprovizionari_Furnizori">
+          <AssociationSet Name="FK_ComenziAprovizionare_Furnizori" Association="Self.FK_ComenziAprovizionare_Furnizori">
             <End Role="Furnizori" EntitySet="Furnizori" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_MagazinCentral" Association="Self.FK_ComenziAprovizionari_MagazinCentral">
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine" Association="Self.FK_ComenziAprovizionare_Magazine">
             <End Role="Magazine" EntitySet="Magazine" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_Magazine" Association="Self.FK_ComenziAprovizionari_Magazine">
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" Association="Self.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
             <End Role="Magazine" EntitySet="Magazine" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_Utilizatori" Association="Self.FK_ComenziAprovizionari_Utilizatori">
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DepozitCentral" Association="Self.FK_ComenziAprovizionare_Magazine_DepozitCentral">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Utilizatori" Association="Self.FK_ComenziAprovizionare_Utilizatori">
             <End Role="Utilizatori" EntitySet="Utilizatori" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
@@ -561,7 +562,7 @@
           <Property Name="Adresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Produse" Relationship="Self.FK_Produse_IdFurnizor" FromRole="Furnizori" ToRole="Produse" />
           <Property Name="NRREGCOMERTULUI" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ComenziAprovizionari" Relationship="Domain.FK_ComenziAprovizionari_Furnizori" FromRole="Furnizori" ToRole="ComenziAprovizionari" />
+          <NavigationProperty Name="ComenziAprovizionari" Relationship="Domain.FK_ComenziAprovizionare_Furnizori" FromRole="Furnizori" ToRole="ComenziAprovizionari" />
         </EntityType>
         <EntityType Name="Inventar">
           <Key>
@@ -585,9 +586,10 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inventar" Relationship="Self.FK_Inventar_IdMagazin" FromRole="Magazine" ToRole="Inventar" />
           <NavigationProperty Name="Utilizatori" Relationship="Self.FK_Utilizatori_IdMagazin" FromRole="Magazine" ToRole="Utilizatori" />
-          <NavigationProperty Name="ComenziAprovizionari" Relationship="Domain.FK_ComenziAprovizionari_CatreMagazineCentral" FromRole="Magazine" ToRole="ComenziAprovizionari" />
-          <NavigationProperty Name="ComenziAprovizionari1" Relationship="Domain.FK_ComenziAprovizionari_MagazinCentral" FromRole="Magazine" ToRole="ComenziAprovizionari" />
-          <NavigationProperty Name="ComenziAprovizionari2" Relationship="Domain.FK_ComenziAprovizionari_Magazine" FromRole="Magazine" ToRole="ComenziAprovizionari" />
+          <NavigationProperty Name="CatreMagazin_ComenziAprovizionari" Relationship="Domain.FK_ComenziAprovizionare_Magazine" FromRole="Magazine" ToRole="ComenziAprovizionari" />
+          <NavigationProperty Name="DeLaDepozit_ComenziAprovizionari1" Relationship="Domain.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" FromRole="Magazine" ToRole="ComenziAprovizionari" />
+          <NavigationProperty Name="CatreDepozit_ComenziAprovizionari2" Relationship="Domain.FK_ComenziAprovizionare_Magazine_DepozitCentral" FromRole="Magazine" ToRole="ComenziAprovizionari" />
+          <Property Name="EsteDepozitCentral" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Preturi">
           <Key>
@@ -654,7 +656,7 @@
           <NavigationProperty Name="Comenzi" Relationship="Self.FK_Comenzi_IdUtilizator" FromRole="Utilizatori" ToRole="Comenzi" />
           <NavigationProperty Name="Magazine" Relationship="Self.FK_Utilizatori_IdMagazin" FromRole="Utilizatori" ToRole="Magazine" />
           <NavigationProperty Name="Roluri" Relationship="Self.FK_Utilizatori_IdRol" FromRole="Utilizatori" ToRole="Roluri" />
-          <NavigationProperty Name="ComenziAprovizionari" Relationship="Domain.FK_ComenziAprovizionari_Utilizatori" FromRole="Utilizatori" ToRole="ComenziAprovizionari" />
+          <NavigationProperty Name="ComenziAprovizionari" Relationship="Domain.FK_ComenziAprovizionare_Utilizatori" FromRole="Utilizatori" ToRole="ComenziAprovizionari" />
         </EntityType>
         <EntityType Name="ViziteMedicale">
           <Key>
@@ -917,23 +919,23 @@
           </FunctionImport>
           <EntitySet Name="ComenziAprovizionari" EntityType="Domain.ComenziAprovizionari" />
           <EntitySet Name="RandComenziAprovizionareProduse" EntityType="Domain.RandComenziAprovizionareProduse" />
-          <AssociationSet Name="FK_ComenziAprovizionari_CatreMagazineCentral" Association="Domain.FK_ComenziAprovizionari_CatreMagazineCentral">
-            <End Role="Magazine" EntitySet="Magazine" />
-            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_Furnizori" Association="Domain.FK_ComenziAprovizionari_Furnizori">
+          <AssociationSet Name="FK_ComenziAprovizionare_Furnizori" Association="Domain.FK_ComenziAprovizionare_Furnizori">
             <End Role="Furnizori" EntitySet="Furnizori" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_MagazinCentral" Association="Domain.FK_ComenziAprovizionari_MagazinCentral">
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine" Association="Domain.FK_ComenziAprovizionare_Magazine">
             <End Role="Magazine" EntitySet="Magazine" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_Magazine" Association="Domain.FK_ComenziAprovizionari_Magazine">
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" Association="Domain.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
             <End Role="Magazine" EntitySet="Magazine" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComenziAprovizionari_Utilizatori" Association="Domain.FK_ComenziAprovizionari_Utilizatori">
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DepozitCentral" Association="Domain.FK_ComenziAprovizionare_Magazine_DepozitCentral">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Utilizatori" Association="Domain.FK_ComenziAprovizionare_Utilizatori">
             <End Role="Utilizatori" EntitySet="Utilizatori" />
             <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
           </AssociationSet>
@@ -945,7 +947,7 @@
             <End Role="Produse" EntitySet="Produse" />
             <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipCuloare" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipCuloare" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -954,19 +956,20 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DeLaFurnizorId" Type="Int32" />
-          <Property Name="CatreMagazinCentralId" Type="Int32" />
-          <Property Name="DeLaMagazinCentralId" Type="Int32" />
+          <Property Name="CatreDepozitCentralId" Type="Int32" />
+          <Property Name="DeLaDepozitCentralId" Type="Int32" />
           <Property Name="CatreMagazinId" Type="Int32" />
           <Property Name="DataCreare" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataPrimire" Type="DateTime" Precision="3" />
+          <Property Name="StatusComanda" Type="Int32" Nullable="false" />
           <Property Name="IdUtilizator" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CatreMagazinCentral" Relationship="Domain.FK_ComenziAprovizionari_CatreMagazineCentral" FromRole="ComenziAprovizionari" ToRole="Magazine" />
-          <NavigationProperty Name="DeLaFurnizor" Relationship="Domain.FK_ComenziAprovizionari_Furnizori" FromRole="ComenziAprovizionari" ToRole="Furnizori" />
-          <NavigationProperty Name="DeLaMagazinCentral" Relationship="Domain.FK_ComenziAprovizionari_MagazinCentral" FromRole="ComenziAprovizionari" ToRole="Magazine" />
-          <NavigationProperty Name="CatreMagazin" Relationship="Domain.FK_ComenziAprovizionari_Magazine" FromRole="ComenziAprovizionari" ToRole="Magazine" />
-          <NavigationProperty Name="Utilizatori" Relationship="Domain.FK_ComenziAprovizionari_Utilizatori" FromRole="ComenziAprovizionari" ToRole="Utilizatori" />
+          <NavigationProperty Name="Furnizori" Relationship="Domain.FK_ComenziAprovizionare_Furnizori" FromRole="ComenziAprovizionari" ToRole="Furnizori" />
+          <NavigationProperty Name="Magazine" Relationship="Domain.FK_ComenziAprovizionare_Magazine" FromRole="ComenziAprovizionari" ToRole="Magazine" />
+          <NavigationProperty Name="DeLaDepozitCentral" Relationship="Domain.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" FromRole="ComenziAprovizionari" ToRole="Magazine" />
+          <NavigationProperty Name="CatreDepozitCentral" Relationship="Domain.FK_ComenziAprovizionare_Magazine_DepozitCentral" FromRole="ComenziAprovizionari" ToRole="Magazine" />
+          <NavigationProperty Name="Utilizatori" Relationship="Domain.FK_ComenziAprovizionare_Utilizatori" FromRole="ComenziAprovizionari" ToRole="Utilizatori" />
           <NavigationProperty Name="RandComenziAprovizionareProduse" Relationship="Domain.FK_RandComenziAprovizionareProduse_ComenziAprovizionari" FromRole="ComenziAprovizionari" ToRole="RandComenziAprovizionareProduse" />
         </EntityType>
         <EntityType Name="RandComenziAprovizionareProduse">
@@ -981,19 +984,7 @@
           <NavigationProperty Name="ComenziAprovizionari" Relationship="Domain.FK_RandComenziAprovizionareProduse_ComenziAprovizionari" FromRole="RandComenziAprovizionareProduse" ToRole="ComenziAprovizionari" />
           <NavigationProperty Name="Produse" Relationship="Domain.FK_RandComenziAprovizionareProduse_Produse" FromRole="RandComenziAprovizionareProduse" ToRole="Produse" />
         </EntityType>
-        <Association Name="FK_ComenziAprovizionari_CatreMagazineCentral">
-          <End Type="Domain.Magazine" Role="Magazine" Multiplicity="0..1" />
-          <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Magazine">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ComenziAprovizionari">
-              <PropertyRef Name="CatreMagazinCentralId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComenziAprovizionari_Furnizori">
+        <Association Name="FK_ComenziAprovizionare_Furnizori">
           <End Type="Domain.Furnizori" Role="Furnizori" Multiplicity="0..1" />
           <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1005,19 +996,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComenziAprovizionari_MagazinCentral">
-          <End Type="Domain.Magazine" Role="Magazine" Multiplicity="0..1" />
-          <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Magazine">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ComenziAprovizionari">
-              <PropertyRef Name="DeLaMagazinCentralId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComenziAprovizionari_Magazine">
+        <Association Name="FK_ComenziAprovizionare_Magazine">
           <End Type="Domain.Magazine" Role="Magazine" Multiplicity="0..1" />
           <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1029,7 +1008,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComenziAprovizionari_Utilizatori">
+        <Association Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
+          <End Type="Domain.Magazine" Role="Magazine" Multiplicity="0..1" />
+          <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="DeLaDepozitCentralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Magazine_DepozitCentral">
+          <End Type="Domain.Magazine" Role="Magazine" Multiplicity="0..1" />
+          <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="CatreDepozitCentralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Utilizatori">
           <End Type="Domain.Utilizatori" Role="Utilizatori" Multiplicity="1" />
           <End Type="Domain.ComenziAprovizionari" Role="ComenziAprovizionari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1065,7 +1068,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1222,11 +1225,12 @@
             <EntityTypeMapping TypeName="Domain.ComenziAprovizionari">
               <MappingFragment StoreEntitySet="ComenziAprovizionari">
                 <ScalarProperty Name="IdUtilizator" ColumnName="IdUtilizator" />
+                <ScalarProperty Name="StatusComanda" ColumnName="StatusComanda" />
                 <ScalarProperty Name="DataPrimire" ColumnName="DataPrimire" />
                 <ScalarProperty Name="DataCreare" ColumnName="DataCreare" />
                 <ScalarProperty Name="CatreMagazinId" ColumnName="CatreMagazinId" />
-                <ScalarProperty Name="DeLaMagazinCentralId" ColumnName="DeLaMagazinCentralId" />
-                <ScalarProperty Name="CatreMagazinCentralId" ColumnName="CatreMagazinCentralId" />
+                <ScalarProperty Name="DeLaDepozitCentralId" ColumnName="DeLaDepozitCentralId" />
+                <ScalarProperty Name="CatreDepozitCentralId" ColumnName="CatreDepozitCentralId" />
                 <ScalarProperty Name="DeLaFurnizorId" ColumnName="DeLaFurnizorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1243,7 +1247,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-  </EntityContainerMapping>
+          </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

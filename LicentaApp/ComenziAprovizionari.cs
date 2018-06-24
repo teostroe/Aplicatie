@@ -22,17 +22,18 @@ namespace LicentaApp
     
         public int Id { get; set; }
         public Nullable<int> DeLaFurnizorId { get; set; }
-        public Nullable<int> CatreMagazinCentralId { get; set; }
-        public Nullable<int> DeLaMagazinCentralId { get; set; }
+        public Nullable<int> CatreDepozitCentralId { get; set; }
+        public Nullable<int> DeLaDepozitCentralId { get; set; }
         public Nullable<int> CatreMagazinId { get; set; }
         public System.DateTime DataCreare { get; set; }
         public Nullable<System.DateTime> DataPrimire { get; set; }
+        public int StatusComanda { get; set; }
         public int IdUtilizator { get; set; }
     
-        public virtual Magazine CatreMagazinCentral { get; set; }
-        public virtual Furnizori DeLaFurnizor { get; set; }
-        public virtual Magazine DeLaMagazinCentral { get; set; }
-        public virtual Magazine CatreMagazin { get; set; }
+        public virtual Furnizori Furnizori { get; set; }
+        public virtual Magazine Magazine { get; set; }
+        public virtual Magazine DeLaDepozitCentral { get; set; }
+        public virtual Magazine CatreDepozitCentral { get; set; }
         public virtual Utilizatori Utilizatori { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RandComenziAprovizionareProduse> RandComenziAprovizionareProduse { get; set; }

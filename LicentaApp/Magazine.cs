@@ -19,9 +19,9 @@ namespace LicentaApp
         {
             this.Inventar = new HashSet<Inventar>();
             this.Utilizatori = new HashSet<Utilizatori>();
-            this.ComenziAprovizionari = new HashSet<ComenziAprovizionari>();
-            this.ComenziAprovizionari1 = new HashSet<ComenziAprovizionari>();
-            this.ComenziAprovizionari2 = new HashSet<ComenziAprovizionari>();
+            this.CatreMagazin_ComenziAprovizionari = new HashSet<ComenziAprovizionari>();
+            this.DeLaDepozit_ComenziAprovizionari1 = new HashSet<ComenziAprovizionari>();
+            this.CatreDepozit_ComenziAprovizionari2 = new HashSet<ComenziAprovizionari>();
         }
     
         public int Id { get; set; }
@@ -29,16 +29,17 @@ namespace LicentaApp
         public string Oras { get; set; }
         public string Adresa { get; set; }
         public string Email { get; set; }
+        public bool EsteDepozitCentral { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventar> Inventar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Utilizatori> Utilizatori { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari { get; set; }
+        public virtual ICollection<ComenziAprovizionari> CatreMagazin_ComenziAprovizionari { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari1 { get; set; }
+        public virtual ICollection<ComenziAprovizionari> DeLaDepozit_ComenziAprovizionari1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComenziAprovizionari> ComenziAprovizionari2 { get; set; }
+        public virtual ICollection<ComenziAprovizionari> CatreDepozit_ComenziAprovizionari2 { get; set; }
     }
 }

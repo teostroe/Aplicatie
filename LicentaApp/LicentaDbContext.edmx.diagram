@@ -31,14 +31,14 @@
         <AssociationConnector Association="Domain.FK_Utilizatori_IdRol" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Domain.ComenziAprovizionari" Width="1.5" PointX="8" PointY="10.25" />
         <EntityTypeShape EntityType="Domain.RandComenziAprovizionareProduse" Width="1.5" PointX="10.25" PointY="9.375" />
-        <AssociationConnector Association="Domain.FK_ComenziAprovizionari_CatreMagazineCentral" />
-        <AssociationConnector Association="Domain.FK_ComenziAprovizionari_Furnizori" />
-        <AssociationConnector Association="Domain.FK_ComenziAprovizionari_MagazinCentral" />
-        <AssociationConnector Association="Domain.FK_ComenziAprovizionari_Magazine" />
-        <AssociationConnector Association="Domain.FK_ComenziAprovizionari_Utilizatori" />
+        <AssociationConnector Association="Domain.FK_ComenziAprovizionare_Furnizori" />
+        <AssociationConnector Association="Domain.FK_ComenziAprovizionare_Magazine" />
+        <AssociationConnector Association="Domain.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" />
+        <AssociationConnector Association="Domain.FK_ComenziAprovizionare_Magazine_DepozitCentral" />
+        <AssociationConnector Association="Domain.FK_ComenziAprovizionare_Utilizatori" />
         <AssociationConnector Association="Domain.FK_RandComenziAprovizionareProduse_ComenziAprovizionari" />
         <AssociationConnector Association="Domain.FK_RandComenziAprovizionareProduse_Produse" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
