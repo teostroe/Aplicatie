@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col m12 input-field">
             @Html.DropDownListFor(model => model.Lentila.ProducatorId, (SelectList)ViewData[AppConstants.ProducatorOptions], "- Selecteaza -", new { @id = "producator-options" })
-            @Html.LabelFor(model => model.Lentila.ProducatorId)
+            @Html.LabelFor(model => model.Lentila.ProducatorId, "Producator")
             @Html.ValidationMessageFor(model => model.Lentila.ProducatorId, "", new { @class = "text-danger" })
         </div>
     </div>

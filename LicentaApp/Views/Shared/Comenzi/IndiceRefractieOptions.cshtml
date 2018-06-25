@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col m12 input-field">
             @Html.DropDownListFor(model => model.Lentila.IndiceRefractie, (SelectList)ViewData[AppConstants.IndiceReractieOptions], "- Selecteaza -", new { @id = "indice-refractie-options" })
-            @Html.LabelFor(model => model.Lentila.IndiceRefractie)
+            @Html.LabelFor(model => model.Lentila.IndiceRefractie, "Indice Refractie")
             @Html.ValidationMessageFor(model => model.Lentila.IndiceRefractie, "", new { @class = "text-danger" })
         </div>
     </div>

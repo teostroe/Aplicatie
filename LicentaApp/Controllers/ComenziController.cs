@@ -12,6 +12,7 @@ using LicentaApp;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.Services;
+using LicentaApp.Domain.Services.Helpers;
 using LicentaApp.Domain.Services.ValidationServices.Implementations;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
@@ -79,6 +80,7 @@ namespace LicentaApp.Controllers
                 Client = comanda.Clienti,
                 VizitaMedicala = comanda.ViziteMedicale,
                 Discount = comanda.Discount,
+                StatusComanda = comanda.StatusComanda,
                 Data = comanda.Data,
                 Produse = comanda.RandComenziProduse.Select(x => new ComandaProdusViewModel
                 {
@@ -250,8 +252,9 @@ namespace LicentaApp.Controllers
             comanda.RandComenziProduse = new List<RandComenziProduse>();
             comanda.Data = DateTime.Now;
             comanda.Discount = viewModel.Discount;
+            comanda.StatusComanda = StatusComanda.Creata;
             //to be updated
-            comanda.IdUtilizator = 1;
+            comanda.IdUtilizator = this.db.Utilizatori.FirstOrDefault().Id;
             #region Client
             if (db.Clienti.Any(x => x.Id == viewModel.Client.Id))
             {
@@ -305,6 +308,16 @@ namespace LicentaApp.Controllers
                 TempData.Remove(AppConstants.TempComandaViewModel);
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ModificaStatus(int idComanda)
+        {
+            var dbComanda = this.db.Comenzi.FirstOrDefault(x => x.Id == idComanda);
+            db.Comenzi.Attach(dbComanda);
+            dbComanda.StatusComanda = dbComanda.StatusComanda.GetNextState();
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = idComanda });
         }
 
         protected override void Dispose(bool disposing)

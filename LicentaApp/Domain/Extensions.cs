@@ -140,5 +140,20 @@ namespace LicentaApp.Domain
         {
             return string.Join(",", col);
         }
+
+        public static IEnumerable<ValidationResult> ToValidationResultSqlError(this string message)
+        {
+            string[] stringSeparators = new string[] { "\r\n" };
+            if (!message.Contains(stringSeparators[0]))
+            {
+                return new[] { new ValidationResult(message) };
+            }
+
+            return message.Split(stringSeparators, StringSplitOptions.None)
+                .Take(1)
+                .Select(x => new ValidationResult(x));
+
+
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace LicentaApp.ViewModels.Comanda
         public DateTime Data { get; set; }
         public decimal? Discount { get; set; }
         public decimal? Total { get; set; }
+        public StatusComanda StatusComanda { get; set; }
         public Clienti Client { get; set; }
         public ViziteMedicale VizitaMedicala { get; set; }
         public IEnumerable<ComandaProdusViewModel> Produse { get; set; }

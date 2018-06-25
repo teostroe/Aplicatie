@@ -1,4 +1,6 @@
-﻿@model LicentaApp.ViewModels.Comanda.ComandaReadOneViewModel
+﻿@using LicentaApp.Domain
+@using LicentaApp.Domain.Services.Helpers
+@model LicentaApp.ViewModels.Comanda.ComandaReadOneViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -6,8 +8,21 @@
     var counter = 0;
 }
 
-<h3>Nr. Comanda: @this.Model.NumarComanda</h3>
+<div class="row">
+    <div class="col m6">
+        <h5>Nr. Comanda: @this.Model.NumarComanda</h5>
+        <p><b>Status curent:</b> @this.Model.StatusComanda.ToHtmlMvcString()</p>
+    </div>
+    @if (this.Model.StatusComanda.HasNextStatus())
+    {
+        <div class="col m6">
+            <a style="float:right" class="btn" href="@Url.Action("ModificaStatus", "Comenzi", new {idComanda = this.Model.NumarComanda})">@this.Model.StatusComanda.GetInputMessage()</a>
+        </div>        
+    }
+
+</div>
 <hr />
+
 <div class="row">
     @Html.DisplayFor(x => x.Client)
 </div>

@@ -9,7 +9,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.SferaDistantaDrept, (SelectList)ViewData[AppConstants.SferaDistantaOptions], "- Fara -", new { @class = "sfera"})
-            @Html.LabelFor(model => model.SferaDistantaDrept)
+            @Html.LabelFor(model => model.SferaDistantaDrept, "Sfera Distanta")
             @*@Html.ValidationMessageFor(model => model.SferaDistantaDrept, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -17,7 +17,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.SferaAproapeDrept, (SelectList)ViewData[AppConstants.SferaAproapeOptions], "- Fara -", new { @class = "sfera" })
-            @Html.LabelFor(model => model.SferaAproapeDrept)
+            @Html.LabelFor(model => model.SferaAproapeDrept, "Sfera Aproape")
             @*@Html.ValidationMessageFor(model => model.SferaAproapeDrept, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -25,7 +25,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.CilindruDrept, (SelectList)ViewData[AppConstants.CilindruOptions], "- Fara -")
-            @Html.LabelFor(model => model.CilindruDrept)
+            @Html.LabelFor(model => model.CilindruDrept, "Cilindru")
             @*@Html.ValidationMessageFor(model => model.CilindruDrept, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -34,7 +34,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.AxDrept, (SelectList)ViewData[AppConstants.AxOptions], "- Fara -")
-            @Html.LabelFor(model => model.AxDrept)
+            @Html.LabelFor(model => model.AxDrept, "Ax")
             @*@Html.ValidationMessageFor(model => model.AxDrept, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -43,7 +43,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.PrismaDrept, (SelectList)ViewData[AppConstants.PrismaOptions], "- Fara -", new { @class = "sfera" })
-            @Html.LabelFor(model => model.PrismaDrept)
+            @Html.LabelFor(model => model.PrismaDrept, "Prisma")
             @*@Html.ValidationMessageFor(model => model.PrismaDrept, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -56,7 +56,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.SferaDistantaStang, (SelectList)ViewData[AppConstants.SferaDistantaOptions], "- Fara -", new { @class = "sfera" })
-            @Html.LabelFor(model => model.SferaDistantaStang)
+            @Html.LabelFor(model => model.SferaDistantaStang, "Sfera Distanta")
             @*@Html.ValidationMessageFor(model => model.SferaDistantaStang, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -64,7 +64,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.SferaAproapeStang, (SelectList)ViewData[AppConstants.SferaAproapeOptions], "- Fara -", new { @class = "sfera" })
-            @Html.LabelFor(model => model.SferaAproapeStang)
+            @Html.LabelFor(model => model.SferaAproapeStang, "Sfera Aproape")
             @*@Html.ValidationMessageFor(model => model.SferaAproapeStang, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -72,7 +72,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.CilindruStang, (SelectList)ViewData[AppConstants.CilindruOptions], "- Fara -")
-            @Html.LabelFor(model => model.CilindruStang)
+            @Html.LabelFor(model => model.CilindruStang, "Cilindru")
             @*@Html.ValidationMessageFor(model => model.CilindruStang, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -81,7 +81,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.AxStang, (SelectList)ViewData[AppConstants.AxOptions], "- Fara -")
-            @Html.LabelFor(model => model.AxStang)
+            @Html.LabelFor(model => model.AxStang, "Ax")
             @Html.ValidationMessageFor(model => model.AxStang, "", new { @class = "text-danger" })
         </div>
     }
@@ -90,7 +90,7 @@
     {
         <div class="col m2 input-field">
             @Html.DropDownListFor(model => model.PrismaStang, (SelectList)ViewData[AppConstants.PrismaOptions], "- Fara -", new { @class = "sfera" })
-            @Html.LabelFor(model => model.PrismaStang)
+            @Html.LabelFor(model => model.PrismaStang, "Prisma")
             @*@Html.ValidationMessageFor(model => model.PrismaStang, "", new { @class = "text-danger" })*@
         </div>
     }
@@ -101,7 +101,7 @@
 <div class="row">
     <div class="col m4 input-field">
         @Html.EditorFor(model => model.DistantaPupilara)
-        @Html.LabelFor(model => model.DistantaPupilara)
+        @Html.LabelFor(model => model.DistantaPupilara, "Distanta Pupilara")
         @*@Html.ValidationMessageFor(model => model.DistantaPupilara, "", new { @class = "text-danger" })*@
     </div>
 </div>

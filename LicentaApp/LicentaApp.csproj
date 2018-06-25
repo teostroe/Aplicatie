@@ -176,6 +176,7 @@
     <Compile Include="ComenziAprovizionari.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Base\BaseAppController.cs" />
     <Compile Include="Controllers\ClientiController.cs" />
     <Compile Include="Controllers\ComenziAprovizionareController.cs" />
     <Compile Include="Controllers\ComenziController.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Domain\RazorExtensions.cs" />
     <Compile Include="Domain\Services\Binders\DateTimeModelBinder.cs" />
     <Compile Include="Domain\Services\Binders\DecimalModelBinder.cs" />
+    <Compile Include="Domain\Services\Helpers\StatusComandaClientHelper.cs" />
     <Compile Include="Domain\Services\SerializationService.cs" />
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
@@ -211,6 +213,7 @@
     <Compile Include="Domain\Services\ValidationServices\IValidationService.cs" />
     <Compile Include="Domain\SqlExceptionService.cs" />
     <Compile Include="Domain\ValueObjects\DaNu.cs" />
+    <Compile Include="Domain\ValueObjects\DbSaveResult.cs" />
     <Compile Include="Domain\ValueObjects\StatusComanda.cs" />
     <Compile Include="Domain\ValueObjects\TipComanda.cs" />
     <Compile Include="Domain\ValueObjects\TipComandaAprovizionare.cs" />
@@ -286,6 +289,11 @@
     <Content Include="Bundles\Content\Custom\materialize-overrides.css" />
     <Content Include="Bundles\Content\fa-svg-with-js.css" />
     <Content Include="Bundles\Content\fontawesome-all.css" />
+    <Content Include="Bundles\Content\Images\delivery-truck.png" />
+    <Content Include="Bundles\Content\Images\inventory.png" />
+    <Content Include="Bundles\Content\Images\network.png" />
+    <Content Include="Bundles\Content\Images\online-store.png" />
+    <Content Include="Bundles\Content\Images\supplies.png" />
     <Content Include="Bundles\Content\materialize.css" />
     <Content Include="Bundles\Content\materialize.min.css" />
     <Content Include="Bundles\Scripts\Custom\DynamicProductProperties.js" />
@@ -480,6 +488,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Shared\Modals\" />
   </ItemGroup>
   <ItemGroup>

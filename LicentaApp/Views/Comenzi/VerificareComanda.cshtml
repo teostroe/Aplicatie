@@ -66,15 +66,14 @@
                 {
                     <tr>
                         <td><b>Tratament</b></td>
-                        <td colspan="4">@this.Model.Lentila.Tratement.Value.ToHtmlMvcString()</td>
+                        <td colspan="5">@this.Model.Lentila.Tratement.Value.ToHtmlMvcString()</td>
                     </tr>
                 }
                 if (this.Model.Lentila.Culoare.HasValue)
                 {
                     <tr>
-                        <td></td>
-                        <td colspan="2"><b>Culoare</b></td>
-                        <td colspan="2">@this.Model.Lentila.Culoare.Value.ToHtmlMvcString()</td>
+                        <td><b>Culoare</b></td>
+                        <td colspan="5">@this.Model.Lentila.Culoare.Value.ToHtmlMvcString()</td>
                     </tr>
                 }
             }

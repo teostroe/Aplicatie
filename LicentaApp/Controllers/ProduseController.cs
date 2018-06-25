@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.XPath;
 using LicentaApp;
+using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.ValueObjects;
@@ -16,10 +17,8 @@ using LicentaApp.ViewModels;
 
 namespace LicentaApp.Controllers
 {
-    public class ProduseController : Controller
+    public class ProduseController : BaseAppController
     {
-        private LicentaDbContext db = new LicentaDbContext();
-
         // GET: Produse
         public ActionResult Index(int? page)
         {
@@ -94,7 +93,13 @@ namespace LicentaApp.Controllers
                 });
             }
             db.Produse.Add(model.Produse);
-            db.SaveChanges();
+            var dbResult = this.SaveChages();
+            if (dbResult != DbSaveResult.Success)
+            {
+                this.InitViewBag();
+                this.ReInitViewModel(ref model);
+                return View(model);
+            }
             return RedirectToAction("Index");
         }
 
@@ -136,7 +141,6 @@ namespace LicentaApp.Controllers
                 this.InitViewBag();
                 this.ReInitViewModel(ref model);
                 return View(model);
-
             }
 
             var dbProduse = this.db.Produse.SingleOrDefault(x => x.Id == model.Produse.Id);
@@ -165,7 +169,14 @@ namespace LicentaApp.Controllers
                 IdProdus = model.Produse.Id
             });
 
-            db.SaveChanges();
+            var result = this.SaveChages();
+            if (result != DbSaveResult.Success)
+            {
+                this.InitViewBag();
+                this.ReInitViewModel(ref model);
+                return View(model);
+            }
+
             return RedirectToAction("Index");
         }
 
