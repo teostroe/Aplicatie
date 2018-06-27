@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<table class="all-reports-table">
+    <tbody>
+
+        <tr>
+            <td><b>Top vanzari ochelari soare in functie de cantitatile vandute</b></td>
+            <td><a href="@Url.Action("TopOchelariSoare_CantitatiVandute")" class="tooltipped icon-button report-icon" data-position="bottom" data-tooltip="Raport tabelar"><i class="fas fa-table fa-2x"></i></a></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Statistica Vanzari Magazine</b></td>
+            <td><a href="@Url.Action("StatisticaMagazinDupaVanzari")" class="tooltipped icon-button report-icon" data-position="bottom" data-tooltip="Raport tabelar"><i class="fas fa-table fa-2x"></i></a></td>
+            <td><a href="@Url.Action("StatisticaMagazinDupaVanzari_Grafic")" class="tooltipped icon-button report-icon" data-position="bottom" data-tooltip="Grafic"><i class="fas fa-chart-bar fa-2x"></i></a></td>
+        </tr>
+        <tr>
+            <td><b>Statistica Vanzari Magazine in functie de cantitatile vandute</b></td>
+            <td><a href="@Url.Action("StatisticaMagazineDupaCantitati")" class="tooltipped icon-button report-icon" data-position="bottom" data-tooltip="Raport tabelar"><i class="fas fa-table fa-2x"></i></a></td>
+            <td><a href="@Url.Action("StatisticaMagazineDupaCantitati_Grafic")" class="tooltipped icon-button report-icon" data-position="bottom" data-tooltip="Grafic"><i class="fas fa-chart-bar fa-2x"></i></a></td>
+        </tr>
+        <tr>
+            <td><b>Vanzari totale pe luna</b></td>
+            <td><a href="@Url.Action("VanzariTotalePeLuni")" class="tooltipped icon-button report-icon" data-position="bottom" data-tooltip="Raport tabelar"><i class="fas fa-table fa-2x"></i></a></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

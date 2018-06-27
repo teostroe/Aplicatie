@@ -116,5 +116,10 @@ namespace LicentaApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTopOchelariSoare_Result>("GetTopOchelariSoare", p_dataStartParameter, p_dataFinalaParameter);
         }
+    
+        public virtual ObjectResult<PivotTableTotalVanzari_Result> PivotTableTotalVanzari()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PivotTableTotalVanzari_Result>("PivotTableTotalVanzari");
+        }
     }
 }

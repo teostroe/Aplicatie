@@ -268,6 +268,9 @@
     <Compile Include="Magazine.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="PivotTableTotalVanzari_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Preturi.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -512,6 +515,9 @@
     <Content Include="Views\Rapoarte\StatisticaMagazinDupaVanzari.cshtml" />
     <Content Include="Views\Shared\Rapoarte\StatisticaMagazinDupaVanzari_Data.cshtml" />
     <Content Include="Views\Rapoarte\StatisticaMagazinDupaVanzari_Grafic.cshtml" />
+    <Content Include="Views\Rapoarte\VanzariTotalePeLuni.cshtml" />
+    <Content Include="Views\Rapoarte\Index.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\StatisticaMagazineDupaCantitati_Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

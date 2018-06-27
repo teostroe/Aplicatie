@@ -5,24 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-<br/>
-
 <div class="row">
-    <div class="col m5 input-field">
-        <input type="text" class="datepicker" id ="startDate">
-        <label for="startDate">Data inceput</label>
-    </div>
-    <div class="col m5 input-field">
-        <input type="text" class="datepicker" id="endDate">
-        <label for="endDate">Data final</label>
-    </div>
-    <div class="col m2">
-        <a href="#" class="btn btn-small waves-effect" id="getData">Genereaza raport</a> 
-    </div>
+    <h4 class="report-title">Statistica Vanzari Magazine</h4>
 </div>
 
+@Html.Partial("Rapoarte/_ReportButtons")
+
 <div class="row">
-    <div id="statistica-grafic"></div>
+    <div id="statistica-grafic" style="width: 900px; height: 500px"></div>
 </div>
 
 
@@ -43,10 +33,10 @@
         
         var dataTable = createDataTable(model);
         google.charts.load('current', { packages: ['corechart', 'bar']});
-        google.charts.setOnLoadCallback(drawTitleSubtitle);
+        google.charts.setOnLoadCallback(drawChart);
 
 
-        function drawTitleSubtitle() {
+        function drawChart() {
             var data = google.visualization.arrayToDataTable(dataTable);
 
             var options = {
@@ -62,12 +52,12 @@
             materialChart.draw(data, google.charts.Bar.convertOptions(options));
         }
 
-        $('#getData').click(function() {
+        $('#getReportData').click(function() {
             var startDate = $('#startDate').val();
             var endDate = $('#endDate').val();
 
             $.ajax({
-                url: '@Url.Action("GetStatisticaMagazineDupaCantitati_Data")',
+                url: '@Url.Action("StatisticaMagazineDupaCantitati_GraficData")',
                 type: 'GET',
                 data: {startDate: startDate, endDate: endDate},
                 dataType: 'json',
@@ -77,7 +67,7 @@
                 },
                 success: function (result) {
                     dataTable = createDataTable(result);
-                    google.charts.setOnLoadCallback(drawTitleSubtitle);
+                    google.charts.setOnLoadCallback(drawChart);
                 },
                 async: true
             });

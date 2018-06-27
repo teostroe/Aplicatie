@@ -428,6 +428,7 @@
           <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
           <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="PivotTableTotalVanzari" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DomainStoreContainer">
           <EntitySet Name="Clienti" EntityType="Self.Clienti" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comenzi" EntityType="Self.Comenzi" Schema="dbo" store:Type="Tables" />
@@ -974,6 +975,7 @@
             <Parameter Name="p_dataStart" Mode="In" Type="String" />
             <Parameter Name="p_dataFinala" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PivotTableTotalVanzari" ReturnType="Collection(Domain.PivotTableTotalVanzari_Result)" />
           </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -1124,6 +1126,21 @@
           <Property Type="String" Name="Denumire" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="Cod" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="CantitateTotala" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PivotTableTotalVanzari_Result">
+          <Property Type="Int32" Name="Anul" Nullable="true" />
+          <Property Type="Decimal" Name="jan" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="feb" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="mar" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="apr" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="may" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="jun" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="jul" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="aug" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="sep" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="oct" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="nov" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="dec" Nullable="true" Precision="38" Scale="0" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1342,6 +1359,25 @@
                 <ScalarProperty Name="Denumire" ColumnName="Denumire" />
                 <ScalarProperty Name="Cod" ColumnName="Cod" />
                 <ScalarProperty Name="CantitateTotala" ColumnName="CantitateTotala" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PivotTableTotalVanzari" FunctionName="Domain.Store.PivotTableTotalVanzari">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.PivotTableTotalVanzari_Result">
+                <ScalarProperty Name="Anul" ColumnName="Anul" />
+                <ScalarProperty Name="jan" ColumnName="jan" />
+                <ScalarProperty Name="feb" ColumnName="feb" />
+                <ScalarProperty Name="mar" ColumnName="mar" />
+                <ScalarProperty Name="apr" ColumnName="apr" />
+                <ScalarProperty Name="may" ColumnName="may" />
+                <ScalarProperty Name="jun" ColumnName="jun" />
+                <ScalarProperty Name="jul" ColumnName="jul" />
+                <ScalarProperty Name="aug" ColumnName="aug" />
+                <ScalarProperty Name="sep" ColumnName="sep" />
+                <ScalarProperty Name="oct" ColumnName="oct" />
+                <ScalarProperty Name="nov" ColumnName="nov" />
+                <ScalarProperty Name="dec" ColumnName="dec" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

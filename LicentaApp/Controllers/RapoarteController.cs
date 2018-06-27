@@ -12,6 +12,11 @@ namespace LicentaApp.Controllers
         private string _stringDateFormat = "yyyy-MM-dd";
         private readonly LicentaDbContext db = new LicentaDbContext();
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult TopLentileVandute()
         {
             return View(this.db.GetTopLentile());
@@ -23,6 +28,16 @@ namespace LicentaApp.Controllers
             return View(this.db.GetStatisticaMagazineDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
         }
 
+
+        public ActionResult StatisticaMagazineDupaCantitati_Data(DateTime startDate, DateTime endDate)
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return PartialView("Rapoarte/StatisticaMagazineDupaCantitati_Data",
+                this.db.GetStatisticaMagazineDupaCantitati(
+                    dates.GetStartDateAsString(), 
+                    dates.GetFinalDateAsString()));
+        }
+
         public ActionResult StatisticaMagazineDupaCantitati_Grafic()
         {
             var dates = InitialDateService.GetInitialDates();
@@ -30,7 +45,7 @@ namespace LicentaApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetStatisticaMagazineDupaCantitati_Data(DateTime startDate, DateTime endDate)
+        public ActionResult StatisticaMagazineDupaCantitati_GraficData(DateTime startDate, DateTime endDate)
         {
             return Json(
                 this.db.GetStatisticaMagazineDupaCantitati(startDate.ToString(this._stringDateFormat),
@@ -80,6 +95,11 @@ namespace LicentaApp.Controllers
             return Json(
                 this.db.GetStatisticaMagazineDupaVanzari(startDate.ToString(this._stringDateFormat),
                     endDate.ToString(this._stringDateFormat)), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult VanzariTotalePeLuni()
+        {
+            return View(this.db.PivotTableTotalVanzari());
         }
     }
 }
