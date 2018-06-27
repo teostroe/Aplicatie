@@ -1,0 +1,22 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetTopOchelariSoare_Result>
+@{
+    ViewBag.Title = "TopOchelariSoare_CantitatiVandute";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Top vanzari ochelari soare in functie de cantitatile vandute</h4>
+</div>
+
+@using (Ajax.BeginForm("TopOchelariSoare_Data", "Rapoarte", new AjaxOptions { UpdateTargetId = "report-container", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Partial("Rapoarte/_ReportButtons")
+}
+
+<div id="report-container">
+    @Html.Partial("Rapoarte/TopOchelariSoare_Data", this.Model)
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

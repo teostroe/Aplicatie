@@ -60,3 +60,10 @@ function loadStepOnItemChange(containerId, url, nextChangeFunction, dom, conditi
         });
     showHide(conditionToDisplay, $(containerId));
 }
+
+function getSqlDateFormat(value) {
+    //get type: dd/MM/yyyy
+    //result type: yyyy-MM-dd
+    var items = value.split('/');
+    return items[2] + '-' + items[1] + '-' + items[0];
+}

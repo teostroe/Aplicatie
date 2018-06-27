@@ -4,510 +4,523 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Domain.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="DomainStoreContainer">
-    <EntitySet Name="Clienti" EntityType="Domain.Store.Clienti" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Comenzi" EntityType="Domain.Store.Comenzi" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DetaliiProdus" EntityType="Domain.Store.DetaliiProdus" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Furnizori" EntityType="Domain.Store.Furnizori" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Inventar" EntityType="Domain.Store.Inventar" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Magazine" EntityType="Domain.Store.Magazine" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Preturi" EntityType="Domain.Store.Preturi" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Produse" EntityType="Domain.Store.Produse" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RandComenziProduse" EntityType="Domain.Store.RandComenziProduse" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Roluri" EntityType="Domain.Store.Roluri" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Utilizatori" EntityType="Domain.Store.Utilizatori" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ViziteMedicale" EntityType="Domain.Store.ViziteMedicale" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ComenziAprovizionari" EntityType="Domain.Store.ComenziAprovizionari" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RandComenziAprovizionareProduse" EntityType="Domain.Store.RandComenziAprovizionareProduse" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Comenzi_IdClient" Association="Domain.Store.FK_Comenzi_IdClient">
-      <End Role="Clienti" EntitySet="Clienti" />
-      <End Role="Comenzi" EntitySet="Comenzi" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Comenzi_IdUtilizator" Association="Domain.Store.FK_Comenzi_IdUtilizator">
-      <End Role="Utilizatori" EntitySet="Utilizatori" />
-      <End Role="Comenzi" EntitySet="Comenzi" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RandComenziProdus_780915676" Association="Domain.Store.FK_RandComenziProdus_780915676">
-      <End Role="Comenzi" EntitySet="Comenzi" />
-      <End Role="RandComenziProduse" EntitySet="RandComenziProduse" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ViziteMedicale_I_1739780243" Association="Domain.Store.FK_ViziteMedicale_I_1739780243">
-      <End Role="Comenzi" EntitySet="Comenzi" />
-      <End Role="ViziteMedicale" EntitySet="ViziteMedicale" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetaliiProdus_IdProdus" Association="Domain.Store.FK_DetaliiProdus_IdProdus">
-      <End Role="Produse" EntitySet="Produse" />
-      <End Role="DetaliiProdus" EntitySet="DetaliiProdus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Produse_IdFurnizor" Association="Domain.Store.FK_Produse_IdFurnizor">
-      <End Role="Furnizori" EntitySet="Furnizori" />
-      <End Role="Produse" EntitySet="Produse" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Inventar_IdMagazin" Association="Domain.Store.FK_Inventar_IdMagazin">
-      <End Role="Magazine" EntitySet="Magazine" />
-      <End Role="Inventar" EntitySet="Inventar" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Inventar_IdProdus" Association="Domain.Store.FK_Inventar_IdProdus">
-      <End Role="Produse" EntitySet="Produse" />
-      <End Role="Inventar" EntitySet="Inventar" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Utilizatori_IdMagazin" Association="Domain.Store.FK_Utilizatori_IdMagazin">
-      <End Role="Magazine" EntitySet="Magazine" />
-      <End Role="Utilizatori" EntitySet="Utilizatori" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Preturi_IdProdus" Association="Domain.Store.FK_Preturi_IdProdus">
-      <End Role="Produse" EntitySet="Produse" />
-      <End Role="Preturi" EntitySet="Preturi" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RandComenziProduse_IdProdus" Association="Domain.Store.FK_RandComenziProduse_IdProdus">
-      <End Role="Produse" EntitySet="Produse" />
-      <End Role="RandComenziProduse" EntitySet="RandComenziProduse" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Utilizatori_IdRol" Association="Domain.Store.FK_Utilizatori_IdRol">
-      <End Role="Roluri" EntitySet="Roluri" />
-      <End Role="Utilizatori" EntitySet="Utilizatori" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComenziAprovizionare_Furnizori" Association="Domain.Store.FK_ComenziAprovizionare_Furnizori">
-      <End Role="Furnizori" EntitySet="Furnizori" />
-      <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComenziAprovizionare_Magazine" Association="Domain.Store.FK_ComenziAprovizionare_Magazine">
-      <End Role="Magazine" EntitySet="Magazine" />
-      <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" Association="Domain.Store.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
-      <End Role="Magazine" EntitySet="Magazine" />
-      <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DepozitCentral" Association="Domain.Store.FK_ComenziAprovizionare_Magazine_DepozitCentral">
-      <End Role="Magazine" EntitySet="Magazine" />
-      <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComenziAprovizionare_Utilizatori" Association="Domain.Store.FK_ComenziAprovizionare_Utilizatori">
-      <End Role="Utilizatori" EntitySet="Utilizatori" />
-      <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RandComenziAprovizionareProduse_ComenziAprovizionari" Association="Domain.Store.FK_RandComenziAprovizionareProduse_ComenziAprovizionari">
-      <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
-      <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RandComenziAprovizionareProduse_Produse" Association="Domain.Store.FK_RandComenziAprovizionareProduse_Produse">
-      <End Role="Produse" EntitySet="Produse" />
-      <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Clienti">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nume" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Prenume" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="NumarTelefon" Type="nvarchar" Nullable="false" MaxLength="10" />
-    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="DataNastere" Type="datetime" Nullable="false" />
-    <Property Name="DataInregistrare" Type="datetime" Nullable="false" />
-    <Property Name="Profesie" Type="nvarchar" Nullable="false" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Comenzi">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Data" Type="datetime" Nullable="false" />
-    <Property Name="Discount" Type="decimal" Nullable="true" Precision="18" Scale="2" />
-    <Property Name="IdUtilizator" Type="int" Nullable="false" />
-    <Property Name="IdClient" Type="int" Nullable="false" />
-    <Property Name="Manopera" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="StatusComanda" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="DetaliiProdus">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Denumire" Type="nvarchar" Nullable="false" MaxLength="255" />
-    <Property Name="Valoare" Type="nvarchar" Nullable="false" MaxLength="255" />
-    <Property Name="IdProdus" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Furnizori">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Denumire" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="CIF" Type="nvarchar" Nullable="false" MaxLength="20" />
-    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="NumarTelefon" Type="nvarchar" Nullable="false" MaxLength="10" />
-    <Property Name="Adresa" Type="nvarchar" Nullable="false" MaxLength="150" />
-    <Property Name="NRREGCOMERTULUI" Type="nvarchar" Nullable="false" MaxLength="15" />
-  </EntityType>
-  <EntityType Name="Inventar">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CantitateDisponibila" Type="int" Nullable="false" />
-    <Property Name="IdMagazin" Type="int" Nullable="false" />
-    <Property Name="IdProdus" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Magazine">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Denumire" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Oras" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Adresa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="EsteDepozitCentral" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Preturi">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Valoare" Type="decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="DataActualizare" Type="datetime" Nullable="false" />
-    <Property Name="EsteUtilizatAcum" Type="bit" Nullable="false" />
-    <Property Name="IdProdus" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Produse">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cod" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Denumire" Type="nvarchar" Nullable="false" MaxLength="150" />
-    <Property Name="Discount" Type="decimal" Nullable="true" Precision="18" Scale="2" />
-    <Property Name="TipProdus" Type="int" Nullable="false" />
-    <Property Name="IdFurnizor" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="RandComenziProduse">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cantitate" Type="int" Nullable="false" />
-    <Property Name="IdComanda" Type="int" Nullable="false" />
-    <Property Name="IdProdus" Type="int" Nullable="false" />
-    <Property Name="TipTratement" Type="int" Nullable="true" />
-    <Property Name="TipCuloare" Type="int" Nullable="true" />
-    <Property Name="Discount" Type="decimal" Nullable="true" Precision="10" Scale="2" />
-  </EntityType>
-  <EntityType Name="Roluri">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Denumire" Type="nvarchar" Nullable="false" MaxLength="40" />
-  </EntityType>
-  <EntityType Name="Utilizatori">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Nume" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Prenume" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Parola" Type="nvarchar" Nullable="false" MaxLength="25" />
-    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="IdRol" Type="int" Nullable="false" />
-    <Property Name="IdMagazin" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ViziteMedicale">
-    <Key>
-      <PropertyRef Name="IdComandaVizitaMedicala" />
-    </Key>
-    <Property Name="IdComandaVizitaMedicala" Type="int" Nullable="false" />
-    <Property Name="DistantaPupilara" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-    <Property Name="SferaDistantaStang" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="SferaAproapeStang" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="CilindruStang" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="AxStang" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="PrismaStang" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="SferaDistantaDrept" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="SferaAproapeDrept" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="CilindruDrept" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="AxDrept" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="PrismaDrept" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-  </EntityType>
-  <EntityType Name="ComenziAprovizionari">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DeLaFurnizorId" Type="int" Nullable="true" />
-    <Property Name="CatreDepozitCentralId" Type="int" Nullable="true" />
-    <Property Name="DeLaDepozitCentralId" Type="int" Nullable="true" />
-    <Property Name="CatreMagazinId" Type="int" Nullable="true" />
-    <Property Name="DataCreare" Type="datetime" Nullable="false" />
-    <Property Name="DataPrimire" Type="datetime" Nullable="true" />
-    <Property Name="StatusComanda" Type="int" Nullable="false" />
-    <Property Name="IdUtilizator" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="RandComenziAprovizionareProduse">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdProdus" Type="int" Nullable="false" />
-    <Property Name="IdComanda" Type="int" Nullable="false" />
-    <Property Name="CantitateCeruta" Type="int" Nullable="false" />
-    <Property Name="CantitatePrimita" Type="int" Nullable="true" />
-  </EntityType>
-  <Association Name="FK_Comenzi_IdClient">
-    <End Role="Clienti" Type="Domain.Store.Clienti" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Comenzi" Type="Domain.Store.Comenzi" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clienti">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Comenzi">
-        <PropertyRef Name="IdClient" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Comenzi_IdUtilizator">
-    <End Role="Utilizatori" Type="Domain.Store.Utilizatori" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Comenzi" Type="Domain.Store.Comenzi" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Utilizatori">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Comenzi">
-        <PropertyRef Name="IdUtilizator" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RandComenziProdus_780915676">
-    <End Role="Comenzi" Type="Domain.Store.Comenzi" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="RandComenziProduse" Type="Domain.Store.RandComenziProduse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Comenzi">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RandComenziProduse">
-        <PropertyRef Name="IdComanda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ViziteMedicale_I_1739780243">
-    <End Role="Comenzi" Type="Domain.Store.Comenzi" Multiplicity="1" />
-    <End Role="ViziteMedicale" Type="Domain.Store.ViziteMedicale" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Comenzi">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ViziteMedicale">
-        <PropertyRef Name="IdComandaVizitaMedicala" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetaliiProdus_IdProdus">
-    <End Role="Produse" Type="Domain.Store.Produse" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="DetaliiProdus" Type="Domain.Store.DetaliiProdus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DetaliiProdus">
-        <PropertyRef Name="IdProdus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Produse_IdFurnizor">
-    <End Role="Furnizori" Type="Domain.Store.Furnizori" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Produse" Type="Domain.Store.Produse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Furnizori">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Produse">
-        <PropertyRef Name="IdFurnizor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Inventar_IdMagazin">
-    <End Role="Magazine" Type="Domain.Store.Magazine" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Inventar" Type="Domain.Store.Inventar" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Magazine">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inventar">
-        <PropertyRef Name="IdMagazin" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Inventar_IdProdus">
-    <End Role="Produse" Type="Domain.Store.Produse" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Inventar" Type="Domain.Store.Inventar" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inventar">
-        <PropertyRef Name="IdProdus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Utilizatori_IdMagazin">
-    <End Role="Magazine" Type="Domain.Store.Magazine" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Utilizatori" Type="Domain.Store.Utilizatori" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Magazine">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Utilizatori">
-        <PropertyRef Name="IdMagazin" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Preturi_IdProdus">
-    <End Role="Produse" Type="Domain.Store.Produse" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Preturi" Type="Domain.Store.Preturi" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Preturi">
-        <PropertyRef Name="IdProdus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RandComenziProduse_IdProdus">
-    <End Role="Produse" Type="Domain.Store.Produse" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="RandComenziProduse" Type="Domain.Store.RandComenziProduse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RandComenziProduse">
-        <PropertyRef Name="IdProdus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Utilizatori_IdRol">
-    <End Role="Roluri" Type="Domain.Store.Roluri" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Utilizatori" Type="Domain.Store.Utilizatori" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Roluri">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Utilizatori">
-        <PropertyRef Name="IdRol" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComenziAprovizionare_Furnizori">
-    <End Role="Furnizori" Type="Domain.Store.Furnizori" Multiplicity="0..1" />
-    <End Role="ComenziAprovizionari" Type="Domain.Store.ComenziAprovizionari" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Furnizori">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ComenziAprovizionari">
-        <PropertyRef Name="DeLaFurnizorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComenziAprovizionare_Magazine">
-    <End Role="Magazine" Type="Domain.Store.Magazine" Multiplicity="0..1" />
-    <End Role="ComenziAprovizionari" Type="Domain.Store.ComenziAprovizionari" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Magazine">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ComenziAprovizionari">
-        <PropertyRef Name="CatreMagazinId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
-    <End Role="Magazine" Type="Domain.Store.Magazine" Multiplicity="0..1" />
-    <End Role="ComenziAprovizionari" Type="Domain.Store.ComenziAprovizionari" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Magazine">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ComenziAprovizionari">
-        <PropertyRef Name="DeLaDepozitCentralId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComenziAprovizionare_Magazine_DepozitCentral">
-    <End Role="Magazine" Type="Domain.Store.Magazine" Multiplicity="0..1" />
-    <End Role="ComenziAprovizionari" Type="Domain.Store.ComenziAprovizionari" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Magazine">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ComenziAprovizionari">
-        <PropertyRef Name="CatreDepozitCentralId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComenziAprovizionare_Utilizatori">
-    <End Role="Utilizatori" Type="Domain.Store.Utilizatori" Multiplicity="1" />
-    <End Role="ComenziAprovizionari" Type="Domain.Store.ComenziAprovizionari" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Utilizatori">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ComenziAprovizionari">
-        <PropertyRef Name="IdUtilizator" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RandComenziAprovizionareProduse_ComenziAprovizionari">
-    <End Role="ComenziAprovizionari" Type="Domain.Store.ComenziAprovizionari" Multiplicity="1" />
-    <End Role="RandComenziAprovizionareProduse" Type="Domain.Store.RandComenziAprovizionareProduse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ComenziAprovizionari">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RandComenziAprovizionareProduse">
-        <PropertyRef Name="IdComanda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RandComenziAprovizionareProduse_Produse">
-    <End Role="Produse" Type="Domain.Store.Produse" Multiplicity="1" />
-    <End Role="RandComenziAprovizionareProduse" Type="Domain.Store.RandComenziAprovizionareProduse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RandComenziAprovizionareProduse">
-        <PropertyRef Name="IdProdus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="Domain.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clienti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumarTelefon" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataNastere" Type="datetime" Nullable="false" />
+          <Property Name="DataInregistrare" Type="datetime" Nullable="false" />
+          <Property Name="Profesie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comenzi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdUtilizator" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Manopera" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="StatusComanda" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComenziAprovizionari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeLaFurnizorId" Type="int" />
+          <Property Name="CatreDepozitCentralId" Type="int" />
+          <Property Name="DeLaDepozitCentralId" Type="int" />
+          <Property Name="CatreMagazinId" Type="int" />
+          <Property Name="DataCreare" Type="datetime" Nullable="false" />
+          <Property Name="DataPrimire" Type="datetime" />
+          <Property Name="StatusComanda" Type="int" Nullable="false" />
+          <Property Name="IdUtilizator" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetaliiProdus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Valoare" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdProdus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Furnizori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CIF" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumarTelefon" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NRREGCOMERTULUI" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CantitateDisponibila" Type="int" Nullable="false" />
+          <Property Name="IdMagazin" Type="int" Nullable="false" />
+          <Property Name="IdProdus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Magazine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Oras" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EsteDepozitCentral" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Preturi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valoare" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DataActualizare" Type="datetime" Nullable="false" />
+          <Property Name="EsteUtilizatAcum" Type="bit" Nullable="false" />
+          <Property Name="IdProdus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TipProdus" Type="int" Nullable="false" />
+          <Property Name="IdFurnizor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RandComenziAprovizionareProduse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProdus" Type="int" Nullable="false" />
+          <Property Name="IdComanda" Type="int" Nullable="false" />
+          <Property Name="CantitateCeruta" Type="int" Nullable="false" />
+          <Property Name="CantitatePrimita" Type="int" />
+        </EntityType>
+        <EntityType Name="RandComenziProduse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cantitate" Type="int" Nullable="false" />
+          <Property Name="IdComanda" Type="int" Nullable="false" />
+          <Property Name="IdProdus" Type="int" Nullable="false" />
+          <Property Name="TipTratement" Type="int" />
+          <Property Name="TipCuloare" Type="int" />
+          <Property Name="Discount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Roluri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizatori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Parola" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="IdMagazin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViziteMedicale">
+          <Key>
+            <PropertyRef Name="IdComandaVizitaMedicala" />
+          </Key>
+          <Property Name="IdComandaVizitaMedicala" Type="int" Nullable="false" />
+          <Property Name="DistantaPupilara" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SferaDistantaStang" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SferaAproapeStang" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CilindruStang" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AxStang" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PrismaStang" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SferaDistantaDrept" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SferaAproapeDrept" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CilindruDrept" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AxDrept" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PrismaDrept" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_Comenzi_IdClient">
+          <End Role="Clienti" Type="Self.Clienti" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comenzi" Type="Self.Comenzi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clienti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comenzi">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comenzi_IdUtilizator">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comenzi" Type="Self.Comenzi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comenzi">
+              <PropertyRef Name="IdUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Furnizori">
+          <End Role="Furnizori" Type="Self.Furnizori" Multiplicity="0..1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Furnizori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="DeLaFurnizorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Magazine">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="CatreMagazinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="DeLaDepozitCentralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Magazine_DepozitCentral">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="0..1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="CatreDepozitCentralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComenziAprovizionare_Utilizatori">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComenziAprovizionari">
+              <PropertyRef Name="IdUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiProdus_IdProdus">
+          <End Role="Produse" Type="Self.Produse" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetaliiProdus" Type="Self.DetaliiProdus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetaliiProdus">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventar_IdMagazin">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inventar" Type="Self.Inventar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventar">
+              <PropertyRef Name="IdMagazin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventar_IdProdus">
+          <End Role="Produse" Type="Self.Produse" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inventar" Type="Self.Inventar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventar">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Preturi_IdProdus">
+          <End Role="Produse" Type="Self.Produse" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Preturi" Type="Self.Preturi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Preturi">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produse_IdFurnizor">
+          <End Role="Furnizori" Type="Self.Furnizori" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Produse" Type="Self.Produse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Furnizori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Produse">
+              <PropertyRef Name="IdFurnizor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RandComenziAprovizionareProduse_ComenziAprovizionari">
+          <End Role="ComenziAprovizionari" Type="Self.ComenziAprovizionari" Multiplicity="1" />
+          <End Role="RandComenziAprovizionareProduse" Type="Self.RandComenziAprovizionareProduse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComenziAprovizionari">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RandComenziAprovizionareProduse">
+              <PropertyRef Name="IdComanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RandComenziAprovizionareProduse_Produse">
+          <End Role="Produse" Type="Self.Produse" Multiplicity="1" />
+          <End Role="RandComenziAprovizionareProduse" Type="Self.RandComenziAprovizionareProduse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RandComenziAprovizionareProduse">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RandComenziProdus_780915676">
+          <End Role="Comenzi" Type="Self.Comenzi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RandComenziProduse" Type="Self.RandComenziProduse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comenzi">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RandComenziProduse">
+              <PropertyRef Name="IdComanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RandComenziProduse_IdProdus">
+          <End Role="Produse" Type="Self.Produse" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RandComenziProduse" Type="Self.RandComenziProduse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RandComenziProduse">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizatori_IdMagazin">
+          <End Role="Magazine" Type="Self.Magazine" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilizatori">
+              <PropertyRef Name="IdMagazin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizatori_IdRol">
+          <End Role="Roluri" Type="Self.Roluri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roluri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilizatori">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViziteMedicale_I_1739780243">
+          <End Role="Comenzi" Type="Self.Comenzi" Multiplicity="1" />
+          <End Role="ViziteMedicale" Type="Self.ViziteMedicale" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Comenzi">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ViziteMedicale">
+              <PropertyRef Name="IdComandaVizitaMedicala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetStatisticaMagazineDupaCantitati" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetStatisticaMagazineDupaVanzari" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetTopLentile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetTopOchelariSoare" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="DomainStoreContainer">
+          <EntitySet Name="Clienti" EntityType="Self.Clienti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comenzi" EntityType="Self.Comenzi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComenziAprovizionari" EntityType="Self.ComenziAprovizionari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetaliiProdus" EntityType="Self.DetaliiProdus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Furnizori" EntityType="Self.Furnizori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventar" EntityType="Self.Inventar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Magazine" EntityType="Self.Magazine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preturi" EntityType="Self.Preturi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produse" EntityType="Self.Produse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RandComenziAprovizionareProduse" EntityType="Self.RandComenziAprovizionareProduse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RandComenziProduse" EntityType="Self.RandComenziProduse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roluri" EntityType="Self.Roluri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizatori" EntityType="Self.Utilizatori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViziteMedicale" EntityType="Self.ViziteMedicale" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comenzi_IdClient" Association="Self.FK_Comenzi_IdClient">
+            <End Role="Clienti" EntitySet="Clienti" />
+            <End Role="Comenzi" EntitySet="Comenzi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comenzi_IdUtilizator" Association="Self.FK_Comenzi_IdUtilizator">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="Comenzi" EntitySet="Comenzi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Furnizori" Association="Self.FK_ComenziAprovizionare_Furnizori">
+            <End Role="Furnizori" EntitySet="Furnizori" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine" Association="Self.FK_ComenziAprovizionare_Magazine">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral" Association="Self.FK_ComenziAprovizionare_Magazine_DeLaDepozitCentral">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Magazine_DepozitCentral" Association="Self.FK_ComenziAprovizionare_Magazine_DepozitCentral">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComenziAprovizionare_Utilizatori" Association="Self.FK_ComenziAprovizionare_Utilizatori">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiProdus_IdProdus" Association="Self.FK_DetaliiProdus_IdProdus">
+            <End Role="Produse" EntitySet="Produse" />
+            <End Role="DetaliiProdus" EntitySet="DetaliiProdus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventar_IdMagazin" Association="Self.FK_Inventar_IdMagazin">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="Inventar" EntitySet="Inventar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventar_IdProdus" Association="Self.FK_Inventar_IdProdus">
+            <End Role="Produse" EntitySet="Produse" />
+            <End Role="Inventar" EntitySet="Inventar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Preturi_IdProdus" Association="Self.FK_Preturi_IdProdus">
+            <End Role="Produse" EntitySet="Produse" />
+            <End Role="Preturi" EntitySet="Preturi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produse_IdFurnizor" Association="Self.FK_Produse_IdFurnizor">
+            <End Role="Furnizori" EntitySet="Furnizori" />
+            <End Role="Produse" EntitySet="Produse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RandComenziAprovizionareProduse_ComenziAprovizionari" Association="Self.FK_RandComenziAprovizionareProduse_ComenziAprovizionari">
+            <End Role="ComenziAprovizionari" EntitySet="ComenziAprovizionari" />
+            <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RandComenziAprovizionareProduse_Produse" Association="Self.FK_RandComenziAprovizionareProduse_Produse">
+            <End Role="Produse" EntitySet="Produse" />
+            <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RandComenziProdus_780915676" Association="Self.FK_RandComenziProdus_780915676">
+            <End Role="Comenzi" EntitySet="Comenzi" />
+            <End Role="RandComenziProduse" EntitySet="RandComenziProduse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RandComenziProduse_IdProdus" Association="Self.FK_RandComenziProduse_IdProdus">
+            <End Role="Produse" EntitySet="Produse" />
+            <End Role="RandComenziProduse" EntitySet="RandComenziProduse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilizatori_IdMagazin" Association="Self.FK_Utilizatori_IdMagazin">
+            <End Role="Magazine" EntitySet="Magazine" />
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilizatori_IdRol" Association="Self.FK_Utilizatori_IdRol">
+            <End Role="Roluri" EntitySet="Roluri" />
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViziteMedicale_I_1739780243" Association="Self.FK_ViziteMedicale_I_1739780243">
+            <End Role="Comenzi" EntitySet="Comenzi" />
+            <End Role="ViziteMedicale" EntitySet="ViziteMedicale" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Domain" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -948,6 +961,19 @@
             <End Role="Produse" EntitySet="Produse" />
             <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
           </AssociationSet>
+          <FunctionImport Name="GetTopLentile" ReturnType="Collection(Domain.GetTopLentile_Result)" />
+          <FunctionImport Name="GetStatisticaMagazineDupaCantitati" ReturnType="Collection(Domain.GetStatisticaMagazineDupaCantitati_Result)">
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetStatisticaMagazineDupaVanzari" ReturnType="Collection(Domain.GetStatisticaMagazineDupaVanzari_Result)">
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTopOchelariSoare" ReturnType="Collection(Domain.GetTopOchelariSoare_Result)">
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -1069,6 +1095,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetTopLentile_Result">
+          <Property Type="Int32" Name="IdProdus" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Cod" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CantitateTotala" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TopLentile_Result">
+          <Property Type="Int32" Name="IdProdus" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Cod" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CantitateTotala" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetStatisticaMagazineDupaCantitati_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Oras" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CantitateTotala" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetStatisticaMagazineDupaVanzari_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Oras" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalVanzari" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetTopOchelariSoare_Result">
+          <Property Type="Int32" Name="IdProdus" Nullable="true" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Cod" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CantitateTotala" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1249,6 +1305,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetTopLentile" FunctionName="Domain.Store.GetTopLentile">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetTopLentile_Result">
+                <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="CantitateTotala" ColumnName="CantitateTotala" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStatisticaMagazineDupaCantitati" FunctionName="Domain.Store.GetStatisticaMagazineDupaCantitati">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetStatisticaMagazineDupaCantitati_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+                <ScalarProperty Name="CantitateTotala" ColumnName="CantitateTotala" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStatisticaMagazineDupaVanzari" FunctionName="Domain.Store.GetStatisticaMagazineDupaVanzari">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetStatisticaMagazineDupaVanzari_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+                <ScalarProperty Name="TotalVanzari" ColumnName="TotalVanzari" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTopOchelariSoare" FunctionName="Domain.Store.GetTopOchelariSoare">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetTopOchelariSoare_Result">
+                <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="CantitateTotala" ColumnName="CantitateTotala" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

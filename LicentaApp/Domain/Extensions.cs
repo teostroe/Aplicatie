@@ -97,13 +97,14 @@ namespace LicentaApp.Domain
             return collection == null || collection.Count == 0;
         }
 
-        public static IEnumerable<T> ToPagedList<T>(this IEnumerable<T> data, int currentPage)
+        public static IEnumerable<T> ToPagedList<T>(this IEnumerable<T> data, int? currentPage)
         {
-            if (data.Any())
+            if (!currentPage.HasValue)
             {
-                return data.Skip((currentPage - 1) * AppConstants.Pagination.ElementsOnPage).Take(AppConstants.Pagination.ElementsOnPage);
+                currentPage = 1;
             }
-            return data;
+            return data.Skip((currentPage.Value - 1) * AppConstants.Pagination.ElementsOnPage).Take(AppConstants.Pagination.ElementsOnPage);
+
         }
 
         public static IEnumerable<T> ToPagedList<T>(this IQueryable<T> data, int? currentPage)

@@ -188,6 +188,7 @@
     <Compile Include="Controllers\PreturiController.cs" />
     <Compile Include="Controllers\ProduseController.cs" />
     <Compile Include="Controllers\ProfilController.cs" />
+    <Compile Include="Controllers\RapoarteController.cs" />
     <Compile Include="Controllers\RoluriController.cs" />
     <Compile Include="Controllers\UtilizatoriController.cs" />
     <Compile Include="DetaliiProdus.cs">
@@ -204,6 +205,8 @@
     <Compile Include="Domain\Services\Binders\DateTimeModelBinder.cs" />
     <Compile Include="Domain\Services\Binders\DecimalModelBinder.cs" />
     <Compile Include="Domain\Services\Helpers\StatusComandaClientHelper.cs" />
+    <Compile Include="Domain\Services\Reports\InitialDateService.cs" />
+    <Compile Include="Domain\Services\Reports\ReportDates.cs" />
     <Compile Include="Domain\Services\SerializationService.cs" />
     <Compile Include="Domain\Services\OptionsGenerationService.cs" />
     <Compile Include="Domain\Services\ProductsDataService.cs" />
@@ -222,6 +225,18 @@
     <Compile Include="Domain\ValueObjects\TipProdus.cs" />
     <Compile Include="Domain\ValueObjects\TipTratament.cs" />
     <Compile Include="Furnizori.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetStatisticaMagazineDupaCantitati_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetStatisticaMagazineDupaVanzari_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTopLentile_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTopOchelariSoare_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -267,6 +282,9 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Roluri.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TopLentile_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilizatori.cs">
@@ -485,6 +503,15 @@
     <Content Include="Views\ComenziAprovizionare\VizualizeazaComanda.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ComenziAprovizionari.cshtml" />
     <Content Include="Views\ComenziAprovizionare\PrimesteComanda.cshtml" />
+    <Content Include="Views\Rapoarte\TopLentileVandute.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaMagazineDupaCantitati.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaMagazineDupaCantitati_Grafic.cshtml" />
+    <Content Include="Views\Rapoarte\TopOchelariSoare_CantitatiVandute.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\TopOchelariSoare_Data.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\_ReportButtons.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaMagazinDupaVanzari.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\StatisticaMagazinDupaVanzari_Data.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaMagazinDupaVanzari_Grafic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

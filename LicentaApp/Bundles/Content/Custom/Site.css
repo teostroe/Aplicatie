@@ -217,3 +217,20 @@
 .setting-card .btn-floating.halfway-fab {
     bottom: 24px;
 }
+
+.report-title {
+    text-align: center;
+    font-weight: 400;
+    color: #212121;
+    font-size: 30px;
+}
+
+.chart-url-icon {
+    
+    margin-top: 20px;
+}
+
+.btn-floating.btn-large.chart-url-icon {
+    width: 50px;
+    height: 50px;
+}

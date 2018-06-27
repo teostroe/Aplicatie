@@ -1,0 +1,21 @@
+﻿@using LicentaApp.Domain.Services.Reports
+@{
+    var dates = InitialDateService.GetInitialDates();
+}
+
+<br />
+<div class="row">
+    <div class="col m5 input-field">
+        <input type="text" class="datepicker" id="startDate" name="startDate" value="@dates.GetStartDateUiFormatted()">
+        <label for="startDate">Data inceput</label>
+    </div>
+    <div class="col m5 input-field">
+        <input type="text" class="datepicker" id="endDate" name="endDate" value="@dates.GetFinalDateUiFormatted()">
+        <label for="endDate">Data final</label>
+    </div>
+    <div class="col m2">
+        @*<input class="btn btn-small waves-effect"  value="Genereaza raport"/>*@
+        <button class="btn waves-effect waves-light" type="submit" id="getReportData" value="Genereaza raport">Genereaza raport</button>
+
+    </div>
+</div>

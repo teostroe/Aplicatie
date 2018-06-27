@@ -72,5 +72,49 @@ namespace LicentaApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("P_AFISARECLIENT", p_TELEFONParameter, p_NUME, p_PRENUME, p_EMAIL);
         }
+    
+        public virtual ObjectResult<GetTopLentile_Result> GetTopLentile()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTopLentile_Result>("GetTopLentile");
+        }
+    
+        public virtual ObjectResult<GetStatisticaMagazineDupaCantitati_Result> GetStatisticaMagazineDupaCantitati(string p_dataStart, string p_dataFinala)
+        {
+            var p_dataStartParameter = p_dataStart != null ?
+                new ObjectParameter("p_dataStart", p_dataStart) :
+                new ObjectParameter("p_dataStart", typeof(string));
+    
+            var p_dataFinalaParameter = p_dataFinala != null ?
+                new ObjectParameter("p_dataFinala", p_dataFinala) :
+                new ObjectParameter("p_dataFinala", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStatisticaMagazineDupaCantitati_Result>("GetStatisticaMagazineDupaCantitati", p_dataStartParameter, p_dataFinalaParameter);
+        }
+    
+        public virtual ObjectResult<GetStatisticaMagazineDupaVanzari_Result> GetStatisticaMagazineDupaVanzari(string p_dataStart, string p_dataFinala)
+        {
+            var p_dataStartParameter = p_dataStart != null ?
+                new ObjectParameter("p_dataStart", p_dataStart) :
+                new ObjectParameter("p_dataStart", typeof(string));
+    
+            var p_dataFinalaParameter = p_dataFinala != null ?
+                new ObjectParameter("p_dataFinala", p_dataFinala) :
+                new ObjectParameter("p_dataFinala", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStatisticaMagazineDupaVanzari_Result>("GetStatisticaMagazineDupaVanzari", p_dataStartParameter, p_dataFinalaParameter);
+        }
+    
+        public virtual ObjectResult<GetTopOchelariSoare_Result> GetTopOchelariSoare(string p_dataStart, string p_dataFinala)
+        {
+            var p_dataStartParameter = p_dataStart != null ?
+                new ObjectParameter("p_dataStart", p_dataStart) :
+                new ObjectParameter("p_dataStart", typeof(string));
+    
+            var p_dataFinalaParameter = p_dataFinala != null ?
+                new ObjectParameter("p_dataFinala", p_dataFinala) :
+                new ObjectParameter("p_dataFinala", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTopOchelariSoare_Result>("GetTopOchelariSoare", p_dataStartParameter, p_dataFinalaParameter);
+        }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetTopLentile_Result>
+    @{
+        ViewBag.Title = "TopLentileVandute";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Denumire</th>
+            <th>Cod</th>
+            <th>Cantitate totala</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in this.Model)
+        {
+            <tr>
+                <td>@item.Denumire</td>
+                <td>@item.Cod</td>
+                <td>@item.CantitateTotala</td>
+            </tr>
+        }
+        </tbody>
+    </table>
