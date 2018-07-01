@@ -1,0 +1,40 @@
+﻿@model LicentaApp.Utilizatori
+
+<table class="striped custom-display-table">
+    <thead>
+    <tr>
+        <th colspan="2">Detalii Utilizator</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td><b>Username:</b></td>
+            <td>@this.Model.Username</td>
+        </tr>
+    <tr>
+        <td><b>Nume:</b></td>
+        <td>@this.Model.Nume</td>
+    </tr>
+
+    <tr>
+        <td><b>Prenume:</b></td>
+        <td>@this.Model.Prenume</td>
+    </tr>
+
+    <tr>
+        <td><b>Email:</b></td>
+        <td>@this.Model.Email</td>
+    </tr>
+
+    <tr>
+        <td><b>Magazin:</b></td>
+        <td>@this.Model.Magazine.Denumire</td>
+    </tr>
+
+    <tr>
+        <td><b>Rol:</b></td>
+        <td>@this.Model.Roluri.Denumire</td>
+    </tr>
+    </tbody>
+</table>

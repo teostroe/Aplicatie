@@ -1,0 +1,40 @@
+﻿@model LicentaApp.ViewModels.Utilizatori.ModificaParolaViewModel
+
+@{
+    ViewBag.Title = "ModificaParola";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("ModificaParola", "Profil"))
+{ 
+    @Html.ValidationSummary()
+    @Html.HiddenFor(x => x.Username)
+    <table>
+        <thead></thead>
+        <tbody>
+        <tr>
+            <td>Username:</td>
+            <td>@this.Model.Username</td>
+        </tr>
+        <tr>
+            <td>Parola curenta:</td>
+            <td>@Html.PasswordFor(x => x.ParolaCurenta)</td>
+        </tr>
+        <tr>
+            <td>Parola noua:</td>
+            <td>@Html.PasswordFor(x => x.ParolaNoua)</td>
+        </tr>
+        <tr>
+            <td>Confirma parola noua:</td>
+            <td>@Html.PasswordFor(x => x.ConfirmaParolaNoua)</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-large waves-effect">Salveaza</button>
+
+}
+
+
+

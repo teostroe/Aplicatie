@@ -309,6 +309,7 @@
     <Compile Include="ViewModels\Comanda\ProdusVerificareViewModel.cs" />
     <Compile Include="ViewModels\LentileViewModel.cs" />
     <Compile Include="ViewModels\ProduseViewModel.cs" />
+    <Compile Include="ViewModels\Utilizatori\ModificaParolaViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -456,8 +457,6 @@
     <Content Include="Views\Comenzi\Create.cshtml" />
     <Content Include="Views\Comenzi\Details.cshtml" />
     <Content Include="Views\Comenzi\Index.cshtml" />
-    <Content Include="Views\Clienti\Create.cshtml" />
-    <Content Include="Views\Clienti\Delete.cshtml" />
     <Content Include="Views\Clienti\Details.cshtml" />
     <Content Include="Views\Clienti\Edit.cshtml" />
     <Content Include="Views\Clienti\Index.cshtml" />
@@ -515,6 +514,9 @@
     <Content Include="Views\Shared\Rapoarte\StatisticaMagazineDupaCantitati_Data.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Profil\VizualizeazaProfil.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Utilizatori.cshtml" />
+    <Content Include="Views\Profil\ModificaParola.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

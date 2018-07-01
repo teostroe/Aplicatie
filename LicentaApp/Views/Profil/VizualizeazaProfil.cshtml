@@ -1,0 +1,9 @@
+﻿@model LicentaApp.Utilizatori
+@{
+    ViewBag.Title = "VizualizeazaProfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.DisplayForModel()
+
+<a href="@Url.Action("ModificaParola")" class="btn">Modifica parola</a>

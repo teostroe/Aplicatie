@@ -10,7 +10,7 @@
         @if (currentUser != null)
         {
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Bun venit, @(currentUser.Prenume + " " + currentUser.Nume)</a></li>
+                <li><a href="@Url.Action("VizualizeazaProfil", "Profil")">Bun venit, @(currentUser.Prenume + " " + currentUser.Nume)</a></li>
                 <li><a href="@Url.Action("LogOut", "Account")" class="tooltipped" data-position="bottom" data-tooltip="Log out"><i class="fas fa-sign-out-alt"></i></a></li>
             </ul>
         }
