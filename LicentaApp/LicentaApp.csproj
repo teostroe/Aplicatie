@@ -250,6 +250,9 @@
     <Compile Include="Inventar.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="LentileView.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="LicentaDbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -273,6 +276,9 @@
     <Compile Include="Magazine.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="OchelariDeSoareView.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="PivotTableTotalVanzari_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -283,6 +289,9 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RameView.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="RandComenziAprovizionareProduse.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -320,8 +329,11 @@
     <Content Include="Bundles\Content\fontawesome-all.css" />
     <Content Include="Bundles\Content\Images\delivery-truck.png" />
     <Content Include="Bundles\Content\Images\inventory.png" />
+    <Content Include="Bundles\Content\Images\lens.png" />
     <Content Include="Bundles\Content\Images\network.png" />
     <Content Include="Bundles\Content\Images\online-store.png" />
+    <Content Include="Bundles\Content\Images\reading-glasses.png" />
+    <Content Include="Bundles\Content\Images\sunglasses.png" />
     <Content Include="Bundles\Content\Images\supplies.png" />
     <Content Include="Bundles\Content\materialize.css" />
     <Content Include="Bundles\Content\materialize.min.css" />
@@ -517,6 +529,9 @@
     <Content Include="Views\Profil\VizualizeazaProfil.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Utilizatori.cshtml" />
     <Content Include="Views\Profil\ModificaParola.cshtml" />
+    <Content Include="Views\Produse\ListaLentile.cshtml" />
+    <Content Include="Views\Produse\ListaRame.cshtml" />
+    <Content Include="Views\Produse\ListaOchelariDeSoare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

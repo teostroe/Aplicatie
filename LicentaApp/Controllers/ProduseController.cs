@@ -22,14 +22,30 @@ namespace LicentaApp.Controllers
     public class ProduseController : BaseAppController
     {
         // GET: Produse
-        public ActionResult Index(int? page)
+        public ActionResult Index()
         {
-            var produse = db.Produse.Include(p => p.Furnizori)
-                .Include(x => x.Preturi)
-                .OrderBy(x => x.TipProdus)
-                .ThenBy(x => x.Denumire);
-            ViewData.InitializePagination(page, produse.Count(), this.ControllerContext);
-            return View(produse.ToPagedList(page));
+            return View();
+        }
+
+        public ActionResult ListaLentile(int? page)
+        {
+            var model = this.db.LentileView.AsQueryable();
+            ViewData.InitializePagination(page, model.Count(), this.ControllerContext);
+            return View(model.ToPagedList(page));
+        }
+
+        public ActionResult ListaRame(int? page)
+        {
+            var model = this.db.RameView.AsQueryable();
+            ViewData.InitializePagination(page, model.Count(), this.ControllerContext);
+            return View(model.ToPagedList(page));
+        }
+
+        public ActionResult ListaOchelariDeSoare(int? page)
+        {
+            var model = this.db.OchelariDeSoareView.AsQueryable();
+            ViewData.InitializePagination(page, model.Count(), this.ControllerContext);
+            return View(model.ToPagedList(page));
         }
 
         // GET: Produse/Details/5

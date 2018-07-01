@@ -41,6 +41,9 @@ namespace LicentaApp
         public virtual DbSet<ViziteMedicale> ViziteMedicale { get; set; }
         public virtual DbSet<ComenziAprovizionari> ComenziAprovizionari { get; set; }
         public virtual DbSet<RandComenziAprovizionareProduse> RandComenziAprovizionareProduse { get; set; }
+        public virtual DbSet<LentileView> LentileView { get; set; }
+        public virtual DbSet<OchelariDeSoareView> OchelariDeSoareView { get; set; }
+        public virtual DbSet<RameView> RameView { get; set; }
     
         public virtual int P_LOGIN(string x, string y, ObjectParameter z)
         {

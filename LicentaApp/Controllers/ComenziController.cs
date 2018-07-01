@@ -50,11 +50,11 @@ namespace LicentaApp.Controllers
                     //Discount = x.Discount,
                     //Total = ProductsDataService.GetTotal(x.Id, db)
                 })
-                .OrderByDescending(x => x.Data)
-                .ToList();
+                .OrderByDescending(x => x.Data);
+
             ViewData.InitializePagination(page, comenzi.Count(), this.ControllerContext);
 
-            return View(comenzi);
+            return View(comenzi.ToPagedList(page));
         }
 
         // GET: Comenzi/Details/5

@@ -165,6 +165,54 @@
           <Property Name="AxDrept" Type="decimal" Precision="18" Scale="0" />
           <Property Name="PrismaDrept" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LicentaTeo.dbo.LentileView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LentileView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Pret" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Cod" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TipLentila" Type="varchar" MaxLength="250" />
+          <Property Name="IndiceRefractie" Type="varchar" MaxLength="250" />
+          <Property Name="Pret" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LicentaTeo.dbo.OchelariDeSoareView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OchelariDeSoareView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Pret" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Cod" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EstePolarizat" Type="varchar" MaxLength="250" />
+          <Property Name="Pret" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RameView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Valoare" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Cod" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Valoare" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Comenzi_IdClient">
           <End Role="Clienti" Type="Self.Clienti" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -444,6 +492,36 @@
           <EntitySet Name="Roluri" EntityType="Self.Roluri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utilizatori" EntityType="Self.Utilizatori" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViziteMedicale" EntityType="Self.ViziteMedicale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LentileView" EntityType="Self.LentileView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LentileView].[Id] AS [Id], 
+    [LentileView].[Cod] AS [Cod], 
+    [LentileView].[Denumire] AS [Denumire], 
+    [LentileView].[Discount] AS [Discount], 
+    [LentileView].[TipLentila] AS [TipLentila], 
+    [LentileView].[IndiceRefractie] AS [IndiceRefractie], 
+    [LentileView].[Pret] AS [Pret]
+    FROM [dbo].[LentileView] AS [LentileView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OchelariDeSoareView" EntityType="Self.OchelariDeSoareView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OchelariDeSoareView].[Id] AS [Id], 
+    [OchelariDeSoareView].[Cod] AS [Cod], 
+    [OchelariDeSoareView].[Denumire] AS [Denumire], 
+    [OchelariDeSoareView].[Discount] AS [Discount], 
+    [OchelariDeSoareView].[EstePolarizat] AS [EstePolarizat], 
+    [OchelariDeSoareView].[Pret] AS [Pret]
+    FROM [dbo].[OchelariDeSoareView] AS [OchelariDeSoareView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RameView" EntityType="Self.RameView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RameView].[Id] AS [Id], 
+    [RameView].[Cod] AS [Cod], 
+    [RameView].[Denumire] AS [Denumire], 
+    [RameView].[Discount] AS [Discount], 
+    [RameView].[Valoare] AS [Valoare]
+    FROM [dbo].[RameView] AS [RameView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Comenzi_IdClient" Association="Self.FK_Comenzi_IdClient">
             <End Role="Clienti" EntitySet="Clienti" />
             <End Role="Comenzi" EntitySet="Comenzi" />
@@ -976,6 +1054,9 @@
             <Parameter Name="p_dataFinala" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PivotTableTotalVanzari" ReturnType="Collection(Domain.PivotTableTotalVanzari_Result)" />
+          <EntitySet Name="LentileView" EntityType="Domain.LentileView" />
+          <EntitySet Name="OchelariDeSoareView" EntityType="Domain.OchelariDeSoareView" />
+          <EntitySet Name="RameView" EntityType="Domain.RameView" />
           </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -1142,6 +1223,48 @@
           <Property Type="Decimal" Name="nov" Nullable="true" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="dec" Nullable="true" Precision="38" Scale="0" />
         </ComplexType>
+        <EntityType Name="LentileView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Pret" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Cod" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Denumire" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TipLentila" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IndiceRefractie" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Pret" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="OchelariDeSoareView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Pret" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Cod" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Denumire" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EstePolarizat" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Pret" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="RameView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Valoare" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Cod" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Denumire" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Valoare" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1381,6 +1504,42 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="LentileView">
+            <EntityTypeMapping TypeName="Domain.LentileView">
+              <MappingFragment StoreEntitySet="LentileView">
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="IndiceRefractie" ColumnName="IndiceRefractie" />
+                <ScalarProperty Name="TipLentila" ColumnName="TipLentila" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OchelariDeSoareView">
+            <EntityTypeMapping TypeName="Domain.OchelariDeSoareView">
+              <MappingFragment StoreEntitySet="OchelariDeSoareView">
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="EstePolarizat" ColumnName="EstePolarizat" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RameView">
+            <EntityTypeMapping TypeName="Domain.RameView">
+              <MappingFragment StoreEntitySet="RameView">
+                <ScalarProperty Name="Valoare" ColumnName="Valoare" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

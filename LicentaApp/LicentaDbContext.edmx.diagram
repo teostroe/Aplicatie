@@ -38,6 +38,9 @@
         <AssociationConnector Association="Domain.FK_ComenziAprovizionare_Utilizatori" />
         <AssociationConnector Association="Domain.FK_RandComenziAprovizionareProduse_ComenziAprovizionari" />
         <AssociationConnector Association="Domain.FK_RandComenziAprovizionareProduse_Produse" />
+        <EntityTypeShape EntityType="Domain.LentileView" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Domain.OchelariDeSoareView" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Domain.RameView" Width="1.5" PointX="4.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

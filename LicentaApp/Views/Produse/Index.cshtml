@@ -5,63 +5,33 @@
     Layout = "~/Views/Shared/_PagedLayout.cshtml";
 }
 
+
 <div class="row">
-    <div class="col s11">
-        <h4>Produse</h4>
+    <div class="col s12 m4">
+        <div class="card setting-card">
+            <div class="card-image">
+                <img src="../../Bundles/Content/Images/lens.png">
+                <span class="card-title">Lentile</span>
+                <a href="@Url.Action("ListaLentile","Produse")" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+        </div>
     </div>
-    <div class="col s1">
-        @Html.Partial("_FloatingButton", new Tuple<string, string>(Url.Action("Create", "Produse"), "Adauga"))
+    <div class="col s12 m4">
+        <div class="card setting-card">
+            <div class="card-image">
+                <img src="../../Bundles/Content/Images/reading-glasses.png">
+                <span class="card-title">Rame</span>
+                <a href="@Url.Action("ListaRame","Produse")" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card setting-card">
+            <div class="card-image">
+                <img src="../../Bundles/Content/Images/sunglasses.png">
+                <span class="card-title">Ochelari de Soare</span>
+                <a href="@Url.Action("ListaOchelariDeSoare","Produse")" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+        </div>
     </div>
 </div>
-
-<table class="table">
-    <tr>
-        <th>
-            Cod
-        </th>
-        <th>
-            Denumire
-        </th>
-        <th>
-            Tip Produs
-        </th>
-        <th>
-            Discount
-        </th>
-        <th>
-            Pret
-        </th>
-        <th>
-            Furnizor
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Denumire)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.TipProdus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @item.Preturi.Single(x => x.EsteUtilizatAcum).Valoare
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Furnizori.Denumire)
-        </td>
-        <td>
-            @Html.Partial("_RUDButtons", new Tuple<int,string> (item.Id, "Produse"))
-        </td>
-    </tr>
-}
-
-</table>

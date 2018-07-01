@@ -1,0 +1,56 @@
+﻿@model IEnumerable<RameView>
+@{
+    ViewBag.Title = "ListaRame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col s11">
+        <h4>Rame</h4>
+    </div>
+    <div class="col s1">
+        @Html.Partial("_FloatingButton", new Tuple<string, string>(Url.Action("Create", "Produse"), "Adauga"))
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Cod
+        </th>
+        <th>
+            Denumire
+        </th>
+        <th>
+            Discount
+        </th>
+        <th>
+            Pret
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Denumire)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valoare)
+            </td>
+            <td>
+                @Html.Partial("_RUDButtons", new Tuple<int, string>(item.Id, "Produse"))
+            </td>
+        </tr>
+    }
+
+</table>

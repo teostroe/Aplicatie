@@ -27,7 +27,7 @@ namespace LicentaApp.Domain.Metadata
             Cache.Add(new ProductMetadata(ProductProperties.Sablon, "Sablon", typeof(int), new[] { TipProdus.Rame, TipProdus.OchelariSoare },
                 Deserializers.IntegerDeserializer, Serializers.IntegerSerializer));
             Cache.Add(new ProductMetadata(ProductProperties.EstePolarizat, "Este Polarizat", typeof(DaNu), new [] {TipProdus.OchelariSoare },
-                Deserializers.BooleanDeserialzier, Serializers.BooleanSerializer));
+                Deserializers.EnumDeserializer<DaNu>, Serializers.EnumSerializer<DaNu>));
         }
 
         public static List<ProductMetadata> GetAllForProductType(TipProdus tipProdus)
