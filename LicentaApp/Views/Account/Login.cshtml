@@ -1,0 +1,58 @@
+﻿@model LicentaApp.ViewModels.Auth.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="row valign-wrapper" style="height:100vh; margin-bottom:0px">
+    <div class="col s12">
+        <div class="card-panel" style="margin-left:auto; margin-right:auto; width:40%">
+
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "col s12", role = "form" }))
+            {
+                <div class="row">
+                    <div class="col s12">
+                        <center>
+                            <i class="fas fa-user-circle fa-4x login-icon"></i>
+                        </center>
+                    </div>
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(m => m.Username)
+                        @Html.TextBoxFor(m => m.Username)
+                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, "Parola")
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <p>
+                    <label>
+                        <input data-val="true" data-val-required="Tine-ma minte? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" class="">
+                        <span>Pastreaza-ma autentificat?</span>
+                    </label>
+                </p>
+
+                <button class="btn waves-effect waves-light right" type="submit" name="action">Autentificare</button>
+
+            }
+            <div class="clear-layout"></div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

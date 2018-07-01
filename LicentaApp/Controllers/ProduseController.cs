@@ -11,12 +11,14 @@ using System.Xml.XPath;
 using LicentaApp;
 using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
+using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
     public class ProduseController : BaseAppController
     {
         // GET: Produse

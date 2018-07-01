@@ -5,12 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp.Domain;
+using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Services.ValidationServices.Implementations;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels.ComandaAprovizionare;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
     public class ComenziAprovizionareController : Controller
     {
 
@@ -19,6 +21,7 @@ namespace LicentaApp.Controllers
 
         #region De la Furnizor
         [HttpGet]
+        [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
         public ActionResult ComenziAprovizionareFurnizori(int? page)
         {
             var model = db.ComenziAprovizionari
@@ -36,12 +39,14 @@ namespace LicentaApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
         public ActionResult CreazaComandaAprovizionareFurnizor()
         {
             this.OnCreateFromFurnizor_InitView();
             return View("Creaza");
         }
 
+        [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
         public PartialViewResult GetProduseFurnizor(int idFurnizor)
         {
             var viewModel = new ComandaAprivizionareCreate();
@@ -51,6 +56,7 @@ namespace LicentaApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
         public ActionResult CreazaComandaAprovizionareFurnizor(ComandaAprivizionareCreate viewModel)
         {
             var validationResult = new AprovizionareFurnizorValidationService().ValidateData(viewModel);
@@ -85,6 +91,7 @@ namespace LicentaApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
         public ActionResult AcceptaComandaAprovizionareFurnizor(ComandaAprivizionareReadOneViewModel model)
         {
             var dbComanda = this.db.ComenziAprovizionari
@@ -121,6 +128,7 @@ namespace LicentaApp.Controllers
             return RedirectToAction("ComenziAprovizionareFurnizori");
         }
 
+        [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
         private void OnCreateFromFurnizor_InitView()
         {
             ViewData.Add(AppConstants.FurnizorOptions, this.db.Furnizori.ToSelectList(x => x.Id, x => x.Denumire));

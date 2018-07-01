@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using LicentaApp;
 using LicentaApp.Domain;
+using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.Services;
 using LicentaApp.Domain.Services.Helpers;
@@ -21,6 +22,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
     public class ComenziController : Controller
     {
         private LicentaDbContext db = new LicentaDbContext();

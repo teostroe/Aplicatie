@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
 using System.Data.Entity.Core.Objects;
+using LicentaApp.Domain.Auth;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
     public class ClientiController : Controller
     {
         private LicentaDbContext db = new LicentaDbContext();
@@ -18,9 +20,6 @@ namespace LicentaApp.Controllers
         // GET: Clienti
         public ActionResult Index()
         {
-            //ObjectParameter z=new ObjectParameter("aa",typeof(int));
-            //db.P_LOGIN("edi","dd",z);
-            //z.Value
             return View(db.Clienti.ToList());
         }
 

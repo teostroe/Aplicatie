@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LicentaApp.Domain.Auth;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
     public class HomeController : Controller
     {
         public ActionResult Index()

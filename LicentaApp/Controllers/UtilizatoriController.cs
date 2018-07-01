@@ -10,9 +10,11 @@ using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
 using LicentaApp.Domain;
+using LicentaApp.Domain.Auth;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
     public class UtilizatoriController : Controller
     {
         private LicentaDbContext db = new LicentaDbContext();

@@ -249,3 +249,15 @@
     transition: color 0.5s;
     color: #504eb7;
 }
+
+/* Login */
+
+.clear-layout {
+    clear: both;
+}
+
+.login-icon {
+    /*background-color: #f5f5f5;*/
+    color: #5c6785;
+    /*border-radius: 100%;*/
+}

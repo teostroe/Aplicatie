@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Domain.Auth;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
     public class MagazineController : Controller
     {
         private LicentaDbContext db = new LicentaDbContext();

@@ -176,16 +176,14 @@
     <Compile Include="ComenziAprovizionari.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Base\BaseAppController.cs" />
     <Compile Include="Controllers\ClientiController.cs" />
     <Compile Include="Controllers\ComenziAprovizionareController.cs" />
     <Compile Include="Controllers\ComenziController.cs" />
-    <Compile Include="Controllers\DetaliiProdusController.cs" />
     <Compile Include="Controllers\FurnizoriController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InventarController.cs" />
     <Compile Include="Controllers\MagazineController.cs" />
-    <Compile Include="Controllers\PreturiController.cs" />
     <Compile Include="Controllers\ProduseController.cs" />
     <Compile Include="Controllers\ProfilController.cs" />
     <Compile Include="Controllers\RapoarteController.cs" />
@@ -195,6 +193,13 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AppConstants.cs" />
+    <Compile Include="Domain\Auth\AppAuthorizeAttribute.cs" />
+    <Compile Include="Domain\Auth\AppMembershipProvider.cs" />
+    <Compile Include="Domain\Auth\AppMembershipUser.cs" />
+    <Compile Include="Domain\Auth\AppPrincipal.cs" />
+    <Compile Include="Domain\Auth\AppRoleProvider.cs" />
+    <Compile Include="Domain\Auth\AuthConstants.cs" />
+    <Compile Include="Domain\Auth\DTO\SerializeUser.cs" />
     <Compile Include="Domain\EnumHelper.cs" />
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="Domain\Metadata\ProductCache.cs" />
@@ -293,6 +298,7 @@
     <Compile Include="Utilizatori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Auth\LoginViewModel.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareCreate.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareReadOneViewModel.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprovizionareReadAllViewModel.cs" />
@@ -443,21 +449,6 @@
     <Content Include="Views\Produse\Details.cshtml" />
     <Content Include="Views\Produse\Edit.cshtml" />
     <Content Include="Views\Produse\Index.cshtml" />
-    <Content Include="Views\Inventar\Create.cshtml" />
-    <Content Include="Views\Inventar\Delete.cshtml" />
-    <Content Include="Views\Inventar\Details.cshtml" />
-    <Content Include="Views\Inventar\Edit.cshtml" />
-    <Content Include="Views\Inventar\Index.cshtml" />
-    <Content Include="Views\DetaliiProdus\Create.cshtml" />
-    <Content Include="Views\DetaliiProdus\Delete.cshtml" />
-    <Content Include="Views\DetaliiProdus\Details.cshtml" />
-    <Content Include="Views\DetaliiProdus\Edit.cshtml" />
-    <Content Include="Views\DetaliiProdus\Index.cshtml" />
-    <Content Include="Views\Preturi\Create.cshtml" />
-    <Content Include="Views\Preturi\Delete.cshtml" />
-    <Content Include="Views\Preturi\Details.cshtml" />
-    <Content Include="Views\Preturi\Edit.cshtml" />
-    <Content Include="Views\Preturi\Index.cshtml" />
     <Content Include="Views\Comenzi\Create.cshtml" />
     <Content Include="Views\Comenzi\Details.cshtml" />
     <Content Include="Views\Comenzi\Index.cshtml" />
@@ -518,6 +509,8 @@
     <Content Include="Views\Rapoarte\VanzariTotalePeLuni.cshtml" />
     <Content Include="Views\Rapoarte\Index.cshtml" />
     <Content Include="Views\Shared\Rapoarte\StatisticaMagazineDupaCantitati_Data.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
