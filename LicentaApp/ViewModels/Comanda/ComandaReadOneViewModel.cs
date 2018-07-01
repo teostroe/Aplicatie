@@ -53,5 +53,6 @@ namespace LicentaApp.ViewModels.Comanda
         public TipProdus TipProdus { get; set; }
         public int Cantitate { get; set; }
         public decimal Pret { get; set; }
+        public decimal PretTotal { get; set; }
     }
 }

@@ -532,6 +532,9 @@
     <Content Include="Views\Produse\ListaLentile.cshtml" />
     <Content Include="Views\Produse\ListaRame.cshtml" />
     <Content Include="Views\Produse\ListaOchelariDeSoare.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Magazine.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Magazine.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Furnizori.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,20 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
+using LicentaApp.Domain.ValueObjects;
 
 namespace LicentaApp.Controllers
 {
     [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
-    public class FurnizoriController : Controller
+    public class FurnizoriController : BaseAppController
     {
-        private LicentaDbContext db = new LicentaDbContext();
-
         // GET: Furnizori
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Furnizori.ToList());
+            var model = db.Furnizori;
+            ViewData.InitializePagination(page,model.Count(), this.ControllerContext);
+            return View(model.ToPagedList(page));
         }
 
         // GET: Furnizori/Details/5
@@ -51,14 +53,20 @@ namespace LicentaApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Furnizori furnizori)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Furnizori.Add(furnizori);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(furnizori);
+            }
+            db.Furnizori.Add(furnizori);
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return View(furnizori);
             }
 
-            return View(furnizori);
+            return RedirectToAction("Index");
+
+
         }
 
         // GET: Furnizori/Edit/5
@@ -81,15 +89,20 @@ namespace LicentaApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Denumire,CUI,CIF,Email,NumarTelefon,Adresa")] Furnizori furnizori)
+        public ActionResult Edit(Furnizori furnizori)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(furnizori).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(furnizori);
             }
-            return View(furnizori);
+
+            db.Entry(furnizori).State = EntityState.Modified;
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return View(furnizori);
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Furnizori/Delete/5

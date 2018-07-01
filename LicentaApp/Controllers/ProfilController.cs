@@ -66,7 +66,7 @@ namespace LicentaApp.Controllers
 
             this.db.Utilizatori.Attach(dbUtilizator);
             dbUtilizator.Parola = model.ParolaNoua;
-            var result = this.SaveChages();
+            var result = this.SaveChanges();
 
             if (result != DbSaveResult.Success)
             {

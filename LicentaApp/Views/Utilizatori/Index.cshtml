@@ -1,15 +1,18 @@
 ﻿@model IEnumerable<LicentaApp.Utilizatori>
 
-@*@{
+@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_PagedLayout.cshtml";
 }
 
-<h2>Index</h2>*@
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="row">
+    <div class="col s11">
+        <h3>Comenzi</h3>
+    </div>
+    <div class="col s1">
+        @Html.Partial("_FloatingButton", new Tuple<string, string>(Url.Action("Inregistreaza", "Utilizatori"), "Adauga"))
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -54,9 +57,7 @@
             @Html.DisplayFor(modelItem => item.Roluri.Denumire)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-            @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            @Html.Partial("_RUDButtons", new Tuple<int, string>(item.Id, "Utilizatori"))
         </td>
     </tr>
 }

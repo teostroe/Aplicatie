@@ -7,19 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Controllers.Base;
+using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
+using LicentaApp.Domain.ValueObjects;
 
 namespace LicentaApp.Controllers
 {
     [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
-    public class MagazineController : Controller
+    public class MagazineController : BaseAppController
     {
-        private LicentaDbContext db = new LicentaDbContext();
-
         // GET: Magazine
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Magazine.ToList());
+            var model = db.Magazine;
+            ViewData.InitializePagination(page, model.Count(), this.ControllerContext);
+            return View(model);
         }
 
         // GET: Magazine/Details/5
@@ -40,7 +43,7 @@ namespace LicentaApp.Controllers
         // GET: Magazine/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Magazine());
         }
 
         // POST: Magazine/Create
@@ -48,16 +51,23 @@ namespace LicentaApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Denumire,Oras,Adresa,Email")] Magazine magazine)
+        public ActionResult Create(Magazine magazine)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Magazine.Add(magazine);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(magazine);
+                
             }
 
-            return View(magazine);
+            db.Magazine.Add(magazine);
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return View(magazine);
+            }
+
+            return RedirectToAction("Index");
+
         }
 
         // GET: Magazine/Edit/5
@@ -80,15 +90,22 @@ namespace LicentaApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Denumire,Oras,Adresa,Email")] Magazine magazine)
+        public ActionResult Edit(Magazine magazine)
         {
-            if (ModelState.IsValid)
+            ViewBag.Action = AppConstants.CRUD.Edit;
+            if (!ModelState.IsValid)
             {
-                db.Entry(magazine).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(magazine);
             }
-            return View(magazine);
+
+            db.Entry(magazine).State = EntityState.Modified;
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return View(magazine);
+            }
+            return RedirectToAction("Index");
+
         }
 
         // GET: Magazine/Delete/5

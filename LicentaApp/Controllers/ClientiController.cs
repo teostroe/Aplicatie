@@ -89,7 +89,7 @@ namespace LicentaApp.Controllers
             dbClienti.NumarTelefon = clienti.NumarTelefon;
             dbClienti.Profesie = clienti.Profesie;
 
-            var result = this.SaveChages();
+            var result = this.SaveChanges();
             if (result != DbSaveResult.Success)
             {
                 return View(clienti);

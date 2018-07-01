@@ -111,7 +111,7 @@ namespace LicentaApp.Controllers
                 });
             }
             db.Produse.Add(model.Produse);
-            var dbResult = this.SaveChages();
+            var dbResult = this.SaveChanges();
             if (dbResult != DbSaveResult.Success)
             {
                 this.InitViewBag();
@@ -187,7 +187,7 @@ namespace LicentaApp.Controllers
                 IdProdus = model.Produse.Id
             });
 
-            var result = this.SaveChages();
+            var result = this.SaveChanges();
             if (result != DbSaveResult.Success)
             {
                 this.InitViewBag();

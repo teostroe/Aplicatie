@@ -156,5 +156,10 @@ namespace LicentaApp.Domain
 
 
         }
+
+        public static string ToDecimalString(this decimal value)
+        {
+            return string.Format("{0:0.00}", value);
+        }
     }
 }

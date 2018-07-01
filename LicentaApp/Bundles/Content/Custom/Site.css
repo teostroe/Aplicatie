@@ -261,3 +261,8 @@
     color: #5c6785;
     /*border-radius: 100%;*/
 }
+
+
+.select-dropdown {
+    max-height: 400px;
+}

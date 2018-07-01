@@ -17,7 +17,7 @@
     {
         <div class="col m6">
             <a style="float:right" class="btn" href="@Url.Action("ModificaStatus", "Comenzi", new {idComanda = this.Model.NumarComanda})">@this.Model.StatusComanda.GetInputMessage()</a>
-        </div>        
+        </div>
     }
 
 </div>
@@ -33,43 +33,47 @@
             <h5>Detalii Vizita Medicala</h5>
         </div>
         @Html.DisplayFor(x => x.VizitaMedicala)
-    </div>    
+    </div>
 }
 
 
-<table class="striped custom-padding-table" >
+<table class="striped custom-padding-table">
     <thead>
-    <tr>
-        <th>Nr. Crt.</th>
-        <th>Cod</th>
-        <th>Denumire</th>
-        <th>Discount</th>
-        <th>Cantitate</th>
-        <th>Pret Initial</th>
-        <th>Pret Final</th>
-    </tr>
+        <tr>
+            <th>Nr. Crt.</th>
+            <th>Cod</th>
+            <th>Denumire</th>
+            <th>Discount</th>
+            <th>Cantitate</th>
+            <th>Pret Initial</th>
+            <th>Pret Final</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in this.Model.Produse)
-    {
-        ++counter;
+        @foreach (var item in this.Model.Produse)
+        {
+            ++counter;
+            <tr>
+                <td>@counter</td>
+                <td>@item.Cod</td>
+                <td>@item.Denumire</td>
+                <td>@item.Discount</td>
+                <td>@item.Cantitate</td>
+                <td>@item.Pret</td>
+                <td>@(item.Discount.HasValue ? (item.Pret - item.Discount.Value * item.Pret).ToDecimalString() : item.Pret.ToDecimalString())</td>
+            </tr>
+        }
         <tr>
-            <td>@counter</td>
-            <td>@item.Cod</td>
-            <td>@item.Denumire</td>
-            <td>@item.Discount</td>
-            <td>@item.Cantitate</td>
-            <td>@item.Pret</td>
-            <td>@(item.Discount.HasValue ? item.Discount * item.Pret : item.Pret)</td>
+            <td colspan="6">Discount comanda</td>
+            <td>@this.Model.Discount</td>
         </tr>
-    }
-    <tr>
-        <td colspan="6">Discount comanda</td>
-        <td>@this.Model.Discount</td>
-    </tr>
-    <tr>
-        <td colspan="6">Total</td>
-        <td>@this.Model.Total</td>
-    </tr>
+        @if (this.Model.Total.HasValue)
+        {
+            <tr>
+                <td colspan="6">Total</td>
+                <td>@this.Model.Total.Value.ToDecimalString()</td>
+            </tr>
+        }
+
     </tbody>
 </table>

@@ -24,8 +24,7 @@ namespace LicentaApp.Domain.Services
         {
             return dbContext.Preturi.Where(x => x.Id == idProdus)
                 .OrderByDescending(x => x.DataActualizare)
-                .Where(x => data > x.DataActualizare)
-                .FirstOrDefault()
+                .FirstOrDefault(x => data >= x.DataActualizare)
                 .Valoare;
         }
 

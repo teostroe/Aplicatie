@@ -20,16 +20,11 @@ namespace LicentaApp.Controllers
         private LicentaDbContext db = new LicentaDbContext();
 
         // GET: Utilizatori
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            //var val = db.Comenzi.Where(x => x.IdClient == 2).Select(x => new { x.IdClient, x.IdUtilizator }).ToList();
-            //var val2 = new UtilizatorSql {
-            //    Id=1,
-            //    Email="dd@cm",
-
-            //};
             var utilizatori = db.Utilizatori.Include(u => u.Magazine).Include(u => u.Roluri);
-            return View(utilizatori.ToList());
+            ViewData.InitializePagination(page, utilizatori.Count(), this.ControllerContext);
+            return View(utilizatori.ToPagedList(page));
         }
 
         // GET: Utilizatori/Details/5

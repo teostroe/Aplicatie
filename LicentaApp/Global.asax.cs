@@ -24,6 +24,7 @@ namespace LicentaApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
+
             var enCultureInfo = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = enCultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = enCultureInfo;

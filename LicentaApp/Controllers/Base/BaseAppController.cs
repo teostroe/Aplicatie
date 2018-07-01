@@ -14,7 +14,7 @@ namespace LicentaApp.Controllers.Base
     {
         protected LicentaDbContext db = new LicentaDbContext();
 
-        protected DbSaveResult SaveChages()
+        protected DbSaveResult SaveChanges()
         {
             try
             {

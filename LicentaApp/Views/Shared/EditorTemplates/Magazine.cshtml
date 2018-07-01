@@ -1,0 +1,38 @@
+﻿@using LicentaApp.Domain
+@model LicentaApp.Magazine
+@*@{
+    var isEdit = ViewBag.Action == AppConstants.CRUD.Edit;
+}
+@if (isEdit)
+{
+    @Html.HiddenFor(x => x.Id)
+}*@
+<div class="row">
+    <div class="col m4 input-field">
+        @Html.TextBoxFor(model => model.Denumire)
+        @Html.LabelFor(model => model.Denumire)
+    </div>
+    <div class="col m4 input-field">
+        @Html.EditorFor(model => model.Adresa)
+        @Html.LabelFor(model => model.Adresa)
+    </div>
+    <div class="col m4 input-field">
+        @Html.TextBoxFor(model => model.Oras)
+        @Html.LabelFor(model => model.Oras)
+    </div>
+</div>
+<div class="row">
+    <div class="col m6 input-field">
+        @Html.TextBoxFor(model => model.Email)
+        @Html.LabelFor(model => model.Email)
+    </div>
+        <div class="col m6 input-field">
+            <p>
+                <label>
+                    <input data-val="true" data-val-required="Este Depozit Central? field is required." id="EsteDepozitCentral" name="EsteDepozitCentral" type="checkbox" checked="@this.Model.EsteDepozitCentral" class="">
+                    <span>Este depozit central?</span>
+                </label>
+            </p>
+        </div>
+
+</div>

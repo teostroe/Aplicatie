@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using LicentaApp;
+using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Metadata;
@@ -19,13 +21,13 @@ using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
 using LicentaApp.ViewModels.Comanda;
 using Microsoft.Ajax.Utilities;
+using WebGrease.Css.Extensions;
 
 namespace LicentaApp.Controllers
 {
     [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
-    public class ComenziController : Controller
+    public class ComenziController : BaseAppController
     {
-        private LicentaDbContext db = new LicentaDbContext();
         private Dictionary<TipLentila, decimal[]> _indiciRefractie = new Dictionary<TipLentila, decimal[]>()
         {
             {TipLentila.MonofocalaUniforma, new  [] {1.5m, 1.6m, 1.67m, 1.74m}},
@@ -90,11 +92,12 @@ namespace LicentaApp.Controllers
                     TipProdus = x.Produse.TipProdus,
                     Cantitate = x.Cantitate,
                     Denumire = x.Produse.Denumire,
-                    //Pret = ProductsDataService.GetPret(x.Produse.Id, comanda.Data, db),
+                    Pret = ProductsDataService.GetPret(x.IdProdus, comanda.Data, db),
                     Discount = x.Produse.Discount
                 })
             };
-
+            var totalFaraDiscount = model.Produse.Sum(x => x.Pret - x.Pret * x.Discount);
+            model.Total = totalFaraDiscount - totalFaraDiscount * model.Discount;
             return View(model);
         }
 
