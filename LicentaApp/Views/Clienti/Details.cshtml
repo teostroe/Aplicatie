@@ -1,75 +1,32 @@
-﻿@model LicentaApp.Clienti
+﻿@model LicentaApp.ViewModels.Clienti.ClientReadOneViewModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Clienti</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nume)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nume)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prenume)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prenume)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumarTelefon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumarTelefon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNastere)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataNastere)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataInregistrare)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataInregistrare)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Profesie)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Profesie)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col s12">
+        <br/>
+        <a href="@Url.Action("Edit", "Clienti", new {id = this.Model.Client.Id})" class="right tooltipped icon-button edit-icon" data-position="bottom" data-tooltip="Editeaza"><i class="fas fa-pencil-alt fa-2x"></i></a>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@Html.DisplayFor(x => x.Client)
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            @foreach (var item in this.Model.ViziteMedicale)
+            {
+                <li class="tab col s3"><a href="#vizita-medicala-@item.VizitaMedicala.IdComandaVizitaMedicala">Vizita: @item.Data.ToString("dd/MM/yyyy")</a></li>
+            }
+        </ul>
+    </div>
+    @foreach (var item in this.Model.ViziteMedicale)
+    {
+        <div id="vizita-medicala-@item.VizitaMedicala.IdComandaVizitaMedicala" class="col s12">
+            @Html.DisplayFor(x => item.VizitaMedicala)
+        </div>
+    }
+  
+</div>

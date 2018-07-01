@@ -8,7 +8,7 @@ namespace LicentaApp.ViewModels
 {
     public class ComandaViewModel
     {
-        public Clienti Client { get; set; }
+        public LicentaApp.Clienti Client { get; set; }
         public ViziteMedicale VizitaMedicala { get; set; }
         public TipComanda? TipComanda { get; set; }
         public decimal? Discount { get; set; }

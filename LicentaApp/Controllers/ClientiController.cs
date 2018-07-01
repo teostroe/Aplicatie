@@ -8,18 +8,23 @@ using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
 using System.Data.Entity.Core.Objects;
+using LicentaApp.Controllers.Base;
+using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
+using LicentaApp.Domain.ValueObjects;
+using LicentaApp.ViewModels.Clienti;
+using LicentaApp.ViewModels.Comanda;
 
 namespace LicentaApp.Controllers
 {
     [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
-    public class ClientiController : Controller
+    public class ClientiController : BaseAppController
     {
-        private LicentaDbContext db = new LicentaDbContext();
-
         // GET: Clienti
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            var model = db.Clienti.ToList();
+            ViewData.InitializePagination(page, model.Count, this.ControllerContext);
             return View(db.Clienti.ToList());
         }
 
@@ -30,41 +35,30 @@ namespace LicentaApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clienti clienti = db.Clienti.Find(id);
-            if (clienti == null)
+            var model = db.Clienti
+                .Where(x => x.Id == id)
+                .Select(x => new ClientReadOneViewModel()
+                {
+                    Client = x,
+                    ViziteMedicale = x.Comenzi.Where(y => y.ViziteMedicale != null)
+                        .Select(y => new ViziteMedicaleReadOneViewModel
+                        {
+                            VizitaMedicala = y.ViziteMedicale,
+                            Data = y.Data
+                        })
+
+                }).FirstOrDefault();
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(clienti);
-        }
-
-        // GET: Clienti/Create
-        public ActionResult Create()
-        {
-            TempData.Add("TestObj", "TEST");
-            return View();
-        }
-
-        // POST: Clienti/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nume,Prenume,NumarTelefon,Email,DataNastere,DataInregistrare,Profesie")] Clienti clienti)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Clienti.Add(clienti);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(clienti);
+            return View(model);
         }
 
         // GET: Clienti/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Action = AppConstants.CRUD.Edit;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -77,46 +71,31 @@ namespace LicentaApp.Controllers
             return View(clienti);
         }
 
-        // POST: Clienti/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nume,Prenume,NumarTelefon,Email,DataNastere,DataInregistrare,Profesie")] Clienti clienti)
+        public ActionResult Edit(Clienti clienti)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(clienti).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(clienti);
             }
-            return View(clienti);
-        }
 
-        // GET: Clienti/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Clienti clienti = db.Clienti.Find(id);
-            if (clienti == null)
-            {
-                return HttpNotFound();
-            }
-            return View(clienti);
-        }
+            var dbClienti = this.db.Clienti.Single(x => x.Id == clienti.Id);
+            db.Clienti.Attach(dbClienti);
+            dbClienti.DataNastere = clienti.DataNastere;
+            dbClienti.Nume = clienti.Nume;
+            dbClienti.Prenume = clienti.Prenume;
+            dbClienti.Email = clienti.Email;
+            dbClienti.NumarTelefon = clienti.NumarTelefon;
+            dbClienti.Profesie = clienti.Profesie;
 
-        // POST: Clienti/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Clienti clienti = db.Clienti.Find(id);
-            db.Clienti.Remove(clienti);
-            db.SaveChanges();
+            var result = this.SaveChages();
+            if (result != DbSaveResult.Success)
+            {
+                return View(clienti);
+            }
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

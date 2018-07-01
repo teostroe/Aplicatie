@@ -21,7 +21,7 @@
     @if (currentUser != null && (currentUser.IsInRole(AuthConstants.Roluri.Admin) || currentUser.IsInRole(AuthConstants.Roluri.Utilizator)))
     {
         <li class="nav-icon-container">
-            <a href="#!" class="tooltipped" data-position="right" data-tooltip="Clienti"><i class="fas fa-user-circle fa-2x"></i></a>
+            <a href="@Url.Action("Index", "Clienti")" class="tooltipped" data-position="right" data-tooltip="Clienti"><i class="fas fa-user-circle fa-2x"></i></a>
         </li>
     }
     @if (currentUser != null && (currentUser.IsInRole(AuthConstants.Roluri.Admin) || currentUser.IsInRole(AuthConstants.Roluri.Utilizator)))

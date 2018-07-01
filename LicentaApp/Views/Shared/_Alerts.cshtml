@@ -1,15 +1,21 @@
 ﻿@using System.ComponentModel.DataAnnotations
 @using LicentaApp.Domain
 @{
-    var validationResults = ViewData.ContainsKey(AppConstants.Alerts.Error) 
-        ? (IEnumerable<ValidationResult>)ViewData[AppConstants.Alerts.Error] 
-        : Enumerable.Empty<ValidationResult>(); 
+    var validationResults = ViewData.ContainsKey(AppConstants.Alerts.Error)
+        ? (IEnumerable<ValidationResult>)ViewData[AppConstants.Alerts.Error]
+        : Enumerable.Empty<ValidationResult>();
 }
 @if (ViewData.ContainsKey(AppConstants.Alerts.Success))
 {
     <div id="success" class="alert alert-success">
         <p><strong>Succes!</strong></p>
-        <p>@ViewData[AppConstants.Alerts.Success]</p>
+        <ul>
+            @foreach (var result in (string[])ViewData[AppConstants.Alerts.Success])
+            {
+                <li>@result</li>
+            }
+        </ul>
+
     </div>
 }
 @if (ViewData.ContainsKey(AppConstants.Alerts.Error))
@@ -20,7 +26,7 @@
             @foreach (var vr in validationResults)
             {
                 <li>@vr.ErrorMessage</li>
-            }            
+            }
         </ul>
     </div>
 }

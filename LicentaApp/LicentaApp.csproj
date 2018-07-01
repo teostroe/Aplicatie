@@ -299,6 +299,7 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Auth\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Clienti\ClientReadOneViewModel.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareCreate.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprivizionareReadOneViewModel.cs" />
     <Compile Include="ViewModels\ComandaAprovizionare\ComandaAprovizionareReadAllViewModel.cs" />
@@ -330,6 +331,9 @@
     <Content Include="Bundles\Scripts\fontawesome-all.js" />
     <Content Include="Bundles\Scripts\materialize.js" />
     <Content Include="Bundles\Scripts\materialize.min.js" />
+    <Content Include="Bundles\webfonts\fa-brands-400.svg" />
+    <Content Include="Bundles\webfonts\fa-regular-400.svg" />
+    <Content Include="Bundles\webfonts\fa-solid-900.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Bundles\Content\Custom\site.css" />
@@ -519,6 +523,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Bundles\webfonts\fa-brands-400.eot" />
+    <Content Include="Bundles\webfonts\fa-brands-400.ttf" />
+    <Content Include="Bundles\webfonts\fa-brands-400.woff" />
+    <Content Include="Bundles\webfonts\fa-brands-400.woff2" />
+    <Content Include="Bundles\webfonts\fa-regular-400.eot" />
+    <Content Include="Bundles\webfonts\fa-regular-400.ttf" />
+    <Content Include="Bundles\webfonts\fa-regular-400.woff" />
+    <Content Include="Bundles\webfonts\fa-regular-400.woff2" />
+    <Content Include="Bundles\webfonts\fa-solid-900.eot" />
+    <Content Include="Bundles\webfonts\fa-solid-900.ttf" />
+    <Content Include="Bundles\webfonts\fa-solid-900.woff" />
+    <Content Include="Bundles\webfonts\fa-solid-900.woff2" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,13 @@
-﻿@model LicentaApp.Clienti
+﻿@using LicentaApp.Domain
+@model LicentaApp.Clienti
+@{
+    var isEdit = ViewBag.Action == AppConstants.CRUD.Edit;
+}
+@if (isEdit)
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.DataInregistrare)    
+}
 
 <div id="client-editor-section">
     @Html.HiddenFor(model => model.Id)
@@ -6,17 +15,14 @@
         <div class="col m4 input-field">
             @Html.TextBoxFor(model => model.Nume)
             @Html.LabelFor(model => model.Nume)
-            @*@Html.ValidationMessageFor(model => model.Nume, "", new { @class = "text-danger" })*@
         </div>
         <div class="col m4 input-field">
             @Html.EditorFor(model => model.Prenume)
             @Html.LabelFor(model => model.Prenume)
-            @*@Html.ValidationMessageFor(model => model.Prenume, "", new { @class = "text-danger" })*@
         </div>
         <div class="col m4 input-field">
             @Html.TextBoxFor(model => model.DataNastere, "{0:dd/MM/yyyy}", new {  @class="datepicker" })
             @Html.LabelFor(model => model.DataNastere, "Data Nasteree")
-            @*@Html.ValidationMessageFor(model => model.DataNastere, "", new { @class = "text-danger" })*@
         </div>
     </div>
 
@@ -24,17 +30,14 @@
         <div class="col m4 input-field">
             @Html.EditorFor(model => model.Email)
             @Html.LabelFor(model => model.Email)
-            @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
         </div>
         <div class="col m4 input-field">
             @Html.EditorFor(model => model.NumarTelefon)
             @Html.LabelFor(model => model.NumarTelefon, "Numar de telefon")
-            @*@Html.ValidationMessageFor(model => model.NumarTelefon, "", new { @class = "text-danger" })*@
         </div>
         <div class="col m4 input-field">
             @Html.EditorFor(model => model.Profesie)
             @Html.LabelFor(model => model.Profesie)
-            @*@Html.ValidationMessageFor(model => model.Profesie, "", new { @class = "text-danger" })*@
         </div>
     </div>
 
