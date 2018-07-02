@@ -318,6 +318,7 @@
     <Compile Include="ViewModels\Comanda\ProdusVerificareViewModel.cs" />
     <Compile Include="ViewModels\LentileViewModel.cs" />
     <Compile Include="ViewModels\ProduseViewModel.cs" />
+    <Compile Include="ViewModels\Produse\ProdusReadOneViewModel.cs" />
     <Compile Include="ViewModels\Utilizatori\ModificaParolaViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>

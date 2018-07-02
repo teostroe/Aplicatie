@@ -1,12 +1,30 @@
-﻿@model LicentaApp.Produse
+﻿@model LicentaApp.ViewModels.Produse.ProdusReadOneViewModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_TitleUDButtons", new Tuple<string, string, int>("Detalii", "Produse", this.Model.Id))
+@Html.Partial("_TitleUDButtons", new Tuple<string, string, int>("Detalii", "Produse", this.Model.Produs.Id))
 
-@Html.DisplayFor(x => x)
+@Html.DisplayFor(x => x.Produs)
 
 @Html.Partial("DisplayTemplates/DetaliiProduse", this.Model.DetaliiProdus)
+<br />
+<table class="striped custom-display-table">
+    <thead>
+        <tr>
+            <th colspan="2">Inventar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Inventar magazin:</b></td>
+            <td>@this.Model.InventarMagazin</td>
+        </tr>
+        <tr>
+            <td><b>Inventar depozit:</b></td>
+            <td>@this.Model.InventarDepozitCentral</td>
+        </tr>
+    </tbody>
+</table>

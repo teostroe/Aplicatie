@@ -15,6 +15,7 @@ using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
+using LicentaApp.ViewModels.Produse;
 
 namespace LicentaApp.Controllers
 {
@@ -55,12 +56,21 @@ namespace LicentaApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produse produse = db.Produse.Find(id);
-            if (produse == null)
+            var user = User as AppPrincipal;
+
+            var model = db.Produse.Where(x => x.Id == id)
+                .Select(x => new ProdusReadOneViewModel
+                {
+                    Produs = x,
+                    DetaliiProdus = x.DetaliiProdus,
+                    InventarMagazin = x.Inventar.FirstOrDefault(y => y.IdMagazin == user.IdMagazin).CantitateDisponibila,
+                    InventarDepozitCentral = x.Inventar.FirstOrDefault(y => y.Magazine.EsteDepozitCentral).CantitateDisponibila
+                }).FirstOrDefault();
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(produse);
+            return View(model);
         }
 
         public ActionResult GetProductProperties(TipProdus tipProdus)

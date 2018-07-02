@@ -9,7 +9,7 @@ namespace LicentaApp.ViewModels
 {
     public class ProduseViewModel
     {
-        public Produse Produse { get; set; }
+        public LicentaApp.Produse Produse { get; set; }
         public decimal Pret { get; set; }
         public List<ProductMetadata> ProductMetadata { get; set; }
         public Dictionary<string, string> ProductProperties { get; set; }

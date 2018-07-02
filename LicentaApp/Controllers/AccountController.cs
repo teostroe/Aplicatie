@@ -40,7 +40,8 @@ namespace LicentaApp.Controllers
                             UserId = user.UserId,
                             Nume = user.Nume,
                             Prenume= user.Prenume,
-                            DenumireRol = user.Rol.Denumire
+                            DenumireRol = user.Rol.Denumire,
+                            IdMagazin = user.IdMagazin
                         };
 
                         string userData = JsonConvert.SerializeObject(userModel);
