@@ -251,6 +251,7 @@ namespace LicentaApp.Controllers
             {
                 viewModel = (ComandaViewModel)TempData[AppConstants.TempComandaViewModel];
             }
+            var utilizatorCurent = User as AppPrincipal;
 
             //comanda lentile
             var comanda = new Comenzi();
@@ -259,7 +260,7 @@ namespace LicentaApp.Controllers
             comanda.Discount = viewModel.Discount;
             comanda.StatusComanda = StatusComanda.Creata;
             //to be updated
-            comanda.IdUtilizator = this.db.Utilizatori.FirstOrDefault().Id;
+            comanda.IdUtilizator = utilizatorCurent.UserId;
             #region Client
             if (db.Clienti.Any(x => x.Id == viewModel.Client.Id))
             {

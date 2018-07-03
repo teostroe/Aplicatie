@@ -463,8 +463,12 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetPretActual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo"
-                  ReturnType="decimal">
+        <Function Name="GetComparatieMagazineDupaVanzari" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_IdMagazine" Type="varchar(max)" Mode="In" />
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetPretActual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
           <Parameter Name="f_id" Type="int" Mode="In" />
           <Parameter Name="f_data" Type="datetime" Mode="In" />
         </Function>
@@ -1062,6 +1066,11 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <EntitySet Name="LentileView" EntityType="Domain.LentileView" />
           <EntitySet Name="OchelariDeSoareView" EntityType="Domain.OchelariDeSoareView" />
           <EntitySet Name="RameView" EntityType="Domain.RameView" />
+          <FunctionImport Name="GetComparatieMagazineDupaVanzari" ReturnType="Collection(Domain.GetComparatieMagazineDupaVanzari_Result)">
+            <Parameter Name="p_IdMagazine" Mode="In" Type="String" />
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -1270,6 +1279,13 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Valoare" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
+        <ComplexType Name="GetComparatieMagazineDupaVanzari_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Interval" Nullable="true" MaxLength="7" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Oras" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalVanzari" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1545,6 +1561,17 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetComparatieMagazineDupaVanzari" FunctionName="Domain.Store.GetComparatieMagazineDupaVanzari">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetComparatieMagazineDupaVanzari_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Interval" ColumnName="Interval" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+                <ScalarProperty Name="TotalVanzari" ColumnName="TotalVanzari" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

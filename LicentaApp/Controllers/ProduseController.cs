@@ -19,7 +19,7 @@ using LicentaApp.ViewModels.Produse;
 
 namespace LicentaApp.Controllers
 {
-    [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
+    [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
     public class ProduseController : BaseAppController
     {
         // GET: Produse

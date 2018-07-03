@@ -66,13 +66,16 @@ namespace LicentaApp.Controllers
                 ViewData.Add(AppConstants.Alerts.Error, validationResult);
                 return View("Creaza", viewModel);
             }
+
+            var utilizatorCurent = User as AppPrincipal;
+
             var model = new ComenziAprovizionari
             {
                 DeLaFurnizorId = viewModel.IdExpeditor,
                 CatreDepozitCentralId = this.db.Magazine.FirstOrDefault(x => x.EsteDepozitCentral).Id,
                 DataCreare = DateTime.Now,
                 StatusComanda = StatusComanda.Creata,
-                IdUtilizator = this.db.Utilizatori.FirstOrDefault().Id
+                IdUtilizator = utilizatorCurent.UserId
             };
 
             model.RandComenziAprovizionareProduse = new List<RandComenziAprovizionareProduse>();
@@ -172,13 +175,15 @@ namespace LicentaApp.Controllers
                 ViewData.Add(AppConstants.Alerts.Error, validationResult);
                 return View("Creaza", viewModel);
             }
+            var utilizatorCurent = User as AppPrincipal;
+
             var model = new ComenziAprovizionari
             {
                 DeLaDepozitCentralId = viewModel.IdExpeditor,
                 CatreMagazinId = this.db.Magazine.FirstOrDefault(x => !x.EsteDepozitCentral).Id,
                 DataCreare = DateTime.Now,
                 StatusComanda = StatusComanda.Creata,
-                IdUtilizator = this.db.Utilizatori.FirstOrDefault().Id
+                IdUtilizator = utilizatorCurent.UserId
             };
 
             model.RandComenziAprovizionareProduse = new List<RandComenziAprovizionareProduse>();

@@ -232,6 +232,9 @@
     <Compile Include="Furnizori.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetComparatieMagazineDupaVanzari_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetStatisticaMagazineDupaCantitati_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -319,6 +322,7 @@
     <Compile Include="ViewModels\LentileViewModel.cs" />
     <Compile Include="ViewModels\ProduseViewModel.cs" />
     <Compile Include="ViewModels\Produse\ProdusReadOneViewModel.cs" />
+    <Compile Include="ViewModels\Rapoarte\ComparatieMagazineViewModel.cs" />
     <Compile Include="ViewModels\Utilizatori\ModificaParolaViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
@@ -536,6 +540,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Magazine.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Magazine.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Furnizori.cshtml" />
+    <Content Include="Views\Rapoarte\ComparatieMagazineDupaVanzari_Grafic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

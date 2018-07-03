@@ -142,6 +142,11 @@ namespace LicentaApp.Domain
             return string.Join(",", col);
         }
 
+        public static string ToCommaSeparatedString<T>(this ICollection<T> col)
+        {
+            return string.Join(",", col.ToString());
+        }
+
         public static IEnumerable<ValidationResult> ToValidationResultSqlError(this string message)
         {
             string[] stringSeparators = new string[] { "\r\n" };

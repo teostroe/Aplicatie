@@ -1,0 +1,102 @@
+﻿@using LicentaApp.Domain
+@using LicentaApp.Domain.Services.Reports
+
+@{
+    ViewBag.Title = "ComparatieMagazineDupaVanzari_Grafic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Comparatie vanzari intre magazine</h4>
+</div><div class="row">
+    @if (ViewData.ContainsKey(AppConstants.MagazineOptions))
+    {
+        <div class="input-field col s12">
+            <select multiple id="magazineSelect">
+                <option value="" disabled>-- Alege --</option>
+                @foreach (var item in (SelectList)ViewData[AppConstants.MagazineOptions])
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <label>Magazine</label>
+        </div>
+    }
+</div>
+
+@Html.Partial("Rapoarte/_ReportButtons")
+
+<div class="row">
+    <div id="statistica-grafic" style="width: 900px; height: 600px"></div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['line'] });
+        //google.charts.setOnLoadCallback(drawChart);
+        var dataTable = {};
+
+
+        function createDataTable(result) {
+            var data = new google.visualization.DataTable();
+
+            var headers = result.Headers;
+            data.addColumn('string', headers[0]);
+            for (var i = 1; i < headers.length; ++i) {
+                data.addColumn('number', headers[i]);
+            }
+            for (var i = 0 ; i < result.Data.length; ++i) {
+                var d = result.Data[i];
+                var row =  [d.Interval].concat(d.Valori);
+                data.addRow(row);
+            }
+
+            return data;
+        }
+
+
+        function drawChart() {
+            var options = {
+                chart: {
+                    title: 'Vanzarile lunare',
+                    subtitle: 'in functie de magazine'
+                },
+                hAxis: {
+                    format: 'decimal'
+                }
+            };
+
+            var chart = new google.charts.Line(document.getElementById('statistica-grafic'));
+
+            chart.draw(dataTable, google.charts.Line.convertOptions(options));
+        }
+
+
+
+        $('#getReportData').click(function () {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var magazineIds = $('#magazineSelect').val();
+
+            $.ajax({
+                url: '@Url.Action("ComparatieMagazineDupaVanzari_GraficData")',
+                type: 'GET',
+                data: { magazineIds: JSON.stringify(magazineIds), startDate: startDate, endDate: endDate },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    console.log(result);
+                    dataTable = createDataTable(result);
+                    google.charts.setOnLoadCallback(drawChart);
+                },
+                async: true
+            });
+
+        });
+    </script>
+}
