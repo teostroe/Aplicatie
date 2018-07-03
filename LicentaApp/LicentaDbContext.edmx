@@ -485,6 +485,11 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
           <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetTopProfesiiClienti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_orasMagazin" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="PivotTableTotalVanzari" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DomainStoreContainer">
           <EntitySet Name="Clienti" EntityType="Self.Clienti" Schema="dbo" store:Type="Tables" />
@@ -1071,6 +1076,11 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
             <Parameter Name="p_dataStart" Mode="In" Type="String" />
             <Parameter Name="p_dataFinala" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetTopProfesiiClienti" ReturnType="Collection(Domain.GetTopProfesiiClienti_Result)">
+            <Parameter Name="p_orasMagazin" Mode="In" Type="String" />
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -1285,6 +1295,10 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <Property Type="String" Name="Denumire" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Oras" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="TotalVanzari" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetTopProfesiiClienti_Result">
+          <Property Type="String" Name="Profesie" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TotalComenzi" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1569,6 +1583,14 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
                 <ScalarProperty Name="Denumire" ColumnName="Denumire" />
                 <ScalarProperty Name="Oras" ColumnName="Oras" />
                 <ScalarProperty Name="TotalVanzari" ColumnName="TotalVanzari" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTopProfesiiClienti" FunctionName="Domain.Store.GetTopProfesiiClienti">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetTopProfesiiClienti_Result">
+                <ScalarProperty Name="Profesie" ColumnName="Profesie" />
+                <ScalarProperty Name="TotalComenzi" ColumnName="TotalComenzi" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

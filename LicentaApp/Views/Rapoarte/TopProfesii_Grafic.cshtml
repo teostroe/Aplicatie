@@ -1,0 +1,89 @@
+﻿@using LicentaApp.Domain
+
+@{
+    ViewBag.Title = "TopProfesii_Grafic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Statistica in functie de profesii</h4>
+</div>
+
+<div class="row">
+    @if (ViewData.ContainsKey(AppConstants.OraseOptions))
+    {
+        <div class="input-field col s12">
+            <select id="oras" name="oras">
+                <option value="" disabled>-- Alege --</option>
+                @foreach (var item in (SelectList)ViewData[AppConstants.OraseOptions])
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <label>Orase</label>
+        </div>
+    }
+</div>
+
+@Html.Partial("Rapoarte/_ReportButtons")
+
+<div class="row">
+    <div id="statistica-grafic" style="width: 900px; height: 600px"></div>
+</div>
+
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        var dataTable = {};
+        google.charts.load('current', { packages: ['corechart'] });
+
+        function createDataTable(items) {
+            var result = [];
+            result.push(['Profesie', 'Cantitate Totala']);
+            for (var i = 0; i < items.length; ++i) {
+                result.push([items[i]["Profesie"], items[i]["TotalComenzi"]]);
+            }
+
+            return result;
+        }
+
+
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(dataTable);
+
+            var options = {
+                title: 'Vanzari totale magazin',
+                is3D: true
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('statistica-grafic'));
+            chart.draw(data, options);
+        }
+
+
+        $('#getReportData').click(function () {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var oras = $('#oras').val();
+
+            $.ajax({
+                url: '@Url.Action("TopProfesii_GraficData")',
+                type: 'GET',
+                data: { oras: oras, startDate: startDate, endDate: endDate },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    dataTable = createDataTable(result);
+                    google.charts.setOnLoadCallback(drawChart);
+                },
+                async: true
+            });
+
+        });
+    </script>
+}

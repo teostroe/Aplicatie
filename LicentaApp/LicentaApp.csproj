@@ -247,6 +247,9 @@
     <Compile Include="GetTopOchelariSoare_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetTopProfesiiClienti_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -541,6 +544,9 @@
     <Content Include="Views\Shared\EditorTemplates\Magazine.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Furnizori.cshtml" />
     <Content Include="Views\Rapoarte\ComparatieMagazineDupaVanzari_Grafic.cshtml" />
+    <Content Include="Views\Rapoarte\TopProfesii.cshtml" />
+    <Content Include="Views\Rapoarte\TopProfesii_Grafic.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\TopProfesii_Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -141,5 +141,22 @@ namespace LicentaApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetComparatieMagazineDupaVanzari_Result>("GetComparatieMagazineDupaVanzari", p_IdMagazineParameter, p_dataStartParameter, p_dataFinalaParameter);
         }
+    
+        public virtual ObjectResult<GetTopProfesiiClienti_Result> GetTopProfesiiClienti(string p_orasMagazin, string p_dataStart, string p_dataFinala)
+        {
+            var p_orasMagazinParameter = p_orasMagazin != null ?
+                new ObjectParameter("p_orasMagazin", p_orasMagazin) :
+                new ObjectParameter("p_orasMagazin", typeof(string));
+    
+            var p_dataStartParameter = p_dataStart != null ?
+                new ObjectParameter("p_dataStart", p_dataStart) :
+                new ObjectParameter("p_dataStart", typeof(string));
+    
+            var p_dataFinalaParameter = p_dataFinala != null ?
+                new ObjectParameter("p_dataFinala", p_dataFinala) :
+                new ObjectParameter("p_dataFinala", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTopProfesiiClienti_Result>("GetTopProfesiiClienti", p_orasMagazinParameter, p_dataStartParameter, p_dataFinalaParameter);
+        }
     }
 }

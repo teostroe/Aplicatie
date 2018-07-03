@@ -349,14 +349,11 @@ namespace LicentaApp.Controllers
             }
 
             if (viewModel.VizitaMedicala == null) return;
+            bool doarLentilaProgresiva = (viewModel.VizitaMedicala.SferaAproapeDrept.HasValue ||
+                                          viewModel.VizitaMedicala.SferaAproapeStang.HasValue) &&
+                                         (viewModel.VizitaMedicala.SferaDistantaDrept.HasValue ||
+                                          viewModel.VizitaMedicala.SferaDistantaStang.HasValue);
 
-            bool doarLentilaProgresiva =
-                (viewModel.VizitaMedicala.SferaAproapeDrept.HasValue ||
-                 viewModel.VizitaMedicala.SferaDistantaDrept.HasValue ||
-                 viewModel.VizitaMedicala.PrismaDrept.HasValue) &&
-                (viewModel.VizitaMedicala.SferaAproapeStang.HasValue ||
-                 viewModel.VizitaMedicala.SferaDistantaStang.HasValue ||
-                 viewModel.VizitaMedicala.PrismaStang.HasValue);
             AddTipLentilaOptionsToViewData(doarLentilaProgresiva);
 
             if (viewModel.Lentila == null) return;
@@ -365,10 +362,19 @@ namespace LicentaApp.Controllers
             {
                 this.AddIndiceRefractieOptionsToViewData(viewModel.Lentila.TipLentila.Value);
             }
+            else
+            {
+                return;
+            }
 
             if (viewModel.Lentila.IndiceRefractie.HasValue)
             {
-                this.AddProducatorOptionsToViewData(viewModel.Lentila.TipLentila.Value, viewModel.Lentila.IndiceRefractie.Value);
+                this.AddProducatorOptionsToViewData(viewModel.Lentila.TipLentila.Value,
+                    viewModel.Lentila.IndiceRefractie.Value);
+            }
+            else
+            {
+                return;
             }
 
             if (viewModel.Lentila.ProducatorId.HasValue)
@@ -376,9 +382,17 @@ namespace LicentaApp.Controllers
                 this.AddLentilaOptionsToViewData(viewModel.Lentila.TipLentila.Value,
                     viewModel.Lentila.IndiceRefractie.Value, viewModel.Lentila.ProducatorId.Value);
             }
+            else
+            {
+                return;
+            }
             if (!viewModel.Lentila.CodProdus.IsNullOrEmpty())
             {
                 this.AddLentileExtraOptionsToViewData();
+            }
+            else
+            {
+                return;
             }
         }
 

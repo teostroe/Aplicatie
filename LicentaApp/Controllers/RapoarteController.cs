@@ -44,7 +44,37 @@ namespace LicentaApp.Controllers
         #endregion
 
         #region Top Profesii Clienti
-        
+        public ActionResult TopProfesii()
+        {
+            ViewData.Add(AppConstants.OraseOptions, new SelectList(db.Magazine.Select(x => x.Oras).Distinct()));
+            return View();
+        }
+
+        public ActionResult TopProfesii_Data(string oras, DateTime startDate, DateTime endDate)
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return PartialView("Rapoarte/TopProfesii_Data",
+                this.db.GetTopProfesiiClienti(
+                    oras,
+                    startDate.ToString(_stringDateFormat),
+                    endDate.ToString(_stringDateFormat)));
+        }
+
+        public ActionResult TopProfesii_Grafic()
+        {
+            ViewData.Add(AppConstants.OraseOptions, new SelectList(db.Magazine.Select(x => x.Oras).Distinct()));
+            return View();
+        }
+        [HttpGet]
+        public ActionResult TopProfesii_GraficData(string oras, DateTime startDate, DateTime endDate)
+        {
+            return Json(
+                this.db.GetTopProfesiiClienti(
+                    oras,
+                    startDate.ToString(this._stringDateFormat),
+                    endDate.ToString(this._stringDateFormat)), JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Statistica Magazine dupa Cantitati

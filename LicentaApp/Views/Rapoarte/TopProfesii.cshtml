@@ -1,0 +1,39 @@
+﻿@using LicentaApp.Domain
+
+@{
+    ViewBag.Title = "TopProfesii";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Statistica in functie de profesii</h4>
+</div>
+@using (Ajax.BeginForm("TopProfesii_Data", "Rapoarte", new AjaxOptions { UpdateTargetId = "report-container", InsertionMode = InsertionMode.Replace }))
+{
+    <div class="row">
+        @if (ViewData.ContainsKey(AppConstants.OraseOptions))
+        {
+            <div class="input-field col s12">
+                <select id="oras" name="oras">
+                    <option value="" disabled>-- Alege --</option>
+                    @foreach (var item in (SelectList)ViewData[AppConstants.OraseOptions])
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <label>Orase</label>
+            </div>
+        }
+    </div>
+
+@Html.Partial("Rapoarte/_ReportButtons")
+}
+
+<div id="report-container">
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+
