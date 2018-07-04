@@ -1,0 +1,29 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetStatisticaUtilizatoriDupaVanzari_Result>
+
+@{
+    ViewBag.Title = "StatisticaUtilizatoriDupaVanzari";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col m11">
+        <h4 class="report-title">Statistica Vanzari Utilizatori</h4>
+    </div>
+    <div class="col m1">
+        <a class="btn-floating btn-large chart-url-icon waves-effect waves-light red" href="@Url.Action("StatisticaUtilizatoriDupaVanzari_Grafic")"><i class="fas fa-chart-bar fa-2x"></i></a>
+    </div>
+</div>
+
+@using (Ajax.BeginForm("StatisticaUtilizatoriDupaVanzari_Data", "Rapoarte", new AjaxOptions { UpdateTargetId = "report-container", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Partial("Rapoarte/_ReportButtons")
+}
+
+<div id="report-container">
+    @Html.Partial("Rapoarte/StatisticaUtilizatoriDupaVanzari_Data", this.Model)
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+

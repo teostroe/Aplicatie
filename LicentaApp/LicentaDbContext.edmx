@@ -480,13 +480,28 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
           <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="GetTopLentile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetStatisticaUtilizatoriDupaCantitati" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetStatisticaUtilizatoriDupaVanzari" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetTopLentile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetTopOchelariSoare" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
           <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
         </Function>
         <Function Name="GetTopProfesiiClienti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_orasMagazin" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
+          <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetTopRame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
           <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
         </Function>
@@ -1054,7 +1069,10 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
             <End Role="Produse" EntitySet="Produse" />
             <End Role="RandComenziAprovizionareProduse" EntitySet="RandComenziAprovizionareProduse" />
           </AssociationSet>
-          <FunctionImport Name="GetTopLentile" ReturnType="Collection(Domain.GetTopLentile_Result)" />
+          <FunctionImport Name="GetTopLentile" ReturnType="Collection(Domain.GetTopLentile_Result)" >
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetStatisticaMagazineDupaCantitati" ReturnType="Collection(Domain.GetStatisticaMagazineDupaCantitati_Result)">
             <Parameter Name="p_dataStart" Mode="In" Type="String" />
             <Parameter Name="p_dataFinala" Mode="In" Type="String" />
@@ -1078,6 +1096,18 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           </FunctionImport>
           <FunctionImport Name="GetTopProfesiiClienti" ReturnType="Collection(Domain.GetTopProfesiiClienti_Result)">
             <Parameter Name="p_orasMagazin" Mode="In" Type="String" />
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTopRame" ReturnType="Collection(Domain.GetTopRame_Result)">
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetStatisticaUtilizatoriDupaCantitati" ReturnType="Collection(Domain.GetStatisticaUtilizatoriDupaCantitati_Result)">
+            <Parameter Name="p_dataStart" Mode="In" Type="String" />
+            <Parameter Name="p_dataFinala" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetStatisticaUtilizatoriDupaVanzari" ReturnType="Collection(Domain.GetStatisticaUtilizatoriDupaVanzari_Result)">
             <Parameter Name="p_dataStart" Mode="In" Type="String" />
             <Parameter Name="p_dataFinala" Mode="In" Type="String" />
           </FunctionImport>
@@ -1299,6 +1329,24 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
         <ComplexType Name="GetTopProfesiiClienti_Result">
           <Property Type="String" Name="Profesie" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TotalComenzi" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetTopRame_Result">
+          <Property Type="Int32" Name="IdProdus" Nullable="true" />
+          <Property Type="String" Name="Denumire" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Cod" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CantitateTotala" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetStatisticaUtilizatoriDupaCantitati_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Prenume" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CantitateTotala" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetStatisticaUtilizatoriDupaVanzari_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Prenume" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalVanzari" Nullable="false" Precision="18" Scale="0" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1591,6 +1639,36 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
               <ComplexTypeMapping TypeName="Domain.GetTopProfesiiClienti_Result">
                 <ScalarProperty Name="Profesie" ColumnName="Profesie" />
                 <ScalarProperty Name="TotalComenzi" ColumnName="TotalComenzi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTopRame" FunctionName="Domain.Store.GetTopRame">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetTopRame_Result">
+                <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="CantitateTotala" ColumnName="CantitateTotala" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStatisticaUtilizatoriDupaCantitati" FunctionName="Domain.Store.GetStatisticaUtilizatoriDupaCantitati">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetStatisticaUtilizatoriDupaCantitati_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="CantitateTotala" ColumnName="CantitateTotala" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStatisticaUtilizatoriDupaVanzari" FunctionName="Domain.Store.GetStatisticaUtilizatoriDupaVanzari">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetStatisticaUtilizatoriDupaVanzari_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="TotalVanzari" ColumnName="TotalVanzari" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

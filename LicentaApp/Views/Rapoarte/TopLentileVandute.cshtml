@@ -4,23 +4,21 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
+<div class="row">
+    <h4 class="report-title">Top vanzari lentile in functie de cantitatile vandute</h4>
+</div>
 
-    <table class="highlight">
-        <thead>
-        <tr>
-            <th>Denumire</th>
-            <th>Cod</th>
-            <th>Cantitate totala</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in this.Model)
-        {
-            <tr>
-                <td>@item.Denumire</td>
-                <td>@item.Cod</td>
-                <td>@item.CantitateTotala</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+
+@using (Ajax.BeginForm("TopLentileVandute_Data", "Rapoarte", new AjaxOptions { UpdateTargetId = "report-container", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Partial("Rapoarte/_ReportButtons")
+}
+
+
+<div id="report-container">
+    @Html.Partial("Rapoarte/TopLentileVandute_Data", this.Model)
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

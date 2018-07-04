@@ -241,6 +241,12 @@
     <Compile Include="GetStatisticaMagazineDupaVanzari_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetStatisticaUtilizatoriDupaCantitati_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetStatisticaUtilizatoriDupaVanzari_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetTopLentile_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -248,6 +254,9 @@
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="GetTopProfesiiClienti_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTopRame_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -547,6 +556,15 @@
     <Content Include="Views\Rapoarte\TopProfesii.cshtml" />
     <Content Include="Views\Rapoarte\TopProfesii_Grafic.cshtml" />
     <Content Include="Views\Shared\Rapoarte\TopProfesii_Data.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\TopLentileVandute_Data.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\TopRameVandute_Data.cshtml" />
+    <Content Include="Views\Rapoarte\TopRameVandute.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaCantitati.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaCantitati_Grafic.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\StatisticaUtilizatoriDupaCantitati_Data.cshtml" />
+    <Content Include="Views\Shared\Rapoarte\StatisticaUtilizatoriDupaVanzari_Data.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaVanzari.cshtml" />
+    <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaVanzari_Grafic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

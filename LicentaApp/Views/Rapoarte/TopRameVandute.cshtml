@@ -1,0 +1,25 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetTopRame_Result>
+
+@{
+    ViewBag.Title = "TopRameVandute";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Top vanzari rame in functie de cantitatile vandute</h4>
+</div>
+
+
+@using (Ajax.BeginForm("TopRameVandute_Data", "Rapoarte", new AjaxOptions { UpdateTargetId = "report-container", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.Partial("Rapoarte/_ReportButtons")
+}
+
+
+<div id="report-container">
+    @Html.Partial("Rapoarte/TopRameVandute_Data", this.Model)
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using LicentaApp.Domain;
+using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Services.Reports;
 using LicentaApp.ViewModels.Rapoarte;
 
 namespace LicentaApp.Controllers
 {
+    [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
     public class RapoarteController : Controller
     {
         private string _stringDateFormat = "yyyy-MM-dd";
@@ -20,10 +22,41 @@ namespace LicentaApp.Controllers
             return View();
         }
 
+        #region Top Lentile 
+
         public ActionResult TopLentileVandute()
         {
-            return View(this.db.GetTopLentile());
+            var dates = InitialDateService.GetInitialDates();
+            return View(this.db.GetTopLentile(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
         }
+
+        public ActionResult TopLentileVandute_Data(DateTime startDate, DateTime endDate)
+        {
+            return PartialView("Rapoarte/TopLentileVandute_Data",
+                this.db.GetTopLentile(
+                    startDate.ToString(_stringDateFormat),
+                    endDate.ToString(_stringDateFormat)));
+        }
+
+        #endregion
+
+        #region Top Rame 
+
+        public ActionResult TopRameVandute()
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return View(this.db.GetTopRame(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+        }
+
+        public ActionResult TopRameVandute_Data(DateTime startDate, DateTime endDate)
+        {
+            return PartialView("Rapoarte/TopRameVandute_Data",
+                this.db.GetTopRame(
+                    startDate.ToString(_stringDateFormat),
+                    endDate.ToString(_stringDateFormat)));
+        }
+
+        #endregion
 
         #region Top Ochelari Soare
         public ActionResult TopOchelariSoare_CantitatiVandute()
@@ -86,11 +119,10 @@ namespace LicentaApp.Controllers
 
         public ActionResult StatisticaMagazineDupaCantitati_Data(DateTime startDate, DateTime endDate)
         {
-            var dates = InitialDateService.GetInitialDates();
             return PartialView("Rapoarte/StatisticaMagazineDupaCantitati_Data",
                 this.db.GetStatisticaMagazineDupaCantitati(
-                    dates.GetStartDateAsString(),
-                    dates.GetFinalDateAsString()));
+                    startDate.ToString(_stringDateFormat),
+                    endDate.ToString(_stringDateFormat)));
         }
 
         public ActionResult StatisticaMagazineDupaCantitati_Grafic()
@@ -139,6 +171,69 @@ namespace LicentaApp.Controllers
         }
         #endregion
 
+        #region Statistica Utilizatori dupa Cantitati
+        public ActionResult StatisticaUtilizatoriDupaCantitati()
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return View(this.db.GetStatisticaUtilizatoriDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+        }
+
+        public ActionResult StatisticaUtilizatoriDupaCantitati_Data(DateTime startDate, DateTime endDate)
+        {
+            return PartialView("Rapoarte/StatisticaUtilizatoriDupaCantitati_Data",
+                this.db.GetStatisticaUtilizatoriDupaCantitati(
+                    startDate.ToString(_stringDateFormat),
+                    endDate.ToString(_stringDateFormat)));
+        }
+
+        public ActionResult StatisticaUtilizatoriDupaCantitati_Grafic()
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return View(this.db.GetStatisticaUtilizatoriDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+        }
+        [HttpGet]
+        public ActionResult StatisticaUtilizatoriDupaCantitati_GraficData(DateTime startDate, DateTime endDate)
+        {
+            return Json(
+                this.db.GetStatisticaUtilizatoriDupaCantitati(startDate.ToString(this._stringDateFormat),
+                    endDate.ToString(this._stringDateFormat)), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+
+        #region Statistica Utilizatori Dupa Vanzari
+        public ActionResult StatisticaUtilizatoriDupaVanzari()
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return View(this.db.GetStatisticaUtilizatoriDupaVanzari(dates.GetStartDateAsString(),
+                dates.GetFinalDateAsString()));
+        }
+
+
+        public ActionResult StatisticaUtilizatoriDupaVanzari_Data(DateTime startDate, DateTime endDate)
+        {
+            return PartialView("Rapoarte/StatisticaUtilizatoriDupaVanzari_Data",
+                this.db.GetStatisticaUtilizatoriDupaVanzari(
+                    startDate.ToString(_stringDateFormat),
+                    endDate.ToString(_stringDateFormat)));
+        }
+
+        public ActionResult StatisticaUtilizatoriDupaVanzari_Grafic()
+        {
+            var dates = InitialDateService.GetInitialDates();
+            return View(this.db.GetStatisticaUtilizatoriDupaVanzari(dates.GetStartDateAsString(),
+                dates.GetFinalDateAsString()));
+        }
+
+        public ActionResult StatisticaUtilizatoriDupaVanzari_GraficData(DateTime startDate, DateTime endDate)
+        {
+            return Json(
+                this.db.GetStatisticaUtilizatoriDupaVanzari(startDate.ToString(this._stringDateFormat),
+                    endDate.ToString(this._stringDateFormat)), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+
         #region Pivot
         public ActionResult VanzariTotalePeLuni()
         {
@@ -183,12 +278,23 @@ namespace LicentaApp.Controllers
             var result = new ComparatieMagazineViewModel
             {
                 Headers = headers.ToArray(),
-                Data = dataRows.ToArray()
+                Data = dataRows.OrderBy(x => this.GetDateFromInterval(x.Interval)).ToArray()
             };
 
             return Json(result
                , JsonRequestBehavior.AllowGet);
 
+        }
+
+        private DateTime? GetDateFromInterval(string date)
+        {
+            if (!date.Contains("-"))
+            {
+                return null;
+            }
+
+            var vals = date.Split('-');
+            return new DateTime(Convert.ToInt32(vals[0]), Convert.ToInt32(vals[1]), 1);
         }
         #endregion
     }

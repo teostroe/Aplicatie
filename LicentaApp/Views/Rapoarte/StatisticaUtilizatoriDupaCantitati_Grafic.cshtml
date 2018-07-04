@@ -1,0 +1,77 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetStatisticaUtilizatoriDupaCantitati_Result>
+
+@{
+    ViewBag.Title = "StatisticaUtilizatoriDupaCantitati_Grafic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Statistica Vanzari Magazine</h4>
+</div>
+
+@Html.Partial("Rapoarte/_ReportButtons")
+
+<div class="row">
+    <div id="statistica-grafic" style="width: 900px; height: 500px"></div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        var model = @Html.Raw(Json.Encode(this.Model));
+        function createDataTable(items) {
+            var result = [];
+            result.push(['Nume', 'Total Cantitate Vanduta']);
+            for (var i = 0; i < items.length; ++i) {
+                var nume = items[i]["Nume"] + " " + items[i]["Prenume"];
+                result.push([nume, items[i]["CantitateTotala"]]);
+            }
+
+            return result;
+        }
+
+        var dataTable = createDataTable(model);
+        google.charts.load('current', { packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(dataTable);
+
+            var options = {
+                chart: {
+                    title: 'Statistica vanzari utilizatori in functie de cantitati'
+                },
+                hAxis: {
+                    format: 'decimal'
+                },
+                bars: 'horizontal'
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('statistica-grafic'));
+            materialChart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+        $('#getReportData').click(function() {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+
+            $.ajax({
+                url: '@Url.Action("StatisticaUtilizatoriDupaCantitati_GraficData")',
+                type: 'GET',
+                data: {startDate: startDate, endDate: endDate},
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    dataTable = createDataTable(result);
+                    google.charts.setOnLoadCallback(drawChart);
+                },
+                async: true
+            });
+
+        });
+    </script>
+}

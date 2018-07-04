@@ -1,0 +1,21 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetStatisticaUtilizatoriDupaVanzari_Result>
+
+<div class="row">
+    <table class="highlight">
+        <thead>
+            <tr>
+                <th>Denumire</th>
+                <th>Vanzari totale</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in this.Model)
+            {
+                <tr>
+                    <td>@item.Nume @item.Prenume</td>
+                    <td>@item.TotalVanzari</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
