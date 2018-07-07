@@ -209,7 +209,6 @@ namespace LicentaApp.Controllers
                 dates.GetFinalDateAsString()));
         }
 
-
         public ActionResult StatisticaUtilizatoriDupaVanzari_Data(DateTime startDate, DateTime endDate)
         {
             return PartialView("Rapoarte/StatisticaUtilizatoriDupaVanzari_Data",
@@ -295,6 +294,32 @@ namespace LicentaApp.Controllers
 
             var vals = date.Split('-');
             return new DateTime(Convert.ToInt32(vals[0]), Convert.ToInt32(vals[1]), 1);
+        }
+        #endregion
+
+        #region Istoric Preturi
+        public ActionResult IstoricPreturi_Grafic()
+        {
+            ViewData.Add(AppConstants.ProduseOptions, this.db.Produse.ToSelectList(x => x.Cod, x => x.Denumire));
+            return View();
+        }
+
+        public ActionResult IstoricPreturi_GraficData(string codProdus)
+        {
+            var model =
+                this.db.GetIstoricPreturi(codProdus)
+                    .ToList().Select(x => new
+                    {
+                        Data = x.DataActualizare.ToString(_stringDateFormat),
+                        Valoare = x.Valoare
+                    }).ToList();
+
+            model.Add(new
+                {
+                Data = DateTime.Now.ToString(_stringDateFormat),
+                Valoare = model.LastOrDefault().Valoare
+            });
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

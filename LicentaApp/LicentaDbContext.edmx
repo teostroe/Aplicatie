@@ -468,6 +468,9 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <Parameter Name="p_dataStart" Type="varchar" Mode="In" />
           <Parameter Name="p_dataFinala" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetIstoricPreturi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_codProdus" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetPretActual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
           <Parameter Name="f_id" Type="int" Mode="In" />
           <Parameter Name="f_data" Type="datetime" Mode="In" />
@@ -1111,6 +1114,9 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
             <Parameter Name="p_dataStart" Mode="In" Type="String" />
             <Parameter Name="p_dataFinala" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetIstoricPreturi" ReturnType="Collection(Domain.GetIstoricPreturi_Result)">
+            <Parameter Name="p_codProdus" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EnumType Name="TipProdus" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipProdus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         <EnumType Name="TipTratament" a:ExternalTypeName="LicentaApp.Domain.ValueObjects.TipTratament" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -1347,6 +1353,11 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
           <Property Type="String" Name="Nume" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Prenume" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="TotalVanzari" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetIstoricPreturi_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Decimal" Name="Valoare" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="DataActualizare" Nullable="false" Precision="23" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1669,6 +1680,15 @@ warning 6002: The table/view 'LicentaTeo.dbo.RameView' does not have a primary k
                 <ScalarProperty Name="Nume" ColumnName="Nume" />
                 <ScalarProperty Name="Prenume" ColumnName="Prenume" />
                 <ScalarProperty Name="TotalVanzari" ColumnName="TotalVanzari" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetIstoricPreturi" FunctionName="Domain.Store.GetIstoricPreturi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Domain.GetIstoricPreturi_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valoare" ColumnName="Valoare" />
+                <ScalarProperty Name="DataActualizare" ColumnName="DataActualizare" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

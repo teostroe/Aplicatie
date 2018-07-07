@@ -205,5 +205,14 @@ namespace LicentaApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStatisticaUtilizatoriDupaVanzari_Result>("GetStatisticaUtilizatoriDupaVanzari", p_dataStartParameter, p_dataFinalaParameter);
         }
+    
+        public virtual ObjectResult<GetIstoricPreturi_Result> GetIstoricPreturi(string p_codProdus)
+        {
+            var p_codProdusParameter = p_codProdus != null ?
+                new ObjectParameter("p_codProdus", p_codProdus) :
+                new ObjectParameter("p_codProdus", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIstoricPreturi_Result>("GetIstoricPreturi", p_codProdusParameter);
+        }
     }
 }

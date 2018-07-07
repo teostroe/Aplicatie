@@ -56,5 +56,6 @@ namespace LicentaApp.Domain
         public const string CodProduseFurnizor = "CodProduseFurnizor";
         public const string MagazineOptions = "MagazineOptions";
         public const string OraseOptions = "OraseOptions";
+        public const string ProduseOptions = "ProduseOptions";
     }
 }

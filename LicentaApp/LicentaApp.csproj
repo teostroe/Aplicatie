@@ -252,6 +252,9 @@
     <Compile Include="GetComparatieMagazineDupaVanzari_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetIstoricPreturi_Result.cs">
+      <DependentUpon>LicentaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetStatisticaMagazineDupaCantitati_Result.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
     </Compile>
@@ -589,6 +592,7 @@
     <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaVanzari_Grafic.cshtml" />
     <Content Include="Views\EmailTemplates\CerereAprovizionareFurnizor.cshtml" />
     <Content Include="Views\EmailTemplates\CerereAprovizionareFurnizorAttachment.cshtml" />
+    <Content Include="Views\Rapoarte\IstoricPreturi_Grafic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

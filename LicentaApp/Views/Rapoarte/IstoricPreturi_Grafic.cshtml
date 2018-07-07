@@ -1,0 +1,91 @@
+﻿@using LicentaApp.Domain
+
+@{
+    ViewBag.Title = "IstoricPreturi_Grafic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h4 class="report-title">Evolutia pretului unui produs</h4>
+</div><div class="row">
+    @if (ViewData.ContainsKey(AppConstants.ProduseOptions))
+    {
+        <div class="input-field col s12">
+            <select id="produseSelect">
+                <option value="" disabled>-- Alege --</option>
+                @foreach (var item in (SelectList)ViewData[AppConstants.ProduseOptions])
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <label>Produse</label>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div id="statistica-grafic" style="width: 900px; height: 600px"></div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['line'] });
+        var dataTable = {};
+
+        function createDataTable(result) {
+            var data = new google.visualization.DataTable();
+            
+            data.addColumn('string', 'Data Actualizare');
+            data.addColumn('number', 'Valoare');
+
+            for (var i = 0 ; i < result.length; ++i) {
+                data.addRow([result[i]["Data"], result[i]["Valoare"]]);
+            }
+
+            return data;
+        }
+
+
+        function drawChart() {
+            var options = {
+                chart: {
+                    title: 'Evolutia pretului',
+                    subtitle: 'unui produs'
+                },
+                hAxis: {
+                    format: 'decimal'
+                }
+            };
+
+            var chart = new google.charts.Line(document.getElementById('statistica-grafic'));
+
+            chart.draw(dataTable, google.charts.Line.convertOptions(options));
+        }
+
+
+
+        $('#produseSelect').change(function () {
+            var codProdus = $('#produseSelect').val();
+
+            $.ajax({
+                url: '@Url.Action("IstoricPreturi_GraficData")',
+                type: 'GET',
+                data: { codProdus: codProdus},
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                    console.log(result);
+                    dataTable = createDataTable(result);
+                    google.charts.setOnLoadCallback(drawChart);
+                },
+                async: true
+            });
+
+        });
+    </script>
+}
