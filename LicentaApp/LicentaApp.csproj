@@ -355,6 +355,9 @@
     <Compile Include="ViewModels\ProduseViewModel.cs" />
     <Compile Include="ViewModels\Produse\ProdusReadOneViewModel.cs" />
     <Compile Include="ViewModels\Rapoarte\ComparatieMagazineViewModel.cs" />
+    <Compile Include="ViewModels\Rapoarte\Search\LentileFilter.cs" />
+    <Compile Include="ViewModels\Rapoarte\Search\OchelariSoareFilter.cs" />
+    <Compile Include="ViewModels\Rapoarte\Search\RameFilter.cs" />
     <Compile Include="ViewModels\Utilizatori\ModificaParolaViewModel.cs" />
     <Compile Include="ViziteMedicale.cs">
       <DependentUpon>LicentaDbContext.tt</DependentUpon>
@@ -593,6 +596,10 @@
     <Content Include="Views\EmailTemplates\CerereAprovizionareFurnizor.cshtml" />
     <Content Include="Views\EmailTemplates\CerereAprovizionareFurnizorAttachment.cshtml" />
     <Content Include="Views\Rapoarte\IstoricPreturi_Grafic.cshtml" />
+    <Content Include="Views\Shared\Produse\ListaLentileData.cshtml" />
+    <Content Include="Views\Shared\Produse\FilteredPagination.cshtml" />
+    <Content Include="Views\Shared\Produse\ListaRameData.cshtml" />
+    <Content Include="Views\Shared\Produse\ListaOchelariSoareData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

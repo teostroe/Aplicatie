@@ -16,6 +16,8 @@
 
 }
 
+<input type="hidden" name="filter.Page" id="filter_Page" value="@currentPage"/>
+
 @if (isPaginationEnabled)
 {
     <ul class="pagination">
@@ -25,7 +27,7 @@
         }
         else
         {
-            <li class="waves-effect"><a href="@Url.Action(actionName, new {page = currentPage - 1})"><i class="material-icons">chevron_left</i></a></li>
+            <li class="waves-effect"><a target_page="@(currentPage - 1)" class="move-to-page"><i class="material-icons">chevron_left</i></a></li>
         }
         @if (startPage != 1)
         {
@@ -36,11 +38,11 @@
 
             if (currentPage == i)
             {
-                <li class="active">@Html.ActionLink(i.ToString(), actionName, new { page = i })</li>
+                <li class="active"><a target_page ="@i" class="move-to-page">@i</a></li>
             }
             else
             {
-                <li class="waves-effect">@Html.ActionLink(i.ToString(), actionName, new { page = i })</li>
+                <li class="waves-effect"><a target_page ="@i" class="move-to-page">@i</a></li>
             }
 
         }
@@ -54,7 +56,7 @@
         }
         else
         {
-            <li class="waves-effect"><a href="@Url.Action(actionName, new {page = currentPage + 1})"><i class="material-icons">chevron_right</i></a></li>
+            <li class="waves-effect"><a target_page="@(currentPage + 1)" class="move-to-page"><i class="material-icons">chevron_right</i></a></li>
         }
     </ul>
 }

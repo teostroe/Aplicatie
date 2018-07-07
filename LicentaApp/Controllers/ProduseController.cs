@@ -16,6 +16,7 @@ using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels;
 using LicentaApp.ViewModels.Produse;
+using LicentaApp.ViewModels.Rapoarte.Search;
 
 namespace LicentaApp.Controllers
 {
@@ -35,6 +36,38 @@ namespace LicentaApp.Controllers
             return View(model.ToPagedList(page));
         }
 
+        public ActionResult FilterListaLentile(LentileFilter filter)
+        {
+            var model = this.db.LentileView.AsQueryable();
+
+            if (!filter.Cod.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.Cod.Contains(filter.Cod));
+            }
+            if (!filter.Denumire.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.Denumire.Contains(filter.Denumire));
+            }
+            if (filter.Discount.HasValue)
+            {
+                model = model.Where(x => x.Discount == filter.Discount);
+            }
+            if (!filter.TipLentila.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.TipLentila.Contains(filter.TipLentila));
+            }
+            if (!filter.IndiceRefractie.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.IndiceRefractie == filter.IndiceRefractie);
+            }
+            if (filter.Pret.HasValue)
+            {
+                model = model.Where(x => x.Pret == filter.Pret.Value);
+            }
+            ViewData.InitializePagination(filter.Page, model.Count(), this.ControllerContext);
+            return PartialView("Produse/ListaLentileData", model.ToPagedList(filter.Page));
+        }
+
         public ActionResult ListaRame(int? page)
         {
             var model = this.db.RameView.AsQueryable();
@@ -42,11 +75,63 @@ namespace LicentaApp.Controllers
             return View(model.ToPagedList(page));
         }
 
+        public ActionResult FiltreazaListaRame(RameFilter filter)
+        {
+            var model = this.db.RameView.AsQueryable();
+            if (!filter.Cod.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.Cod.Contains(filter.Cod));
+            }
+            if (!filter.Denumire.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.Denumire.Contains(filter.Denumire));
+            }
+            if (filter.Discount.HasValue)
+            {
+                model = model.Where(x => x.Discount == filter.Discount);
+            }
+            if (filter.Pret.HasValue)
+            {
+                model = model.Where(x => x.Valoare == filter.Pret.Value);
+            }
+
+            ViewData.InitializePagination(filter.Page, model.Count(), this.ControllerContext);
+            return PartialView("Produse/ListaRameData", model.ToPagedList(filter.Page));
+        }
+
         public ActionResult ListaOchelariDeSoare(int? page)
         {
             var model = this.db.OchelariDeSoareView.AsQueryable();
             ViewData.InitializePagination(page, model.Count(), this.ControllerContext);
             return View(model.ToPagedList(page));
+        }
+
+        public ActionResult FiltreazaListaOchelariSoare(OchelariSoareFilter filter)
+        {
+            var model = this.db.OchelariDeSoareView.AsQueryable();
+            if (!filter.Cod.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.Cod.Contains(filter.Cod));
+            }
+            if (!filter.Denumire.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.Denumire.Contains(filter.Denumire));
+            }
+            if (filter.Discount.HasValue)
+            {
+                model = model.Where(x => x.Discount == filter.Discount);
+            }
+            if (!filter.EstePolarizat.IsNullOrEmpty())
+            {
+                model = model.Where(x => x.EstePolarizat == filter.EstePolarizat);
+            }
+            if (filter.Pret.HasValue)
+            {
+                model = model.Where(x => x.Pret == filter.Pret.Value);
+            }
+
+            ViewData.InitializePagination(filter.Page, model.Count(), this.ControllerContext);
+            return PartialView("Produse/ListaOchelariSoareData", model.ToPagedList(filter.Page));
         }
 
         // GET: Produse/Details/5

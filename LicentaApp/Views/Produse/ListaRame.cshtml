@@ -14,43 +14,45 @@
     </div>
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            Cod
-        </th>
-        <th>
-            Denumire
-        </th>
-        <th>
-            Discount
-        </th>
-        <th>
-            Pret
-        </th>
-        <th></th>
-    </tr>
+@using (Ajax.BeginForm("FiltreazaListaRame", "Produse", new AjaxOptions { UpdateTargetId = "lista-rame-data", InsertionMode = InsertionMode.ReplaceWith }))
+{
+    @Html.Partial("Produse/ListaRameData", this.Model)
+}
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Denumire)
-            </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valoare)
-            </td>
-            <td>
-                @Html.Partial("_RUDButtons", new Tuple<int, string>(item.Id, "Produse"))
-            </td>
-        </tr>
-    }
 
-</table>
+@section Scripts{
+    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            changePage();
+            $('select').formSelect();
+            filtreaza();
+        });
+
+        $(document).ajaxComplete(function () {
+            changePage();
+            $('select').formSelect();
+            filtreaza();
+        });
+
+
+        function changePage() {
+            $('.move-to-page').click(function () {
+                $('#filter_Page').val($(this).attr('target_page'));
+                $('form').submit();
+            });
+        }
+
+        function filtreaza() {
+            $('#filtreaza').click(function() {
+                $('form').submit();
+            });
+        }
+
+
+
+    </script>
+}
+

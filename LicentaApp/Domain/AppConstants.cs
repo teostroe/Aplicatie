@@ -57,5 +57,6 @@ namespace LicentaApp.Domain
         public const string MagazineOptions = "MagazineOptions";
         public const string OraseOptions = "OraseOptions";
         public const string ProduseOptions = "ProduseOptions";
+
     }
 }

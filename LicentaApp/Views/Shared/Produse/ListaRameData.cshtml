@@ -1,0 +1,56 @@
+﻿@model IEnumerable<RameView>
+
+
+<div id="lista-rame-data">
+
+    <table class="table">
+        <tr>
+            <th>
+                Cod
+                <input type="text" name="filter.Cod" id="filter_Cod" />
+
+            </th>
+            <th>
+                Denumire
+                <input type="text" name="filter.Denumire" id="filter_Denumire" />
+
+            </th>
+            <th>
+                Discount
+                <input type="text" name="filter.Discount" id="filter_Discount" />
+
+            </th>
+            <th>
+                Pret
+                <input type="text" name="filter.Pret" id="filter_Pret" />
+            </th>
+            <th style="min-width: 150px;">
+                <a id="filtreaza" class="btn-floating btn-small waves-effect waves-light red"><i class="fas fa-search"></i></a>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Denumire)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valoare)
+                </td>
+                <td>
+                    @Html.Partial("_RUDButtons", new Tuple<int, string>(item.Id, "Produse"))
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.Partial("Produse/FilteredPagination")
+</div>
