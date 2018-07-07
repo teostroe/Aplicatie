@@ -9,6 +9,7 @@ using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
 using LicentaApp.Domain.Email;
+using LicentaApp.Domain.Filters;
 using LicentaApp.Domain.Services.ValidationServices.Implementations;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels.ComandaAprovizionare;
@@ -165,7 +166,9 @@ namespace LicentaApp.Controllers
         [HttpGet]
         public ActionResult ComenziAprovizionareMagazine(int? page)
         {
+            var user = User as AppPrincipal;
             var model = db.ComenziAprovizionari
+                .FiltreazaComenziAprovizionare(user)
                 .Where(x => x.DeLaDepozitCentralId.HasValue)
                 .Select(x => new ComandaAprovizionareReadAllViewModel
                 {

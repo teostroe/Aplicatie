@@ -12,8 +12,16 @@ namespace LicentaApp.Controllers
     {
         public ActionResult Index()
         {
-            //LicentaDbContext db = new LicentaDbContext();
-            //db.FILTREAZAPRODUSE_DENUMIRE("Furla Brigitte");
+            var user = User as AppPrincipal;
+            if (user.IsInRole(AuthConstants.Roluri.Utilizator))
+            {
+                return RedirectToAction("Index", "Comenzi");
+            }
+
+            if (user.IsInRole(AuthConstants.Roluri.Admin))
+            {
+                return RedirectToAction("Index", "Rapoarte");
+            }
 
             return View();
         }

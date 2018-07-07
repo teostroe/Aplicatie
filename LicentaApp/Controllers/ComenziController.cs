@@ -13,6 +13,7 @@ using LicentaApp;
 using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
+using LicentaApp.Domain.Filters;
 using LicentaApp.Domain.Metadata;
 using LicentaApp.Domain.Services;
 using LicentaApp.Domain.Services.Helpers;
@@ -38,7 +39,9 @@ namespace LicentaApp.Controllers
         // GET: Comenzi
         public ActionResult Index(int? page)
         {
+            var user = User as AppPrincipal;
             var comenzi = db.Comenzi
+                .FiltreazaComenzi(user)
                 .Include(c => c.Clienti)
                 .Include(c => c.Utilizatori)
                 .Include(c => c.ViziteMedicale)
