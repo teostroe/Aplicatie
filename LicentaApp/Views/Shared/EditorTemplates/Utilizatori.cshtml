@@ -1,16 +1,30 @@
-﻿@model LicentaApp.Utilizatori
+﻿@using LicentaApp.Domain
+@model LicentaApp.Utilizatori
+@{
+    var isEdit = ViewBag.Action == AppConstants.CRUD.Edit;
+}
+
+
 
 <div class="row">
     <div class="col m4 input-field">
-        @Html.EditorFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username, new { @readonly = isEdit })
         @Html.LabelFor(model => model.Username)
         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
     </div>
-    <div class="col m4 input-field">
-        @Html.PasswordFor(model => model.Parola)
-        @Html.LabelFor(model => model.Parola)
-        @Html.ValidationMessageFor(model => model.Parola, "", new { @class = "text-danger" })
-    </div>
+    @if (!isEdit)
+    {
+        <div class="col m4 input-field">
+            @Html.PasswordFor(model => model.Parola)
+            @Html.LabelFor(model => model.Parola)
+            @Html.ValidationMessageFor(model => model.Parola, "", new { @class = "text-danger" })
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(x => x.Parola)
+    }
+
     <div class="col m4 input-field">
         @Html.EditorFor(model => model.Email)
         @Html.LabelFor(model => model.Email)
@@ -34,17 +48,17 @@
     @if (ViewBag.RoluriSelectList != null)
     {
         <div class="col m6 input-field">
-            @Html.DropDownListFor(model => model.IdRol, (SelectList) ViewBag.RoluriSelectList, "- Selecteaza -")
+            @Html.DropDownListFor(model => model.IdRol, (SelectList)ViewBag.RoluriSelectList, "- Selecteaza -")
             @Html.LabelFor(model => model.IdRol)
-            @Html.ValidationMessageFor(model => model.IdRol, "", new {@class = "text-danger"})
-        </div>        
+            @Html.ValidationMessageFor(model => model.IdRol, "", new { @class = "text-danger" })
+        </div>
     }
     @if (ViewBag.MagazineSelectList != null)
     {
         <div class="col m6 input-field">
-            @Html.DropDownListFor(model => model.IdMagazin, (SelectList) ViewBag.MagazineSelectList, "- Selecteaza -")
+            @Html.DropDownListFor(model => model.IdMagazin, (SelectList)ViewBag.MagazineSelectList, "- Selecteaza -")
             @Html.LabelFor(model => model.IdMagazin)
-            @Html.ValidationMessageFor(model => model.IdMagazin, "", new {@class = "text-danger"})
-        </div>        
+            @Html.ValidationMessageFor(model => model.IdMagazin, "", new { @class = "text-danger" })
+        </div>
     }
 </div>

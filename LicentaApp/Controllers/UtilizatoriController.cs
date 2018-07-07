@@ -97,8 +97,8 @@ namespace LicentaApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMagazin = new SelectList(db.Magazine, "Id", "Denumire", utilizatori.IdMagazin);
-            ViewBag.IdRol = new SelectList(db.Roluri, "Id", "Denumire", utilizatori.IdRol);
+            this.InitIngreistreazaSelectList();
+
             return View(utilizatori);
         }
 
