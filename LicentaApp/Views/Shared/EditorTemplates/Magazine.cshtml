@@ -27,12 +27,17 @@
         @Html.LabelFor(model => model.Email)
     </div>
         <div class="col m6 input-field">
-            <p>
+            @*<p>
                 <label>
-                    <input data-val="true" data-val-required="Este Depozit Central? field is required." id="EsteDepozitCentral" name="EsteDepozitCentral" type="checkbox" checked="@this.Model.EsteDepozitCentral" class="">
+                    <input data-val="true" data-val-required="Este Depozit Central? field is required." id="EsteDepozitCentral" name="EsteDepozitCentral" type="checkbox" value="@this.Model.EsteDepozitCentral" class="">
                     <span>Este depozit central?</span>
                 </label>
-            </p>
+            </p>*@
+            @*@Html.LabelFor(x => x.EsteDepozitCentral)*@
+            <label>
+            @Html.CheckBoxFor(x => x.EsteDepozitCentral, new {@type = "checkbox"})
+                <span>Este depozit Central?</span>
+            </label>
         </div>
 
 </div>

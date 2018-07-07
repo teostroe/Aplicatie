@@ -18,3 +18,13 @@
         </div>
     </div>
 }
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('input:hidden').each(function (index, element) {
+                $(element).appendTo($(element).parent());
+            });
+        });
+    </script>
+}
