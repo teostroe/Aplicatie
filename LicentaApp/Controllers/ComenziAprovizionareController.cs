@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
+using LicentaApp.Domain.Email;
 using LicentaApp.Domain.Services.ValidationServices.Implementations;
 using LicentaApp.Domain.ValueObjects;
 using LicentaApp.ViewModels.ComandaAprovizionare;
@@ -13,11 +16,8 @@ using LicentaApp.ViewModels.ComandaAprovizionare;
 namespace LicentaApp.Controllers
 {
     [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
-    public class ComenziAprovizionareController : Controller
+    public class ComenziAprovizionareController : BaseAppController
     {
-
-        private LicentaDbContext db = new LicentaDbContext();
-
 
         #region De la Furnizor
         [HttpGet]
@@ -57,7 +57,7 @@ namespace LicentaApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]
-        public ActionResult CreazaComandaAprovizionareFurnizor(ComandaAprivizionareCreate viewModel)
+        public async Task<ActionResult> CreazaComandaAprovizionareFurnizor(ComandaAprivizionareCreate viewModel)
         {
             var validationResult = new AprovizionareFurnizorValidationService().ValidateData(viewModel);
             if (validationResult.Any())
@@ -89,7 +89,20 @@ namespace LicentaApp.Controllers
                 });
             }
             db.ComenziAprovizionari.Add(model);
-            db.SaveChanges();
+
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return View("Creaza", viewModel);
+            }
+
+            var dbCerereAprovizionare = this.db.ComenziAprovizionari
+                .Include(x => x.RandComenziAprovizionareProduse)
+                .Include(x => x.Furnizori)
+                .Where(x => x.IdUtilizator == utilizatorCurent.UserId).OrderByDescending(x => x.DataCreare)
+                .FirstOrDefault();
+
+            await EmailService.SendEmail(this.ControllerContext, EmailDefinitions.CerereAprovizionareFurnizor, dbCerereAprovizionare, dbCerereAprovizionare.Furnizori.Email);
             return RedirectToAction("ComenziAprovizionareFurnizori");
         }
 
@@ -129,6 +142,15 @@ namespace LicentaApp.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("ComenziAprovizionareFurnizori");
+        }
+
+        public FileResult DownloadCerereAprovizionare(int idAprovizionare)
+        {
+            var model = this.db.ComenziAprovizionari.FirstOrDefault(x => x.Id == idAprovizionare);
+            var pdf = PrintService.CreateAttachment(EmailDefinitions.CerereAprovizionareFurnizor.Attachment, model);
+            byte[] fileBytes = pdf.BuildPdf(this.ControllerContext);
+            var fileName = String.Format("AprovizionareFurnizor-{0}.pdf", model.Id);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
         [Authorize(Roles = AuthConstants.Permisii.AdminOnly)]

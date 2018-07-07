@@ -1,0 +1,52 @@
+﻿@model ComenziAprovizionari
+    
+<head>
+    @Styles.Render("~/Content/css")
+</head>
+    
+<div class="row">
+    <div class="col s4">
+        <p>Furnizor: @this.Model.Furnizori.Denumire</p>
+        <p>Nr. ord. reg. com: @this.Model.Furnizori.NRREGCOMERTULUI</p>
+        <p>CUI: @this.Model.Furnizori.CIF</p>
+        <p>Sediul: @this.Model.Furnizori.Adresa</p>
+        <p>Email: @this.Model.Furnizori.Email</p>
+        <p>Telefon: @this.Model.Furnizori.NumarTelefon</p>
+    </div>
+    <div class="col s4 center-align">
+        <h4>Comanda aprovizionare</h4>
+        <div class="basic-border">
+            <p><b>Data: @Model.DataCreare.ToString("dd/MM/yyyy")</b></p>
+        </div>
+    </div>
+    <div class="col s4">
+        <p>Cumparator: IDEAL OPTIC MEDICAL SRL</p>
+        <p>Nr. ord. reg. com: J40/2406/2005 </p>
+        <p>CUI: 17215810</p>
+        <p>Sediul: Emil Racovita nr. 42, Pipera, Ilfov</p>
+        <p>Email: licenta.stroe2018@gmail.com</p>
+        <p>Telefon: 0743026815</p>
+    </div>
+</div>
+<div class="row">
+
+    <table class="pdf-table">
+        <thead>
+            <tr>
+                <th style="width: 40%">Denumire</th>
+                <th style="width: 40%">Cod produs</th>
+                <th style="width: 20%">Cantitate ceruta</th>
+            </tr>
+        </thead>
+        <tbody style="min-height:500px">
+            @foreach (var item in this.Model.RandComenziAprovizionareProduse)
+            {
+                <tr>
+                    <td>@item.Produse.Denumire</td>
+                    <td>@item.Produse.Cod</td>
+                    <td>@item.CantitateCeruta</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

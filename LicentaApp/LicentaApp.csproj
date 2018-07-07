@@ -94,6 +94,18 @@
       <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.9.3.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.9.3\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -200,6 +212,10 @@
     <Compile Include="Domain\Auth\AppRoleProvider.cs" />
     <Compile Include="Domain\Auth\AuthConstants.cs" />
     <Compile Include="Domain\Auth\DTO\SerializeUser.cs" />
+    <Compile Include="Domain\Email\EmailDefinition.cs" />
+    <Compile Include="Domain\Email\EmailDefinitions.cs" />
+    <Compile Include="Domain\Email\EmailService.cs" />
+    <Compile Include="Domain\Email\PrintService.cs" />
     <Compile Include="Domain\EnumHelper.cs" />
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="Domain\Metadata\ProductCache.cs" />
@@ -392,6 +408,7 @@
     </Content>
     <Content Include="Bundles\Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Bundles\Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Bundles\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Bundles\Scripts\jquery-1.10.2.js" />
     <Content Include="Bundles\Scripts\jquery-1.10.2.min.js" />
@@ -441,6 +458,10 @@
     <Content Include="Bundles\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Bundles\Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Bundles\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -565,6 +586,8 @@
     <Content Include="Views\Shared\Rapoarte\StatisticaUtilizatoriDupaVanzari_Data.cshtml" />
     <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaVanzari.cshtml" />
     <Content Include="Views\Rapoarte\StatisticaUtilizatoriDupaVanzari_Grafic.cshtml" />
+    <Content Include="Views\EmailTemplates\CerereAprovizionareFurnizor.cshtml" />
+    <Content Include="Views\EmailTemplates\CerereAprovizionareFurnizorAttachment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

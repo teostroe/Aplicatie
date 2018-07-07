@@ -266,3 +266,20 @@
 .select-dropdown {
     max-height: 400px;
 }
+
+/*PDF*/
+
+
+.pdf-table tr, .pdf-table th, .pdf-table td {
+    border: 1px solid #000;
+}
+
+.pdf-table th {
+    text-align: center;
+}
+
+.pdf-table p {
+    margin: 0px;
+}
+
+/*END PDF*/
