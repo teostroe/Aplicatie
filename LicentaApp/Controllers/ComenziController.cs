@@ -33,7 +33,7 @@ namespace LicentaApp.Controllers
         {
             {TipLentila.MonofocalaUniforma, new  [] {1.5m, 1.6m, 1.67m, 1.74m}},
             {TipLentila.Bifocala, new [] {1.5m, 1.6m} },
-            {TipLentila.Minerala, new[] {1.52m, 167m}},
+            {TipLentila.Minerala, new[] {1.52m, 1.7m}},
             {TipLentila.Progresiva, new  [] {1.5m, 1.6m, 1.67m, 1.74m}  }
         };
         // GET: Comenzi
