@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -9,13 +10,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LicentaApp;
+using LicentaApp.Controllers.Base;
 using LicentaApp.Domain;
 using LicentaApp.Domain.Auth;
+using LicentaApp.Domain.ValueObjects;
 
 namespace LicentaApp.Controllers
 {
     [Authorize(Roles = AuthConstants.Permisii.AdminUtilizator)]
-    public class UtilizatoriController : Controller
+    public class UtilizatoriController : BaseAppController
     {
         private LicentaDbContext db = new LicentaDbContext();
 
@@ -72,7 +75,7 @@ namespace LicentaApp.Controllers
                 ModelState.AddModelError(string.Empty, SqlExceptionService.GetHandledSqlError(ex));
                 return View(utilizator);
             }
-           
+
             return RedirectToAction("Index");
         }
 
@@ -123,29 +126,21 @@ namespace LicentaApp.Controllers
         // GET: Utilizatori/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.db.Comenzi.Any(x => x.IdUtilizator == id) || this.db.ComenziAprovizionari.Any(x => x.IdUtilizator == id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData.Add(AppConstants.Alerts.Error, new[] { new ValidationResult("Utilizatorul nu poate fi sters deoarece a executat deja operatii") });
+                return RedirectToAction("Details", new { id = id });
             }
-            Utilizatori utilizatori = db.Utilizatori.Find(id);
-            if (utilizatori == null)
-            {
-                return HttpNotFound();
-            }
-            return View(utilizatori);
-        }
 
-        // POST: Utilizatori/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Utilizatori utilizatori = db.Utilizatori.Find(id);
-            db.Utilizatori.Remove(utilizatori);
-            db.SaveChanges();
+            var utilizator = db.Utilizatori.Find(id);
+            db.Utilizatori.Remove(utilizator);
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

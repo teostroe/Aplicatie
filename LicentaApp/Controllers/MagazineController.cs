@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -111,26 +112,19 @@ namespace LicentaApp.Controllers
         // GET: Magazine/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.db.Utilizatori.Any(x => x.IdMagazin == id) ||
+                this.db.ComenziAprovizionari.Any(x => x.CatreMagazinId == id || x.DeLaDepozitCentralId == id || x.CatreDepozitCentralId == id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData.Add(AppConstants.Alerts.Error, new[] { new ValidationResult("Magazinul nu poate fi sters deoarece a fost deja utilizat") });
+                return RedirectToAction("Details", new { id = id });
             }
             Magazine magazine = db.Magazine.Find(id);
-            if (magazine == null)
+            this.db.Magazine.Remove(magazine);
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
             {
-                return HttpNotFound();
+                return RedirectToAction("Details", new { id = id });
             }
-            return View(magazine);
-        }
-
-        // POST: Magazine/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Magazine magazine = db.Magazine.Find(id);
-            db.Magazine.Remove(magazine);
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

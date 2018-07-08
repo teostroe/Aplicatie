@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -108,26 +109,20 @@ namespace LicentaApp.Controllers
         // GET: Furnizori/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.db.ComenziAprovizionari.Any(x => x.DeLaFurnizorId == id) || this.db.Produse.Any(x => x.IdFurnizor == id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData.Add(AppConstants.Alerts.Error, new[] { new ValidationResult("Furnizorul nu poate fi sters deoarece a executat deja operatii") });
+                return RedirectToAction("Details", new { id = id });
             }
-            Furnizori furnizori = db.Furnizori.Find(id);
-            if (furnizori == null)
-            {
-                return HttpNotFound();
-            }
-            return View(furnizori);
-        }
 
-        // POST: Furnizori/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             Furnizori furnizori = db.Furnizori.Find(id);
             db.Furnizori.Remove(furnizori);
-            db.SaveChanges();
+
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
             return RedirectToAction("Index");
         }
 

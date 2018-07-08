@@ -9,7 +9,7 @@
 }
 
 
-@using (Html.BeginForm("VerificareComanda", "Comenzi", FormMethod.Get))
+@using (Html.BeginForm("VerificareComanda", "Comenzi", FormMethod.Get, new { @autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
 

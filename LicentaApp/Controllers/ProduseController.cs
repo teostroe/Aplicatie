@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees;
@@ -296,9 +297,20 @@ namespace LicentaApp.Controllers
         // GET: Produse/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (this.db.RandComenziProduse.Any(x => x.IdProdus == id) ||
+                this.db.RandComenziAprovizionareProduse.Any(x => x.IdProdus == id))
+            {
+                TempData.Add(AppConstants.Alerts.Error, new[] { new ValidationResult("Produsul nu poate fi sters deoarece a fost deja folosit") });
+                return RedirectToAction("Details", new { id = id });
+            }
+
             Produse produse = db.Produse.Find(id);
             db.Produse.Remove(produse);
-            db.SaveChanges();
+            var result = this.SaveChanges();
+            if (result != DbSaveResult.Success)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
             return RedirectToAction("Index");
         }
 
@@ -334,3 +346,4 @@ namespace LicentaApp.Controllers
 
     }
 }
+

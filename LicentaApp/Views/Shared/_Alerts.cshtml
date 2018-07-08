@@ -4,6 +4,10 @@
     var validationResults = ViewData.ContainsKey(AppConstants.Alerts.Error)
         ? (IEnumerable<ValidationResult>)ViewData[AppConstants.Alerts.Error]
         : Enumerable.Empty<ValidationResult>();
+
+    var validationResultTempData = TempData.ContainsKey(AppConstants.Alerts.Error)
+        ? (IEnumerable<ValidationResult>)TempData[AppConstants.Alerts.Error]
+        : Enumerable.Empty<ValidationResult>();
 }
 @if (ViewData.ContainsKey(AppConstants.Alerts.Success))
 {
@@ -24,6 +28,18 @@
         <p><strong>Eroare!</strong></p>
         <ul>
             @foreach (var vr in validationResults)
+            {
+                <li>@vr.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+@if (TempData.ContainsKey(AppConstants.Alerts.Error))
+{
+    <div id="errors" class="alert alert-danger">
+        <p><strong>Eroare!</strong></p>
+        <ul>
+            @foreach (var vr in validationResultTempData)
             {
                 <li>@vr.ErrorMessage</li>
             }
