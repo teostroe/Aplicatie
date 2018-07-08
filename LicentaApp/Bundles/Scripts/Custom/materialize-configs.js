@@ -14,6 +14,7 @@ function initCalendar() {
         //defaultDate: "1990/01/01",
         //setDefaultDate: true,
         yearRange: [1900, (new Date()).getFullYear()],
+        firstDay: 1,
         i18n: {
             cancel: "Anuleaza",
             months: [
@@ -45,25 +46,25 @@ function initCalendar() {
                 "Dec"
             ],
             weekdays: [
+                "Duminica",
                 "Luni",
                 "Marti",
                 "Miercuri",
                 "Joi",
                 "Vineri",
-                "Sambata",
-                "Duminica"
+                "Sambata"
             ],
             weekdaysShort: [
+                "Dum",
                 "Lun",
                 "Mar",
                 "Mie",
                 "Joi",
                 "Vin",
-                "Sam",
-                "Dum"
+                "Sam"
             ],
             weekdaysAbbrev: [
-                "L", "M", "M", "J", "V", "S", "D"
+                "D","L", "M", "M", "J", "V", "S"
             ]
 
         }
