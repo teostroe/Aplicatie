@@ -56,7 +56,8 @@
 
             var options = {
                 title: 'Vanzari totale magazin',
-                is3D: true
+                is3D: true,
+                pieResidueSliceLabel: 'Altele'
             };
             var chart = new google.visualization.PieChart(document.getElementById('statistica-grafic'));
             chart.draw(data, options);

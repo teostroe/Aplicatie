@@ -6,7 +6,7 @@
 @{
     var dictionary = (Dictionary<string, ProdusVerificareViewModel>)ViewData[AppConstants.VerificareProduse];
     var total = dictionary.Sum(x => x.Value.Discount.HasValue
-        ? x.Value.Pret * x.Value.Cantitate - (x.Value.Discount * x.Value.Pret * x.Value.Cantitate)
+        ? x.Value.Pret * x.Value.Cantitate - (x.Value.Discount.Value * x.Value.Pret * x.Value.Cantitate)
         : x.Value.Pret * x.Value.Cantitate);
 }
 
@@ -46,18 +46,18 @@
                 <td>@values.Value.DenumireProduse</td>
                 <td>@values.Value.Cantitate</td>
                 <td>@values.Value.Discount</td>
-                <td>@values.Value.Pret</td>
+                <td>@values.Value.Pret.ToDecimalString()</td>
                 @if (values.Value.Discount.HasValue)
                 {
 
                     <td>
-                        @(values.Value.Cantitate * values.Value.Pret -
-                            (values.Value.Discount.Value * values.Value.Cantitate * values.Value.Pret))
+                        @((values.Value.Cantitate * values.Value.Pret -
+                            (values.Value.Discount.Value * values.Value.Cantitate * values.Value.Pret)).ToDecimalString())
                 </td>
                 }
                 else
                 {
-                    <td>@(values.Value.Cantitate * values.Value.Pret)</td>
+                    <td>@((values.Value.Cantitate * values.Value.Pret).ToDecimalString())</td>
                 }
             </tr>
             if (values.Value.TipProdus == TipProdus.Lentile)
@@ -86,8 +86,8 @@
                 <td colspan="2">Manopera</td>
                 <td>1</td>
                 <td></td>
-                <td>@this.Model.Manopera.Value</td>
-                <td>@this.Model.Manopera.Value</td>
+                <td>@this.Model.Manopera.Value.ToDecimalString()</td>
+                <td>@this.Model.Manopera.Value.ToDecimalString()</td>
             </tr>
         }
 
@@ -99,11 +99,11 @@
             <td colspan="5"><b>Total</b></td>
             @if (this.Model.Discount.HasValue)
             {
-                <td>@(total - this.Model.Discount * total)</td>
+                <td>@((total - this.Model.Discount.Value * total).ToDecimalString())</td>
             }
             else
             {
-                <td>@total</td>
+                <td>@total.ToDecimalString()</td>
             }
         </tr>
     </tbody>
