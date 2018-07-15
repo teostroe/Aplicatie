@@ -1,5 +1,4 @@
-﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetStatisticaMagazineDupaVanzari_Result>
-
+﻿
 @{
     ViewBag.Title = "StatisticaMagazinDupaVanzari";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,10 +18,9 @@
 }
 
 <div id="report-container">
-    @Html.Partial("Rapoarte/StatisticaMagazinDupaVanzari_Data", this.Model)
 </div>
 
 @section Scripts{
-    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Bundles/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 }
 

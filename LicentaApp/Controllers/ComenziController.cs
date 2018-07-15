@@ -311,11 +311,19 @@ namespace LicentaApp.Controllers
             #endregion
 
             db.Comenzi.Add(comanda);
-            db.SaveChanges();
+
+
+            var saveResult = this.SaveChanges();
+            if (saveResult != DbSaveResult.Success)
+            {
+                return View(viewModel);
+            }
+
             if (TempData.ContainsKey(AppConstants.TempComandaViewModel))
             {
                 TempData.Remove(AppConstants.TempComandaViewModel);
             }
+
             return RedirectToAction("Index");
         }
 
@@ -340,6 +348,8 @@ namespace LicentaApp.Controllers
 
         private void OnCreate_ViewDataInit(ComandaViewModel viewModel = null)
         {
+            var user = User as AppPrincipal;
+
             ViewData.Add(AppConstants.TelefonClienti, db.Clienti.Select(x => x.NumarTelefon).ToArray());
             ViewData.Add(AppConstants.CodRame, db.Produse.Where(x => x.TipProdus == TipProdus.Rame).Select(x => x.Cod).ToArray());
             ViewData.Add(AppConstants.CodRameSiOchelariSoare, db.Produse.Where(x => new[] { TipProdus.Rame, TipProdus.OchelariSoare, }.Contains(x.TipProdus)).Select(x => x.Cod).ToArray());
@@ -409,7 +419,7 @@ namespace LicentaApp.Controllers
             else
             {
                 ViewData.AddOrUpdate(AppConstants.TipLentilaOptions,
-                    typeof(TipLentila).ToSelectList());
+                    typeof(TipLentila).ToSelectList(TipLentila.Progresiva));
             }
         }
 
@@ -440,7 +450,7 @@ namespace LicentaApp.Controllers
                 {ProductProperties.IndiceRefractie, indiceRefractie}
             };
             var serializedValues = SerializationService.SerializeProductData(data);
-            var selectList = ProductsDataService.GetProducts(serializedValues, this.db).Where(x => x.IdFurnizor == idProducator).ToSelectList(x => x.Cod, x => x.Denumire);
+            var selectList = new SelectList(ProductsDataService.GetProducts(serializedValues, this.db).Where(x => x.IdFurnizor == idProducator).Select(x => x.Cod));
             ViewData.AddOrUpdate(AppConstants.LentilaOptions, selectList);
         }
 

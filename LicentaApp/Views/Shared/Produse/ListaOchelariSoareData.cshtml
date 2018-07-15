@@ -7,36 +7,21 @@
         <tr>
             <th>
                 Cod
-                <input type="text" name="filter.Cod" id="filter_Cod" />
-
             </th>
             <th>
                 Denumire
-                <input type="text" name="filter.Denumire" id="filter_Denumire" />
-
             </th>
             <th>
                 Discount
-                <input type="text" name="filter.Discount" id="filter_Discount" />
-
             </th>
             <th>
                 Este polarizat?
-                <select name="filter.EstePolarizat" id="filter_EstePolarizat">
-                    <option value="">Selecteaaza</option>
-                    @foreach (var item in typeof(DaNu).ToSelectList())
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
             </th>
             <th>
                 Pret
-                <input type="text" name="filter.Pret" id="filter_Pret" />
-
             </th>
             <th style="min-width: 150px;">
-                <a id="filtreaza" class="btn-floating btn-small waves-effect waves-light red"><i class="fas fa-search"></i></a>
+                <a class="waves-effect waves-light btn modal-trigger" href="#filtru">Aplica filtre</a>
             </th>
         </tr>
 

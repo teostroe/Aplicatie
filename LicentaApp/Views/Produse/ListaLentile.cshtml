@@ -18,13 +18,59 @@
 
 @using (Ajax.BeginForm("FilterListaLentile", "Produse", new AjaxOptions { UpdateTargetId = "lista-lentile-data", InsertionMode = InsertionMode.ReplaceWith }))
 {
+    <!-- Modal Structure -->
+    <div id="filtru" class="modal">
+        <div class="modal-content">
+            <h4>Filtre</h4>
+            <div class="row">
+                <div class="input-field col m4">
+                    <input type="text" name="filter.Cod" id="filter_Cod" />
+                    <label for="filter_Cod">Cod</label>
+                </div>
+                <div class="input-field col m4">
+                    <input type="text" name="filter.Denumire" id="filter_Denumire" />
+                    <label for="filter_Denumire">Denumire</label>
+                </div>
+                <div class="input-field col m4">
+                    <input type="text" name="filter.Discount" id="filter_Discount" />
+                    <label for="filter_Discount">Discount</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col m4">
+                    <select name="filter.TipLentila" id="filter_TipLentila">
+                        <option value="">Selecteaza</option>
+                        @foreach (var item in typeof(TipLentila).ToSelectList())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <label for="filter_TipLentila">Tip Lentila</label>
+                </div>
+                <div class="input-field col m4">
+                    <input type="number" name="filter.IndiceRefractie" id="filter_IndiceRefractie" />
+                    <label for="filter_IndiceRefractie">Indice Refractie</label>
+                </div>
+                <div class="input-field col m4">
+                    <input type="number" name="filter.Pret" id="filter_Pret" />
+                    <label for="filter_Pret">Pret</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a id="filtreaza" class="modal-close waves-effect waves-green btn">Aplica</a>
+        </div>
+    </div>
+
     @Html.Partial("Produse/ListaLentileData", this.Model)
 }
 
 
 
 @section Scripts{
-    <script type="text/javascript" src="../../Bundles/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Bundles/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {

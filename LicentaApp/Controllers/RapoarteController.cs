@@ -142,16 +142,12 @@ namespace LicentaApp.Controllers
         #region Statistica Magazine Dupa Vanzari
         public ActionResult StatisticaMagazinDupaVanzari()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaMagazineDupaVanzari(dates.GetStartDateAsString(),
-                dates.GetFinalDateAsString()));
+            return View();
         }
 
         public ActionResult StatisticaMagazinDupaVanzari_Grafic()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaMagazineDupaVanzari(dates.GetStartDateAsString(),
-                dates.GetFinalDateAsString()));
+            return View();
         }
 
 
@@ -231,7 +227,6 @@ namespace LicentaApp.Controllers
                     endDate.ToString(this._stringDateFormat)), JsonRequestBehavior.AllowGet);
         }
         #endregion
-
 
         #region Pivot
         public ActionResult VanzariTotalePeLuni()

@@ -65,6 +65,7 @@ namespace LicentaApp.Controllers
             {
                 model = model.Where(x => x.Pret == filter.Pret.Value);
             }
+            
             ViewData.InitializePagination(filter.Page, model.Count(), this.ControllerContext);
             return PartialView("Produse/ListaLentileData", model.ToPagedList(filter.Page));
         }

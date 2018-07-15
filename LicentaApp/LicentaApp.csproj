@@ -600,6 +600,11 @@
     <Content Include="Views\Shared\Produse\FilteredPagination.cshtml" />
     <Content Include="Views\Shared\Produse\ListaRameData.cshtml" />
     <Content Include="Views\Shared\Produse\ListaOchelariSoareData.cshtml" />
+    <None Include="Properties\PublishProfiles\.pubxml" />
+    <None Include="Properties\PublishProfiles\LicentaTeodoraStroe.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Shared\Rapoarte\_ReportButtons_HasDefaultValues.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

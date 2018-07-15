@@ -49,7 +49,9 @@ namespace LicentaApp.Domain.Services
 
             foreach (var keyValuePair in details)
             {
-                var tempIds = dbContext.Produse.Include(x => x.DetaliiProdus)
+                var tempIds = dbContext.Produse
+                    .Where(x => x.Inventar.Any(y => y.CantitateDisponibila > 0))
+                    .Include(x => x.DetaliiProdus)
                     .Where(x => x.DetaliiProdus.Any(y => keyValuePair.Key == y.Denumire &&
                                                          keyValuePair.Value == y.Valoare))
                     .Select(x => x.Id).ToList();
