@@ -113,8 +113,7 @@ namespace LicentaApp.Controllers
         #region Statistica Magazine dupa Cantitati
         public ActionResult StatisticaMagazineDupaCantitati()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaMagazineDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+            return View();
         }
 
         public ActionResult StatisticaMagazineDupaCantitati_Data(DateTime startDate, DateTime endDate)
@@ -127,8 +126,7 @@ namespace LicentaApp.Controllers
 
         public ActionResult StatisticaMagazineDupaCantitati_Grafic()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaMagazineDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+            return View();
         }
         [HttpGet]
         public ActionResult StatisticaMagazineDupaCantitati_GraficData(DateTime startDate, DateTime endDate)
@@ -170,8 +168,7 @@ namespace LicentaApp.Controllers
         #region Statistica Utilizatori dupa Cantitati
         public ActionResult StatisticaUtilizatoriDupaCantitati()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaUtilizatoriDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+            return View();
         }
 
         public ActionResult StatisticaUtilizatoriDupaCantitati_Data(DateTime startDate, DateTime endDate)
@@ -184,8 +181,7 @@ namespace LicentaApp.Controllers
 
         public ActionResult StatisticaUtilizatoriDupaCantitati_Grafic()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaUtilizatoriDupaCantitati(dates.GetStartDateAsString(), dates.GetFinalDateAsString()));
+            return View();
         }
         [HttpGet]
         public ActionResult StatisticaUtilizatoriDupaCantitati_GraficData(DateTime startDate, DateTime endDate)
@@ -196,13 +192,10 @@ namespace LicentaApp.Controllers
         }
         #endregion
 
-
         #region Statistica Utilizatori Dupa Vanzari
         public ActionResult StatisticaUtilizatoriDupaVanzari()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaUtilizatoriDupaVanzari(dates.GetStartDateAsString(),
-                dates.GetFinalDateAsString()));
+            return View();
         }
 
         public ActionResult StatisticaUtilizatoriDupaVanzari_Data(DateTime startDate, DateTime endDate)
@@ -215,9 +208,7 @@ namespace LicentaApp.Controllers
 
         public ActionResult StatisticaUtilizatoriDupaVanzari_Grafic()
         {
-            var dates = InitialDateService.GetInitialDates();
-            return View(this.db.GetStatisticaUtilizatoriDupaVanzari(dates.GetStartDateAsString(),
-                dates.GetFinalDateAsString()));
+            return View();
         }
 
         public ActionResult StatisticaUtilizatoriDupaVanzari_GraficData(DateTime startDate, DateTime endDate)

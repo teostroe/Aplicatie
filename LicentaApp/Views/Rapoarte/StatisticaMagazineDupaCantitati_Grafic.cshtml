@@ -1,5 +1,4 @@
-﻿@model System.Data.Entity.Core.Objects.ObjectResult<GetStatisticaMagazineDupaCantitati_Result>
-
+﻿
 @{
     ViewBag.Title = "StatisticaMagazineDupaCantitati_Grafic";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +18,10 @@
 @section Scripts{
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-        var model = @Html.Raw(Json.Encode(this.Model));
+        var dataTable = {};
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+
+
         function createDataTable(items) {
             var result = [];
             result.push(['Magazin', 'Total Cantitate Vanduta']);
@@ -30,11 +32,6 @@
 
             return result;
         }
-        
-        var dataTable = createDataTable(model);
-        google.charts.load('current', { packages: ['corechart', 'bar']});
-        google.charts.setOnLoadCallback(drawChart);
-
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable(dataTable);
@@ -59,13 +56,13 @@
             $.ajax({
                 url: '@Url.Action("StatisticaMagazineDupaCantitati_GraficData")',
                 type: 'GET',
-                data: {startDate: startDate, endDate: endDate},
+                data: { startDate: startDate, endDate: endDate },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                error: function (xhr) {
+                error: function(xhr) {
                     alert('Error: ' + xhr.statusText);
                 },
-                success: function (result) {
+                success: function(result) {
                     dataTable = createDataTable(result);
                     google.charts.setOnLoadCallback(drawChart);
                 },

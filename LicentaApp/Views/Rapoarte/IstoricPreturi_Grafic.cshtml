@@ -24,14 +24,16 @@
 </div>
 
 <div class="row">
-    <div id="statistica-grafic" style="width: 900px; height: 600px"></div>
+    <div id="statistica-grafic" style="width: 100%; height: 600px"></div>
 </div>
+
+<div id="chart_div"></div>
 
 
 @section Scripts{
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-        google.charts.load('current', { 'packages': ['line'] });
+        google.charts.load('current', { packages: ['corechart', 'line'] });
         var dataTable = {};
 
         function createDataTable(result) {
@@ -53,15 +55,11 @@
                 chart: {
                     title: 'Evolutia pretului',
                     subtitle: 'unui produs'
-                },
-                hAxis: {
-                    format: 'decimal'
                 }
             };
 
-            var chart = new google.charts.Line(document.getElementById('statistica-grafic'));
-
-            chart.draw(dataTable, google.charts.Line.convertOptions(options));
+            var chart = new google.visualization.LineChart(document.getElementById('statistica-grafic'));
+            chart.draw(dataTable, options);
         }
 
 
