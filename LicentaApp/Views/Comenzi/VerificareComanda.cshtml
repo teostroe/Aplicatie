@@ -18,8 +18,8 @@
 @if (this.Model.TipComanda == TipComanda.ComandaCuPrelucrare)
 {
     <br />
-        <h6><b>Detalii Vizita Medicala</b></h6>
-        <hr />
+    <h6><b>Detalii Vizita Medicala</b></h6>
+    <hr />
         @Html.DisplayFor(x => x.VizitaMedicala)
 }
 
@@ -53,7 +53,7 @@
                     <td>
                         @((values.Value.Cantitate * values.Value.Pret -
                             (values.Value.Discount.Value * values.Value.Cantitate * values.Value.Pret)).ToDecimalString())
-                </td>
+                    </td>
                 }
                 else
                 {
@@ -99,16 +99,30 @@
             <td colspan="5"><b>Total</b></td>
             @if (this.Model.Discount.HasValue)
             {
-                <td>@((total - this.Model.Discount.Value * total).ToDecimalString())</td>
+                if (this.Model.Manopera.HasValue)
+                {
+                    <td>@((total - this.Model.Discount.Value * total + this.Model.Manopera.Value).ToDecimalString())</td>
+                }
+                else
+                {
+                    <td>@((total - this.Model.Discount.Value * total).ToDecimalString())</td>
+                }
             }
             else
             {
-                <td>@total.ToDecimalString()</td>
+                if (this.Model.Manopera.HasValue)
+                {
+                    <td>@(total + this.Model.Manopera.Value).ToDecimalString()</td>
+                }
+                else
+                {
+                    <td>@total.ToDecimalString()</td>
+                }
             }
         </tr>
     </tbody>
 </table>
-<br/>
+<br />
 <div class="row">
     <div class="col m6">
         @using (Html.BeginForm("Create", "Comenzi", FormMethod.Get))

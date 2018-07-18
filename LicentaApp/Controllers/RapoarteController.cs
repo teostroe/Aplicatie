@@ -287,7 +287,7 @@ namespace LicentaApp.Controllers
         #region Istoric Preturi
         public ActionResult IstoricPreturi_Grafic()
         {
-            ViewData.Add(AppConstants.ProduseOptions, this.db.Produse.ToSelectList(x => x.Cod, x => x.Denumire));
+            ViewData.Add(AppConstants.ProduseOptions, this.db.Produse.ToSelectList(x => x.Cod, x => x.Cod));
             return View();
         }
 

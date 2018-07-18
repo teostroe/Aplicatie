@@ -121,7 +121,10 @@ namespace LicentaApp.Domain
             if (!currentPage.HasValue) { currentPage = 1; }
             viewData.Add(AppConstants.Pagination.EnablePagination, true);
             viewData.Add(AppConstants.Pagination.CurrentPage, currentPage);
-            viewData.Add(AppConstants.Pagination.TotalPages, totalData / AppConstants.Pagination.ElementsOnPage + 1);
+            var totalPages = totalData % AppConstants.Pagination.ElementsOnPage == 0
+                ? totalData / AppConstants.Pagination.ElementsOnPage
+                : totalData / AppConstants.Pagination.ElementsOnPage + 1;
+            viewData.Add(AppConstants.Pagination.TotalPages, totalPages);
             viewData.Add(AppConstants.Pagination.ActionName, controllerContext.RouteData.Values["action"].ToString());
         }
 

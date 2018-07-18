@@ -89,6 +89,7 @@ namespace LicentaApp.Controllers
                 Discount = comanda.Discount,
                 StatusComanda = comanda.StatusComanda,
                 Data = comanda.Data,
+                Manopera = comanda.Manopera,
                 Produse = comanda.RandComenziProduse.Select(x => new ComandaProdusViewModel
                 {
                     Cod = x.Produse.Cod,
@@ -101,6 +102,10 @@ namespace LicentaApp.Controllers
             };
             var totalFaraDiscount = model.Produse.Sum(x => x.Pret - x.Pret * x.Discount);
             model.Total = totalFaraDiscount - totalFaraDiscount * model.Discount;
+            if (model.Manopera.HasValue)
+            {
+                model.Total += model.Manopera.Value;
+            }
             return View(model);
         }
 
@@ -262,6 +267,7 @@ namespace LicentaApp.Controllers
             comanda.Data = DateTime.Now;
             comanda.Discount = viewModel.Discount ?? 0;
             comanda.StatusComanda = StatusComanda.Creata;
+            comanda.Manopera = viewModel.Manopera;
             //to be updated
             comanda.IdUtilizator = utilizatorCurent.UserId;
             #region Client
@@ -316,6 +322,7 @@ namespace LicentaApp.Controllers
             var saveResult = this.SaveChanges();
             if (saveResult != DbSaveResult.Success)
             {
+                this.OnCreate_ViewDataInit(viewModel);
                 return View(viewModel);
             }
 
@@ -330,9 +337,23 @@ namespace LicentaApp.Controllers
         [HttpGet]
         public ActionResult ModificaStatus(int idComanda)
         {
-            var dbComanda = this.db.Comenzi.FirstOrDefault(x => x.Id == idComanda);
+            var dbComanda = this.db.Comenzi.Include(x => x.Utilizatori).Include(x => x.RandComenziProduse).FirstOrDefault(x => x.Id == idComanda);
             db.Comenzi.Attach(dbComanda);
             dbComanda.StatusComanda = dbComanda.StatusComanda.GetNextState();
+            if (dbComanda.StatusComanda == StatusComanda.Finalizata)
+            {
+                foreach (var rcp in dbComanda.RandComenziProduse)
+                {
+                    var inventar = rcp.Produse.TipProdus == TipProdus.Lentile
+                        ? this.db.Inventar.FirstOrDefault(x => x.Magazine.EsteDepozitCentral && x.IdProdus == rcp.IdProdus)
+                        : this.db.Inventar.FirstOrDefault(x => x.IdMagazin == dbComanda.Utilizatori.IdMagazin && x.IdProdus == rcp.IdProdus);
+                    if (inventar != null && inventar.CantitateDisponibila >= rcp.Cantitate)
+                    {
+                        this.db.Inventar.Attach(inventar);
+                        inventar.CantitateDisponibila -= rcp.Cantitate;
+                    }
+                }
+            }
             db.SaveChanges();
             return RedirectToAction("Details", new { id = idComanda });
         }

@@ -1,5 +1,8 @@
-﻿@model IEnumerable<RameView>
-
+﻿@using LicentaApp.Domain.Auth
+@model IEnumerable<RameView>
+@{
+    var isAdmin = (User as AppPrincipal).IsInRole(AuthConstants.Roluri.Admin);
+}
 
 <div id="lista-rame-data">
 
@@ -42,7 +45,14 @@
                     @Html.DisplayFor(modelItem => item.Valoare)
                 </td>
                 <td>
-                    @Html.Partial("_RUDButtons", new Tuple<int, string>(item.Id, "Produse"))
+                    @if (isAdmin)
+                    {
+                        @Html.Partial("_RUDButtons", new Tuple<int, string>(item.Id, "Produse"))
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Details", "Produse", new { id= item.Id })" class="tooltipped icon-button view-icon" data-position="bottom" data-tooltip="Detalii"><i class="fas fa-info fa-2x"></i></a>
+                    }
                 </td>
             </tr>
         }

@@ -25,7 +25,7 @@ namespace LicentaApp.Controllers
         {
             var model = db.Clienti.ToList();
             ViewData.InitializePagination(page, model.Count, this.ControllerContext);
-            return View(db.Clienti.ToList());
+            return View(db.Clienti.ToPagedList(page));
         }
 
         // GET: Clienti/Details/5

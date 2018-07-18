@@ -7,7 +7,12 @@ namespace LicentaApp.Domain.ValueObjects
 {
     public enum TipTratament
     {
-        Tratament1 = 1,
-        Tratament2 = 2
+        IceCoating = 1,
+        HardCoat = 2,
+        CleverAntireflex = 3,
+        SuperCoatPolicarbonat = 4,
+        ARColor = 5,
+        BlueBlocker = 6,
+        StratDurificare = 7
     }
 }

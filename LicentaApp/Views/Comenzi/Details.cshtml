@@ -63,6 +63,16 @@
                 <td>@(item.Discount.HasValue ? (item.Pret - item.Discount.Value * item.Pret).ToDecimalString() : item.Pret.ToDecimalString())</td>
             </tr>
         }
+        @if (this.Model.Manopera.HasValue)
+        {
+            <tr>
+                <td>@(this.Model.Produse.Count() + 1)</td>
+                <td colspan="3" >Manopera</td>
+                <td>1</td>
+                <td>@this.Model.Manopera.Value.ToDecimalString()</td>
+                <td>@this.Model.Manopera.Value.ToDecimalString()</td>
+            </tr>            
+        }
         <tr>
             <td colspan="6">Discount comanda</td>
             <td>@this.Model.Discount</td>

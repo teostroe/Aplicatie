@@ -73,7 +73,7 @@ namespace LicentaApp.Controllers
             var model = new ComenziAprovizionari
             {
                 DeLaFurnizorId = viewModel.IdExpeditor,
-                CatreDepozitCentralId = this.db.Magazine.FirstOrDefault(x => x.EsteDepozitCentral).Id,
+                CatreDepozitCentralId = utilizatorCurent.IdMagazin,
                 DataCreare = DateTime.Now,
                 StatusComanda = StatusComanda.Creata,
                 IdUtilizator = utilizatorCurent.UserId
@@ -205,7 +205,7 @@ namespace LicentaApp.Controllers
             var model = new ComenziAprovizionari
             {
                 DeLaDepozitCentralId = viewModel.IdExpeditor,
-                CatreMagazinId = this.db.Magazine.FirstOrDefault(x => !x.EsteDepozitCentral).Id,
+                CatreMagazinId = utilizatorCurent.IdMagazin,
                 DataCreare = DateTime.Now,
                 StatusComanda = StatusComanda.Creata,
                 IdUtilizator = utilizatorCurent.UserId
