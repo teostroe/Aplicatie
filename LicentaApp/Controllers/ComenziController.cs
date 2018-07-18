@@ -260,7 +260,7 @@ namespace LicentaApp.Controllers
             var comanda = new Comenzi();
             comanda.RandComenziProduse = new List<RandComenziProduse>();
             comanda.Data = DateTime.Now;
-            comanda.Discount = viewModel.Discount;
+            comanda.Discount = viewModel.Discount ?? 0;
             comanda.StatusComanda = StatusComanda.Creata;
             //to be updated
             comanda.IdUtilizator = utilizatorCurent.UserId;

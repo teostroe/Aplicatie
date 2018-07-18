@@ -128,6 +128,7 @@ namespace LicentaApp.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult StatisticaMagazineDupaCantitati_GraficData(DateTime startDate, DateTime endDate)
         {

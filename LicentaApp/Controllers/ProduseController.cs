@@ -193,6 +193,8 @@ namespace LicentaApp.Controllers
             model.Produse.DetaliiProdus = new List<DetaliiProdus>();
             model.Produse.Preturi = new List<Preturi>();
 
+            model.Produse.Discount = model.Produse.Discount ?? 0;
+
             model.Produse.Preturi.Add(new Preturi
             {
                 DataActualizare = DateTime.UtcNow,
@@ -262,7 +264,7 @@ namespace LicentaApp.Controllers
             db.Produse.Attach(dbProduse);
             dbProduse.TipProdus = model.Produse.TipProdus;
             dbProduse.Cod = model.Produse.Cod;
-            dbProduse.Discount = model.Produse.Discount;
+            dbProduse.Discount = model.Produse.Discount ?? 0;
             dbProduse.IdFurnizor = model.Produse.IdFurnizor;
             var detaliiprodus = db.DetaliiProdus.Where(x => x.IdProdus == model.Produse.Id).ToArray();
             foreach (var dp in detaliiprodus)
